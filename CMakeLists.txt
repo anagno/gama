@@ -1,12 +1,31 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 project (gnu-gama VERSION 2.07)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_definitions(-DGNU_gama_expat_1_1)
-#add_definitions(-DDEBUG_ACORD2)
-#add_definitions(-DA2G_DEBUG)
+# Download automatically, you can also just copy the conan.cmake file
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+  message(
+    STATUS
+      "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+  file(
+    DOWNLOAD
+    "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.14/conan.cmake"
+    "${CMAKE_BINARY_DIR}/conan.cmake")
+endif()
+
+include(${CMAKE_BINARY_DIR}/conan.cmake)
+conan_check(VERSION 1.19.1 REQUIRED)
+conan_cmake_run(CONANFILE
+                conanfile.py
+                BASIC_SETUP
+                CMAKE_TARGETS
+                BUILD
+                missing)
+
+
+find_package(EXPAT 2.2.9 REQUIRED)
 
 # Library
 set(SRC_GAMA
@@ -217,21 +236,20 @@ set(SRC_GAMA
    lib/gnu_gama/xml/dataparser.h
 )
 
-set(SRC_EXPAT
-   lib/expat/xmltok/xmltok.c
-   lib/expat/xmltok/xmlrole.c
-   lib/expat/xmlwf/codepage.c
-   lib/expat/xmlparse/xmlparse.c
-   lib/expat/xmlparse/hashtable.c
-)
+include_directories(lib)
 
-include_directories(lib lib/expat/xmlparse lib/expat/xmltok)
+add_library(libgama ${SRC_GAMA})
 
-add_library(libgama OBJECT ${SRC_GAMA} ${SRC_EXPAT})
+target_link_libraries(libgama EXPAT::EXPAT)
 
 # Binaries
-add_executable(gama-local bin/gama-local.cpp $<TARGET_OBJECTS:libgama>)
-add_executable(gama-g3 bin/gama-g3.cpp $<TARGET_OBJECTS:libgama>)
+add_executable(gama-local bin/gama-local.cpp)
+
+target_link_libraries(gama-local libgama)
+
+add_executable(gama-g3 bin/gama-g3.cpp)
+
+target_link_libraries(gama-g3 libgama)
 
 # Installation
 install(TARGETS gama-local gama-g3 DESTINATION bin)

@@ -22,20 +22,8 @@
 #ifndef GNU_gama_xml_expat_h_GNU_Gama_interface_for_Expat_XML_parser
 #define GNU_gama_xml_expat_h_GNU_Gama_interface_for_Expat_XML_parser
 
-
-#ifdef  GNU_gama_expat_1_1
-
-/* If for any reason you don't have expat parser installed you can
- * still build GNU Gama using old expat version 1.1 */
-#include <expat/xmlparse/xmlparse.h>
-
-#else
-
 /* For expat 1.95.2 or (hopefully) any later */
 #include <expat.h>
-
-#endif
-
 
 #endif
 

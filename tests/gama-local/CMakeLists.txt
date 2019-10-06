@@ -39,7 +39,10 @@ file(MAKE_DIRECTORY ${RESULT_DIR})
 # check version
 #
 add_executable(check_version scripts/check_version.cpp
-  $<TARGET_OBJECTS:libgama>)
+  )
+
+target_link_libraries(check_version libgama)
+
 add_test(NAME check_version COMMAND check_version
   ${PROJECT_SOURCE_DIR}/configure.ac ${PROJECT_SOURCE_DIR}/CMakeLists.txt)
 
@@ -72,7 +75,9 @@ endforeach(test)
 # check_algorithms
 #
 add_executable(check_algorithms scripts/check_xyz.h scripts/check_xyz.cpp
-  scripts/check_algorithms.cpp $<TARGET_OBJECTS:libgama>)
+  scripts/check_algorithms.cpp)
+
+target_link_libraries(check_algorithms libgama)
 
 foreach(test ${INPUT_FILES})
   add_test(NAME check_algorithms_${test}
@@ -88,7 +93,9 @@ endforeach(test)
 #
 add_executable(check_xml_xml scripts/check_xml_xml.cpp
   scripts/compare_xml_adjustment.h scripts/compare_xml_adjustment.cpp
-  $<TARGET_OBJECTS:libgama>)
+  )
+
+target_link_libraries(check_xml_xml libgama)
 
 set(RES ${RESULT_DIR}/gama-local-adjustment)
 
@@ -112,7 +119,9 @@ endforeach(z)
 #
 add_executable(check_equivalents scripts/check_xyz.h
   scripts/check_xyz.cpp scripts/check_equivalents.cpp
-  $<TARGET_OBJECTS:libgama>)
+  )
+
+target_link_libraries(check_equivalents libgama)
 
 set(EQUIVALENTS_TESTS
     # CMake is weird with 2D arrays, so we apply this hack
@@ -144,7 +153,10 @@ endforeach(test)
 # check_xml_results
 #
 add_executable(check_xml_results  scripts/check_xml_results.cpp
-  scripts/check_xyz.h scripts/check_xyz.cpp $<TARGET_OBJECTS:libgama>)
+  scripts/check_xyz.h scripts/check_xyz.cpp)
+
+target_link_libraries(check_xml_results libgama)  
+
 foreach(test ${INPUT_FILES})
   add_test(
     NAME check_xml_results_${test}
