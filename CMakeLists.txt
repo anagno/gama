@@ -4,6 +4,9 @@ project (gnu-gama VERSION 2.07)
 
 set(CMAKE_CXX_STANDARD 11)
 
+option(USE_CONAN "Use conan package manager for the installation of the dependencies" OFF)
+
+if(USE_CONAN)
 # Download automatically, you can also just copy the conan.cmake file
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
   message(
@@ -15,7 +18,8 @@ if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     "${CMAKE_BINARY_DIR}/conan.cmake")
 endif()
 
-option(INSTALL_SQLITE3 "Install the sqlite3 plugin" OFF)
+  include(CMakeDependentOption)
+  CMAKE_DEPENDENT_OPTION(INSTALL_SQLITE3 "Install the sqlite3 plugin" OFF "USE_CONAN" OFF)
 
 if(INSTALL_SQLITE3)
   set(OPTIONAL_CONAN_PARAMETERS OPTIONS sqlite3=True)
@@ -32,8 +36,9 @@ conan_cmake_run(CONANFILE
                 missing
                 ${OPTIONAL_CONAN_PARAMETERS})
 
+endif()
 
-find_package(EXPAT 2.2.9 REQUIRED)
+find_package(EXPAT 2.2 REQUIRED)
 find_package(SQLite3 3.29 QUIET)
 
 if(SQLITE3_FOUND)
