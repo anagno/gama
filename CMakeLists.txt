@@ -15,17 +15,33 @@ if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     "${CMAKE_BINARY_DIR}/conan.cmake")
 endif()
 
+option(INSTALL_SQLITE3 "Install the sqlite3 plugin" OFF)
+
+if(INSTALL_SQLITE3)
+  set(OPTIONAL_CONAN_PARAMETERS OPTIONS sqlite3=True)
+endif()
+
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 conan_check(VERSION 1.19.1 REQUIRED)
+
 conan_cmake_run(CONANFILE
                 conanfile.py
                 BASIC_SETUP
                 CMAKE_TARGETS
                 BUILD
-                missing)
+                missing
+                ${OPTIONAL_CONAN_PARAMETERS})
 
 
 find_package(EXPAT 2.2.9 REQUIRED)
+find_package(SQLite3 3.29 QUIET)
+
+if(SQLITE3_FOUND)
+  add_definitions(-DGNU_GAMA_LOCAL_SQLITE_READER)
+endif()
+
+#add_definitions(-DDEBUG_ACORD2)
+#add_definitions(-DA2G_DEBUG)
 
 # Library
 set(SRC_GAMA
@@ -241,6 +257,10 @@ include_directories(lib)
 add_library(libgama ${SRC_GAMA})
 
 target_link_libraries(libgama EXPAT::EXPAT)
+
+if(SQLITE3_FOUND)
+  target_link_libraries(libgama sqlite3::sqlite3)
+endif()
 
 # Binaries
 add_executable(gama-local bin/gama-local.cpp)
