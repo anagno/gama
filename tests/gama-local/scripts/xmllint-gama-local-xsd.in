@@ -2,7 +2,7 @@
 
 set -e
 
-for g in @INPUT_FILES@
+for g in @INPUT_FILES_FOR_SH@
 do
-    xmllint --schema @GAMA_XML@/gama-local.xsd @GAMA_INPUT@/$g.gkf --noout
+    @LIBXML2_XMLLINT_EXECUTABLE@ --schema @GAMA_XML@/gama-local.xsd @INPUT_DIR@/$g.gkf --noout
 done

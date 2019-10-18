@@ -1,5 +1,4 @@
 set(TEST_BASE_DIR ${PROJECT_SOURCE_DIR}/tests/gama-local)
-set(GAMA_LOCAL ${CMAKE_BINARY_DIR}/gama-local )
 set(INPUT_DIR ${TEST_BASE_DIR}/input)
 set(INPUT_FILES
     gama-local
@@ -46,8 +45,6 @@ target_link_libraries(check_version libgama)
 add_test(NAME check_version COMMAND check_version
   ${PROJECT_SOURCE_DIR}/configure.ac ${PROJECT_SOURCE_DIR}/CMakeLists.txt)
 
-
-
 # -------------------------------------------------------------------------
 #
 # check_adjustment
@@ -58,7 +55,7 @@ file(MAKE_DIRECTORY ${RESULT_DIR}/gama-local-adjustment)
 foreach(test ${INPUT_FILES})
   foreach(algo svd gso cholesky envelope)
     add_test(NAME gama_local_adjustement_${test}_${algo}
-      COMMAND ${GAMA_LOCAL} ${INPUT_DIR}/${test}.gkf --algorithm ${algo}
+      COMMAND gama-local ${INPUT_DIR}/${test}.gkf --algorithm ${algo}
         --text   ${RESULT_DIR}/gama-local-adjustment/${test}-${algo}.txt
         --html   ${RESULT_DIR}/gama-local-adjustment/${test}-${algo}.html
         --xml    ${RESULT_DIR}/gama-local-adjustment/${test}-${algo}.xml
@@ -164,3 +161,36 @@ foreach(test ${INPUT_FILES})
       ${INPUT_DIR}/${test}.gkf ${INPUT_DIR}/${test}.xml
   )
 endforeach(test)
+
+
+if(LIBXML2_FOUND)
+
+  set(GAMA_XML "${PROJECT_SOURCE_DIR}/xml")
+
+  foreach(test ${INPUT_FILES})
+    add_test(NAME xmllint_gama_local_xsd_${test}
+      COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+        --schema ${GAMA_XML}/gama-local.xsd
+        ${INPUT_DIR}/${test}.gkf
+        --noout)
+  endforeach(test)
+
+  file(MAKE_DIRECTORY ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd)
+
+  foreach(test ${INPUT_FILES})
+    add_test(NAME xmllint-gama-local-adjustment-xsd_input_${test}
+      COMMAND gama-local ${INPUT_DIR}/${test}.gkf
+        --xml ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd/${test}.xml)
+  endforeach(test)
+
+  foreach(test ${INPUT_FILES})
+    add_test(NAME xmllint-gama-local-adjustment-xsd_output_${test}
+      COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+        --schema ${GAMA_XML}/gama-local-adjustment.xsd
+        --noout
+        ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd/${test}.xml
+        )
+  endforeach(test)
+
+endif()
+

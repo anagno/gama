@@ -2,15 +2,15 @@
 
 set -e
 
-RES=@GAMA_RESULTS@/xmllint-gama-local-adjustment-xsd
+RES=@RESULT_DIR@/xmllint-gama-local-adjustment-xsd
 if [ ! -d $RES ] ; then
     mkdir -p $RES
 fi
 
-for g in @INPUT_FILES@
+for g in @INPUT_FILES_FOR_SH@
 do
-    @top_builddir@/bin/gama-local @GAMA_INPUT@/$g.gkf \
+    @GAMA_LOCAL@ @INPUT_DIR@/$g.gkf \
         --xml $RES/adjustment-$g.xml
-    xmllint --schema @GAMA_XML@/gama-local-adjustment.xsd \
+    @LIBXML2_XMLLINT_EXECUTABLE@ --schema @GAMA_XML@/gama-local-adjustment.xsd \
       --noout $RES/adjustment-$g.xml
 done

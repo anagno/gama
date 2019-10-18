@@ -4,6 +4,10 @@ project (gnu-gama VERSION 2.07)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# Tests
+# https://gitlab.kitware.com/cmake/community/wikis/doc/ctest/Testing-With-CTest#dynamic-analysis
+include (CTest)
+
 option(USE_CONAN "Use conan package manager for the installation of the dependencies" OFF)
 
 if(USE_CONAN)
@@ -19,11 +23,20 @@ if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
 endif()
 
   include(CMakeDependentOption)
-  CMAKE_DEPENDENT_OPTION(INSTALL_SQLITE3 "Install the sqlite3 plugin" OFF "USE_CONAN" OFF)
+  set(OPTIONAL_CONAN_PARAMETERS OPTIONS)
 
-if(INSTALL_SQLITE3)
-  set(OPTIONAL_CONAN_PARAMETERS OPTIONS sqlite3=True)
+  CMAKE_DEPENDENT_OPTION(INSTALL_SQLITE3 "Install the sqlite3 plugin" OFF "USE_CONAN" OFF)
+  if(INSTALL_SQLITE3)
+    set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} sqlite3=True)
+  endif()
+
+  if(BUILD_TESTING)
+    CMAKE_DEPENDENT_OPTION(INSTALL_LIBXML2 "Install the libxml2" OFF "USE_CONAN" OFF)
+    if(INSTALL_LIBXML2)
+      set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} libxml2=True)
+    endif()
 endif()
+
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 conan_check(VERSION 1.19.1 REQUIRED)
@@ -40,6 +53,10 @@ endif()
 
 find_package(EXPAT 2.2 REQUIRED)
 find_package(SQLite3 3.29 QUIET)
+
+if(BUILD_TESTING)
+find_package(LibXml2 2.9 QUIET)
+endif()
 
 if(SQLITE3_FOUND)
   add_definitions(-DGNU_GAMA_LOCAL_SQLITE_READER)
@@ -279,6 +296,6 @@ target_link_libraries(gama-g3 libgama)
 # Installation
 install(TARGETS gama-local gama-g3 DESTINATION bin)
 
-# Tests
-enable_testing()
+if(BUILD_TESTING)
 add_subdirectory(tests)
+endif()
