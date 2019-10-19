@@ -8,8 +8,6 @@ set(SRC_GAMA
     gnu_gama/e3.h
     gnu_gama/ellipsoid.cpp
     gnu_gama/ellipsoid.h
-    gnu_gama/ellipsoids.cpp
-    gnu_gama/ellipsoids.h
     gnu_gama/exception.h
     gnu_gama/gon2deg.cpp
     gnu_gama/gon2deg.h
@@ -199,16 +197,23 @@ set(SRC_GAMA
     gnu_gama/xml/dataparser_g3adj.cpp
     gnu_gama/xml/dataparser.h)
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama)
 
-add_library(libgama ${SRC_GAMA})
+add_custom_command(OUTPUT gnu_gama/ellipsoids.cpp
+                          gnu_gama/ellipsoids.h
+                          gnu_gama/ellipsoids.html
+                          gnu_gama/ellipsoids.texi
+                   COMMAND ellipsoids_xml
+                           ${PROJECT_SOURCE_DIR}/xml/ellipsoids.xml
+                           ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama)
 
-target_include_directories(
-  libgama
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-         #$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-         #$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/gama>
-  #PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/impl
-  )
+add_library(libgama ${SRC_GAMA}
+                    ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/ellipsoids.cpp
+                    ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/ellipsoids.h)
+
+target_include_directories(libgama
+                           PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+                                  ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(libgama xml)
 

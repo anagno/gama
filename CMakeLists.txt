@@ -62,6 +62,7 @@ if(SQLITE3_FOUND)
   add_definitions(-DGNU_GAMA_LOCAL_SQLITE_READER)
 endif()
 
+add_subdirectory(scripts)
 add_subdirectory(lib)
 add_subdirectory(bin)
 
