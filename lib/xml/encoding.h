@@ -19,7 +19,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <gnu_gama/xml_expat.h>
+#include "xml_expat.h"
 
 #ifndef gama_local_GKF_XML_encoding_h_
 #define gama_local_GKF_XML_encoding_h_

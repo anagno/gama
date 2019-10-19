@@ -25,7 +25,7 @@
 
 // BaseParser is just a simple C++ wrapper for XML parser expat
 
-#include <gnu_gama/xml_expat.h>
+#include <xml/xml_expat.h>
 #include <gnu_gama/intfloat.h>
 #include <gnu_gama/size_to.h>
 #include <string>

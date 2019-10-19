@@ -21,8 +21,8 @@
 
 #include <iostream>
 #include <string>
-#include <gnu_gama/xml_expat.h>
-#include <gnu_gama/xml/encoding.h>
+#include <xml/xml_expat.h>
+#include <xml/encoding.h>
 
 #ifndef GNU_gama_outstream_h_output_stream_outstreamh
 #define GNU_gama_outstream_h_output_stream_outstreamh

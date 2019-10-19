@@ -26,7 +26,7 @@
 #include <utility>
 
 #include <gnu_gama/xml/gkfparser.h>
-#include <gnu_gama/xml/encoding.h>
+#include <xml/encoding.h>
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/cluster.h>
 #include <gnu_gama/local/language.h>

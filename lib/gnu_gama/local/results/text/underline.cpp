@@ -21,7 +21,7 @@
 
 #include <string>
 #include <gnu_gama/local/results/text/underline.h>
-#include <gnu_gama/xml/encoding.h>
+#include <xml/encoding.h>
 
 namespace GNU_gama { namespace local {
 

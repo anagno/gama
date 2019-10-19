@@ -20,8 +20,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "encoding.h"
+
 #include <string.h>
-#include <gnu_gama/xml/encoding.h>
+
 
 #ifdef __cplusplus
 namespace GNU_gama {

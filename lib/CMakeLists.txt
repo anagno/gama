@@ -1,3 +1,5 @@
+add_subdirectory(xml)
+
 # add_definitions(-DDEBUG_ACORD2) add_definitions(-DA2G_DEBUG)
 
 # Library
@@ -34,7 +36,6 @@ set(SRC_GAMA
     gnu_gama/version.cpp
     gnu_gama/version.h
     gnu_gama/visitor.h
-    gnu_gama/xml_expat.h
     gnu_gama/xsd.h
     gnu_gama/adj/adj_base.h
     gnu_gama/adj/adj_basefull.h
@@ -60,10 +61,6 @@ set(SRC_GAMA
     gnu_gama/sparse/svector.h
     gnu_gama/xml/baseparser.cpp
     gnu_gama/xml/baseparser.h
-    gnu_gama/xml/encoding_cp1251.cpp
-    gnu_gama/xml/encoding.cpp
-    gnu_gama/xml/encoding.h
-    gnu_gama/xml/encoding_unknown_handler.cpp
     gnu_gama/xml/htmlparser.cpp
     gnu_gama/xml/htmlparser.h
     gnu_gama/xml/localnetworkoctave.cpp
@@ -213,7 +210,7 @@ target_include_directories(
   #PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/impl
   )
 
-target_link_libraries(libgama EXPAT::EXPAT)
+target_link_libraries(libgama xml)
 
 if(SQLITE3_FOUND)
   target_link_libraries(libgama sqlite3::sqlite3)
