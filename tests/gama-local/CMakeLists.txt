@@ -66,7 +66,6 @@ foreach(test ${INPUT_FILES})
 endforeach(test)
 
 
-
 # ------------------------------------------------------------------------
 #
 # check_algorithms
@@ -190,6 +189,22 @@ if(LIBXML2_FOUND)
         --noout
         ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd/${test}.xml
         )
+  endforeach(test)
+
+endif()
+
+
+if(OCTAVE_FOUND)
+
+  foreach(test ${INPUT_FILES})
+    foreach(algo svd gso cholesky envelope)
+      add_test(NAME gama_local_octave_${test}_${algo}
+               COMMAND ${OCTAVE_EXECUTABLE}
+                       ${RESULT_DIR}/gama-local-adjustment/${test}-${algo}.m)
+
+      set_tests_properties(gama_local_octave_${test}_${algo}
+                           PROPERTIES DEPENDS gama_local_adjustement_${test}_${algo})
+    endforeach(algo)
   endforeach(test)
 
 endif()
