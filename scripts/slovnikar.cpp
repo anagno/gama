@@ -339,12 +339,16 @@ void Parser::error(const char* message)
   result = 1;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
   /* reading all input files */
   {
     string f;
-    while (cin >> f) { Parser p(f); };
+    for (int idx = 1 ; idx < argc ; ++idx)
+    {
+      f = argv[idx];
+      Parser p(f);
+    }
     dict.erase(f);
   }
 

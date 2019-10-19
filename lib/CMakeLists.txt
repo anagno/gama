@@ -82,8 +82,6 @@ set(SRC_GAMA
     gnu_gama/local/exception.h
     gnu_gama/local/float.h
     gnu_gama/local/itstream.h
-    gnu_gama/local/language.cpp
-    gnu_gama/local/language.h
     gnu_gama/local/svg.cpp
     gnu_gama/local/svg.h
     gnu_gama/local/acord/approx_heights.cpp
@@ -207,9 +205,27 @@ add_custom_command(OUTPUT gnu_gama/ellipsoids.cpp
                            ${PROJECT_SOURCE_DIR}/xml/ellipsoids.xml
                            ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama)
 
+# file(GLOB_RECURSE) commands is being misused here
+# Normally his should be avoided because if files are added or removed, 
+# CMake is not automatically re-run, so the build is unaware of the change.
+# https://cmake.org/cmake/help/v3.10/command/file.html
+file(GLOB_RECURSE language_files
+  ${PROJECT_SOURCE_DIR}/xml/lang/*/*.lang
+)
+
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
+
+add_custom_command(OUTPUT gnu_gama/local/language.h
+                          gnu_gama/local/language.cpp
+                   COMMAND slovnikar ${language_files}
+                   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
+
 add_library(libgama ${SRC_GAMA}
                     ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/ellipsoids.cpp
-                    ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/ellipsoids.h)
+                    ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/ellipsoids.h
+                    ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local/language.h
+                    ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local/language.cpp
+                    )
 
 target_include_directories(libgama
                            PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
