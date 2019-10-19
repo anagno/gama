@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project (gnu-gama VERSION 2.07)
+project (gnu-gama VERSION 2.7)
 
 set(CMAKE_CXX_STANDARD 11)
 

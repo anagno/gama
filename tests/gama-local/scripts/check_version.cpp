@@ -32,43 +32,7 @@ int main(int /*argc*/, char* argv[])
   string version_cpp = GNU_gama::GNU_gama_version(); /* gnu_gama/version.cpp */
   std::cout << version_cpp << " version_cpp\n";
 
-  // string version_configure_ac = string(VERSION);
-
-  string version_configure_ac;                       /* configure.ac */
-  {
-     std::ifstream inpf(argv[1]);
-
-     const string pattern = "AC_INIT([gama], [";
-     while (std::getline(inpf, version_configure_ac))
-       {
-         auto indx = version_configure_ac.find(pattern, 0);
-         if (indx > 0) continue;
-
-         version_configure_ac.erase(0, pattern.size());
-         while (version_configure_ac.back()!= ',')
-           {
-             version_configure_ac.pop_back();
-           }
-         version_configure_ac.pop_back();
-         version_configure_ac.pop_back();
-         break;
-       }
-  }
-  std::cout << version_configure_ac << " version_configure_ac\n";
-
-  if (version_cpp != version_configure_ac)
-    {
-      std::cout
-        << "\nPackage version "
-        << version_configure_ac << ", defined in configure.ac, "
-        << "\nis different from version "
-        << version_cpp << ", defined in lib/gnu_gama/version.cpp\n\n";
-
-      error++;
-    }
-
-
-  std::ifstream inpf(argv[2]);
+  std::ifstream inpf(argv[1]);
 
   /* We expect the fix format of CMakeLists.txt project directive:
    *
@@ -85,10 +49,10 @@ int main(int /*argc*/, char* argv[])
       version_cmake.erase(0, pattern.size());
       version_cmake.pop_back();
 
-      if (version_cmake != version_configure_ac)     /* CMakeLists.txt */
+      if (version_cmake != version_cpp)
         {
           std::cout
-            << "\nPackage version " << version_configure_ac
+            << "\nPackage version " << version_cpp
             << ", defined in configure.ac, "
             << "\nis different from version "
             << version_cmake << ", defined in CMakeLists.txt\n\n";

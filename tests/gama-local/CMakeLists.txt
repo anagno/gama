@@ -43,7 +43,7 @@ add_executable(check_version scripts/check_version.cpp
 target_link_libraries(check_version libgama)
 
 add_test(NAME check_version COMMAND check_version
-  ${PROJECT_SOURCE_DIR}/configure.ac ${PROJECT_SOURCE_DIR}/CMakeLists.txt)
+  ${PROJECT_SOURCE_DIR}/CMakeLists.txt)
 
 # -------------------------------------------------------------------------
 #
