@@ -10,6 +10,24 @@ set(CMAKE_CXX_STANDARD 11)
 # https://gitlab.kitware.com/cmake/community/wikis/doc/ctest/Testing-With-CTest#dynamic-analysis
 include (CTest)
 
+include(CMakeDependentOption)
+option(USE_SQLITE3 "Use the SQLite 3 on the compilation of the source code" OFF)
+
+if(BUILD_TESTING)
+  cmake_dependent_option(USE_LIBXML2
+                         "Use the libxml2 on the compilation of the source code"
+                         OFF
+                         "BUILD_TESTING"
+                         OFF)
+
+  cmake_dependent_option(USE_OCTAVE
+                         "Use the liboctave-dev on the compilation of the source code"
+                         OFF
+                         "BUILD_TESTING"
+                         OFF)
+endif()
+
+
 option(USE_CONAN "Use conan package manager for the installation of the dependencies" OFF)
 
 if(USE_CONAN)
@@ -24,17 +42,14 @@ if(USE_CONAN)
       "${CMAKE_BINARY_DIR}/conan.cmake")
   endif()
 
-  include(CMakeDependentOption)
   set(OPTIONAL_CONAN_PARAMETERS OPTIONS)
 
-  CMAKE_DEPENDENT_OPTION(INSTALL_SQLITE3 "Install the sqlite3 plugin" OFF "USE_CONAN" OFF)
-  if(INSTALL_SQLITE3)
+  if(USE_SQLITE3)
     set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} sqlite3=True)
   endif()
 
   if(BUILD_TESTING)
-    CMAKE_DEPENDENT_OPTION(INSTALL_LIBXML2 "Install the libxml2" OFF "USE_CONAN" OFF)
-    if(INSTALL_LIBXML2)
+    if(USE_LIBXML2)
       set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} libxml2=True)
     endif()
   endif()
@@ -54,13 +69,21 @@ if(USE_CONAN)
 endif()
 
 find_package(EXPAT 2.2 REQUIRED)
-find_package(SQLite3 3.20 QUIET)
+
+if(USE_SQLITE3)
+  find_package(SQLite3 3.20 REQUIRED)
+endif()
 
 if(BUILD_TESTING)
-  find_package(LibXml2 2.9 QUIET)
+  if(USE_LIBXML2)
+    find_package(LibXml2 2.9 REQUIRED)
+  endif()
+  
 
-  #sudo apt-get install liboctave-dev
-  find_package(Octave 4.2 QUIET)
+  if(USE_OCTAVE)
+    #sudo apt-get install liboctave-dev
+    find_package(Octave 4.2 REQUIRED)
+  endif()
 endif()
 
 if(SQLITE3_FOUND)

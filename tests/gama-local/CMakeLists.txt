@@ -65,6 +65,23 @@ foreach(test ${INPUT_FILES})
   endforeach(algo)
 endforeach(test)
 
+# -------------------------------------------------------------------------
+#
+# check_adjustment 360
+# or testing text and html output in 360 degrees we use gso algorithm only
+#
+
+foreach(test ${INPUT_FILES})
+  foreach(algo gso) # svd  cholesky envelope)
+    add_test(NAME gama_local_adjustement_360_${test}_${algo}
+      COMMAND gama-local ${INPUT_DIR}/${test}.gkf --algorithm ${algo}
+        --text   ${RESULT_DIR}/gama-local-adjustment/${test}-${algo}-360.txt
+        --html   ${RESULT_DIR}/gama-local-adjustment/${test}-${algo}-360.html
+      )
+  endforeach(algo)
+endforeach(test)
+
+
 
 # ------------------------------------------------------------------------
 #
@@ -104,9 +121,54 @@ foreach(z ${INPUT_FILES})
     add_test(NAME check_xml_xml_${z}_${a}_${b} COMMAND
       check_xml_xml "${a} ${b} ${z}" ${RES}/${z}-${a}.xml ${RES}/${z}-${b}.xml
     )
+
+    set_tests_properties(check_xml_xml_${z}_${a}_${b}
+                         PROPERTIES DEPENDS
+                                    gama_local_adjustement_${z}-${a})
+
+    set_tests_properties(check_xml_xml_${z}_${a}_${b}
+                         PROPERTIES DEPENDS
+                                    gama_local_adjustement_${z}-${b})
   endforeach(algorithms)
 endforeach(z)
 
+# ------------------------------------------------------------------------
+#
+# check html
+#
+add_executable(check_html scripts/check_html.cpp
+                          scripts/compare_xml_adjustment.h
+                          scripts/compare_xml_adjustment.cpp)
+
+target_link_libraries(check_html libgama)
+
+foreach(test ${INPUT_FILES})
+  foreach(algo gso) # svd  cholesky envelope)
+    add_test(NAME check_html_${test}_${algo}
+             COMMAND check_html
+                     ${test}
+                     ${RESULT_DIR}/gama-local-adjustment/${test}-${algo}.html
+                     ${INPUT_DIR}/${test}.xml)
+
+    set_tests_properties(check_html_${test}_${algo}
+                         PROPERTIES DEPENDS
+                                    gama_local_adjustement_${test}_${algo})
+  endforeach(algo)
+endforeach(test)
+
+foreach(test ${INPUT_FILES})
+  foreach(algo gso) # svd  cholesky envelope)
+    add_test(NAME check_html_360_${test}_${algo}
+             COMMAND check_html
+                     ${test}-360
+                     ${RESULT_DIR}/gama-local-adjustment/${test}-${algo}-360.html
+                     ${INPUT_DIR}/${test}.xml)
+
+    set_tests_properties(check_html_360_${test}_${algo}
+                         PROPERTIES DEPENDS
+                                    gama_local_adjustement_360_${test}_${algo})
+  endforeach(algo)
+endforeach(test)
 
 
 # -------------------------------------------------------------------------
@@ -189,6 +251,10 @@ if(LIBXML2_FOUND)
         --noout
         ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd/${test}.xml
         )
+
+    set_tests_properties(xmllint-gama-local-adjustment-xsd_output_${test}
+                         PROPERTIES DEPENDS
+                                    xmllint-gama-local-adjustment-xsd_input_${test})
   endforeach(test)
 
 endif()

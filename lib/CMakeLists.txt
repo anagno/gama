@@ -238,9 +238,9 @@ target_include_directories(libgama
 target_link_libraries(libgama xml)
 
 if(SQLITE3_FOUND)
-  if(USE_CONAN)
+  if(USE_CONAN AND USE_SQLITE3)
     target_link_libraries(libgama sqlite3::sqlite3)
-  else(USE_CONAN)
+  else()
     target_link_libraries(libgama SQLite::SQLite3)
-  endif(USE_CONAN)
+  endif()
 endif()
