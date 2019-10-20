@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 # Tests
 # https://gitlab.kitware.com/cmake/community/wikis/doc/ctest/Testing-With-CTest#dynamic-analysis
+option(BUILD_TESTING "" OFF)
 include (CTest)
 
 include(CMakeDependentOption)
