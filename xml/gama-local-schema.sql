@@ -22,19 +22,19 @@
 */
 
 
-create table gnu_gama_local_schema_version (
+create table if not exists gnu_gama_local_schema_version (
    major integer default 1 not null check (major = 1),
    minor integer default 1 not null check (minor = 93),
    primary key (major, minor)
 );
-insert into gnu_gama_local_schema_version (major, minor) values (1, 93);
+insert or ignore into gnu_gama_local_schema_version (major, minor) values (1, 93);
 
-create table gnu_gama_local_options (
+create table if not exists gnu_gama_local_options (
    opt_key varchar(40),
    opt_val varchar(80)
 );
 
-create table gnu_gama_local_configurations (
+create table if not exists gnu_gama_local_configurations (
    conf_id   integer primary key,
    conf_name varchar(60) not null unique,
    sigma_apr double precision default 10.0 not null check (sigma_apr > 0),
@@ -52,14 +52,14 @@ create table gnu_gama_local_configurations (
    ellipsoid varchar(20)
 );
 
-create table gnu_gama_local_descriptions (
+create table if not exists gnu_gama_local_descriptions (
    conf_id   integer references gnu_gama_local_configurations,
    indx      integer check (indx >= 1),
    text      varchar(1000) not null,
    primary key (conf_id, indx)
 );
 
-create table gnu_gama_local_points (
+create table if not exists gnu_gama_local_points (
    conf_id   integer references gnu_gama_local_configurations,
    id        varchar(80),
    x         double precision,
@@ -70,7 +70,7 @@ create table gnu_gama_local_points (
    primary key (conf_id, id)
 );
 
-create table gnu_gama_local_clusters (
+create table if not exists gnu_gama_local_clusters (
    conf_id   integer references gnu_gama_local_configurations,
    ccluster  integer check (ccluster > 0),
    dim       integer not null check (dim > 0),
@@ -81,7 +81,7 @@ create table gnu_gama_local_clusters (
 );
 
 -- upper triangular variance-covariance band-matrix (0 <= bandwidth < dim)
-create table gnu_gama_local_covmat (
+create table if not exists gnu_gama_local_covmat (
    conf_id   integer,
    ccluster  integer,
    rind      integer check (rind > 0),
@@ -91,7 +91,7 @@ create table gnu_gama_local_covmat (
    primary key (conf_id, ccluster, rind, cind)
 );
 
-create table gnu_gama_local_obs (
+create table if not exists gnu_gama_local_obs (
    conf_id   integer,
    ccluster  integer,
    indx      integer check (indx > 0),
@@ -112,7 +112,7 @@ create table gnu_gama_local_obs (
    check (tag = 'dh' or (tag <> 'dh' and dist is null))
 );
 
-create table gnu_gama_local_coordinates (
+create table if not exists gnu_gama_local_coordinates (
    conf_id   integer,
    ccluster  integer check (ccluster > 0),
    indx      integer check (indx > 0),
@@ -125,7 +125,7 @@ create table gnu_gama_local_coordinates (
    primary key (conf_id, ccluster, indx)
 );
 
-create table gnu_gama_local_vectors (
+create table if not exists gnu_gama_local_vectors (
    conf_id   integer,
    ccluster  integer check (ccluster > 0),
    indx      integer check (indx > 0),
@@ -143,7 +143,7 @@ create table gnu_gama_local_vectors (
 
 -- adjustment results
 
-create table gnu_gama_local_adj_network_general_parameters (
+create table if not exists gnu_gama_local_adj_network_general_parameters (
    conf_id   integer,
    gmversion varchar(10),
    algorithm varchar(16),
@@ -157,7 +157,7 @@ create table gnu_gama_local_adj_network_general_parameters (
    check (angles in ('left-handed', 'right-handed'))
 );
 
-create table gnu_gama_local_adj_coordinates_summary (
+create table if not exists gnu_gama_local_adj_coordinates_summary (
    conf_id   integer,
    adj_xyz   integer not null,
    adj_xy    integer not null,
@@ -172,7 +172,7 @@ create table gnu_gama_local_adj_coordinates_summary (
    primary key (conf_id)
 );
 
-create table gnu_gama_local_adj_observations_summary (
+create table if not exists gnu_gama_local_adj_observations_summary (
    conf_id    integer,
    distances  integer not null,
    directions integer not null,
@@ -187,7 +187,7 @@ create table gnu_gama_local_adj_observations_summary (
    primary key (conf_id)
 );
 
-create table gnu_gama_local_adj_project_equations (
+create table if not exists gnu_gama_local_adj_project_equations (
    conf_id     integer,
    equations   integer not null,
    unknowns    integer not null,
@@ -199,7 +199,7 @@ create table gnu_gama_local_adj_project_equations (
    primary key (conf_id)
 );
 
-create table gnu_gama_local_adj_standard_deviation (
+create table if not exists gnu_gama_local_adj_standard_deviation (
    conf_id     integer,
    apriori     double precision not null,
    aposteriori double precision not null,
@@ -214,7 +214,7 @@ create table gnu_gama_local_adj_standard_deviation (
    primary key (conf_id)
 );
 
-create table gnu_gama_local_adj_coordinates (
+create table if not exists gnu_gama_local_adj_coordinates (
    conf_id   integer references gnu_gama_local_configurations,
    indx      integer,
    id        varchar(80),
@@ -229,7 +229,7 @@ create table gnu_gama_local_adj_coordinates (
    primary key (conf_id, id)
 );
 
-create table gnu_gama_local_adj_orientation_shifts (
+create table if not exists gnu_gama_local_adj_orientation_shifts (
    conf_id   integer,
    indx      integer,
    id        varchar(80),
@@ -240,7 +240,7 @@ create table gnu_gama_local_adj_orientation_shifts (
 );
 
 -- upper triangular variance-covariance band-matrix (0 <= bandwidth < dim)
-create table gnu_gama_local_adj_covmat (
+create table if not exists gnu_gama_local_adj_covmat (
    conf_id   integer,
    rind      integer check (rind > 0),
    cind      integer check (cind > 0),
@@ -249,7 +249,7 @@ create table gnu_gama_local_adj_covmat (
    primary key (conf_id, rind, cind)
 );
 
-create table gnu_gama_local_adj_original_indexes (
+create table if not exists gnu_gama_local_adj_original_indexes (
    conf_id   integer,
    indx      integer not null,
    adj_indx  integer not null,
@@ -257,7 +257,7 @@ create table gnu_gama_local_adj_original_indexes (
    primary key (conf_id, indx)
 );
 
-create table gnu_gama_local_adj_observations (
+create table if not exists gnu_gama_local_adj_observations (
    conf_id   integer,
    indx      integer not null,
    obs_type  varchar(11),

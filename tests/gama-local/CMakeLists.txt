@@ -421,3 +421,129 @@ foreach(test ${INPUT_FILES_LOCAL_UPDATED})
   endif()
 
 endforeach(test)
+
+
+# -------------------------------------------------------------------------
+#
+# gama-local-sqlite-reader
+#
+
+if(SQLITE3_FOUND)
+
+  add_executable(sqlite_init_db  scripts/sqlite_init_db.cpp)
+
+  target_link_libraries(sqlite_init_db libgama)
+
+  add_executable(check_xml_coordinates  scripts/check_xml_coordinates.cpp)
+
+  target_link_libraries(check_xml_coordinates libgama)
+
+
+  file(MAKE_DIRECTORY ${RESULT_DIR}/gama-local-sqlite-reader)
+  set(GAMA_XML "${PROJECT_SOURCE_DIR}/xml")
+
+  add_test(NAME gama_local_xml2sql_fixed-azimuth
+    COMMAND gama-local-xml2sql
+      fixed-azimuth
+      ${INPUT_DIR}/fixed-azimuth.gkf
+      ${RESULT_DIR}/gama-local-sqlite-reader/fixed-azimuth.sql
+  )
+
+  add_test(NAME sqlite_init_db_fixed-azimuth
+    COMMAND sqlite_init_db
+      ${RESULT_DIR}/gama-local-sqlite-reader/demo.db
+      ${GAMA_XML}/gama-local-schema.sql
+      ${RESULT_DIR}/gama-local-sqlite-reader/fixed-azimuth.sql
+  )
+
+  set_tests_properties(sqlite_init_db_fixed-azimuth
+    PROPERTIES DEPENDS gama_local_xml2sql_fixed-azimuth
+               RUN_SERIAL TRUE)
+
+  add_test(NAME gama_local_adjustement_sql_fixed-azimuth
+    COMMAND gama-local 
+    --sqlitedb ${RESULT_DIR}/gama-local-sqlite-reader/demo.db
+    --readonly-configuration fixed-azimuth
+    --xml ${RESULT_DIR}/gama-local-sqlite-reader/fixed-azimuth.xml
+    )
+
+  add_test(NAME gama_local_adjustement_sql_fixed-constrained
+    COMMAND gama-local ${INPUT_DIR}/fixed-constrained.gkf
+    --xml ${RESULT_DIR}/gama-local-sqlite-reader/fixed-constrained.xml
+    )
+
+  set_tests_properties(gama_local_adjustement_sql_fixed-azimuth
+    PROPERTIES DEPENDS sqlite_init_db_fixed-azimuth
+               RUN_SERIAL TRUE)
+
+  add_test(NAME check_xml_coordinates_fixed-azimuth
+    COMMAND check_xml_coordinates
+    ${RESULT_DIR}/gama-local-sqlite-reader/fixed-azimuth.xml
+    ${RESULT_DIR}/gama-local-sqlite-reader/fixed-constrained.xml
+  )
+
+  set_tests_properties(check_xml_coordinates_fixed-azimuth
+    PROPERTIES DEPENDS gama_local_adjustement_sql_fixed-azimuth
+               RUN_SERIAL TRUE)
+
+  set_tests_properties(check_xml_coordinates_fixed-azimuth
+    PROPERTIES DEPENDS gama_local_adjustement_sql_fixed-constrained
+               RUN_SERIAL TRUE)
+
+  set(INPUT_FILES_SQL
+    tst-tetrahedron-2
+    tst-tetrahedron-3-gon
+    gama-local
+    zoltan-test_2d_dms
+    zoltan-test_3d_gon
+    )
+
+  foreach(test ${INPUT_FILES_SQL})
+
+    add_test(NAME gama_local_xml2sql_${test}
+      COMMAND gama-local-xml2sql
+        ${test}
+        ${INPUT_DIR}/${test}.gkf
+        ${RESULT_DIR}/gama-local-sqlite-reader/${test}.sql
+    )
+
+    add_test(NAME sqlite_init_db_${test}
+      COMMAND sqlite_init_db
+        ${RESULT_DIR}/gama-local-sqlite-reader/demo.db
+        ${RESULT_DIR}/gama-local-sqlite-reader/${test}.sql
+    )
+
+    set_tests_properties(sqlite_init_db_${test}
+      PROPERTIES DEPENDS gama_local_xml2sql_${test}
+                 RUN_SERIAL TRUE)
+
+    set_tests_properties(sqlite_init_db_${test}
+      PROPERTIES DEPENDS sqlite_init_db_fixed-azimuth)
+
+    set_tests_properties(sqlite_init_db_${test}
+      PROPERTIES DEPENDS gama_local_adjustement_sql_fixed-azimuth)
+
+    add_test(NAME gama_local_adjustement_sql_${test}
+      COMMAND gama-local 
+      --sqlitedb ${RESULT_DIR}/gama-local-sqlite-reader/${test}.db
+      --readonly-configuration ${test}
+      --xml ${RESULT_DIR}/gama-local-sqlite-reader/${test}.xml
+      )
+
+    set_tests_properties(gama_local_adjustement_sql_${test}
+      PROPERTIES DEPENDS sqlite_init_db_${test}
+                 RUN_SERIAL TRUE)
+
+    add_test(NAME check_xml_coordinates_${test}
+      COMMAND check_xml_coordinates
+      ${RESULT_DIR}/gama-local-sqlite-reader/${test}.xml
+      ${INPUT_DIR}/${test}.xml
+    )
+
+    set_tests_properties(check_xml_coordinates_${test}
+      PROPERTIES DEPENDS gama_local_adjustement_sql_${test}
+                 RUN_SERIAL TRUE)
+
+  endforeach(test)
+
+endif()

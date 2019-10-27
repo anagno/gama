@@ -58,6 +58,8 @@ int read_sql_file(const char* file_name)
       int prepare = sqlite3_prepare_v2(database, sql, -1, &statement, &tail);
       if (prepare != SQLITE_OK) {
         std::cout << "DB prepare error " << prepare << "\n";
+        std::string errorMessage(sqlite3_errmsg(database));
+        std::cout << "Error: " << errorMessage;
         return error=1;
       }
 
@@ -72,6 +74,8 @@ int read_sql_file(const char* file_name)
       int final = sqlite3_finalize(statement);
       if (final != SQLITE_OK) {
         std::cout << "DB finalize error " << final << "\n";
+        std::string errorMessage(sqlite3_errmsg(database));
+        std::cout << "Error: " << errorMessage;
         return error=1;
       }
 
