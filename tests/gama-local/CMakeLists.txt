@@ -357,5 +357,67 @@ if(LIBXML2_FOUND)
   set_tests_properties(xmllint_gama_local_nop_xml2txt 
       PROPERTIES DEPENDS gama_local_nop)
 
-      
 endif()
+
+# -------------------------------------------------------------------------
+#
+# gama-local-updated-xml
+#
+
+file(MAKE_DIRECTORY ${RESULT_DIR}/gama-local-updated-xml)
+
+set(INPUT_FILES_LOCAL_UPDATED
+  gama-local.gkf
+  azimuth-angle.gkf
+  prostorovka.gkf
+  skorepa-dusek.gkf
+  mikhail-7.4.gkf
+  minimal.gkf
+  seq-dsuloha-d.gkf
+  tst-tetrahedron-2.gkf
+  tst-tetrahedron-3-gon.gkf
+  tst-tetrahedron-3-deg.gkf)
+
+foreach(test ${INPUT_FILES_LOCAL_UPDATED})
+
+  add_test(NAME gama_local_updated_xml_${test}
+    COMMAND gama-local ${INPUT_DIR}/${test}
+      --xml ${RESULT_DIR}/gama-local-updated-xml/${test}-1.xml
+      --updated-xml ${RESULT_DIR}/gama-local-updated-xml/${test}-1.gkf
+    )
+
+  add_test(NAME gama_local_updated_xml_2_${test}
+    COMMAND gama-local ${RESULT_DIR}/gama-local-updated-xml/${test}-1.gkf
+      --xml ${RESULT_DIR}/gama-local-updated-xml/${test}-2.xml
+    )
+
+  set_tests_properties(gama_local_updated_xml_2_${test} 
+      PROPERTIES DEPENDS gama_local_updated_xml_${test})
+
+  add_test(NAME check_xml_xml_update_xml_${test}
+    COMMAND check_xml_xml "udpated xml ${test}" 
+      ${RESULT_DIR}/gama-local-updated-xml/${test}-1.xml
+      ${RESULT_DIR}/gama-local-updated-xml/${test}-2.xml
+    )
+
+  set_tests_properties(check_xml_xml_update_xml_${test}
+    PROPERTIES DEPENDS gama_local_updated_xml_${test})
+
+  set_tests_properties(check_xml_xml_update_xml_${test}
+    PROPERTIES DEPENDS gama_local_updated_xml_2_${test})
+
+
+  if(LIBXML2_FOUND)
+
+    add_test(NAME xmllint_gama_local_update_xml_${test}
+      COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+        --schema ${GAMA_XML}/gama-local.xsd
+        ${RESULT_DIR}/gama-local-updated-xml/${test}-1.gkf
+        --noout)
+
+    set_tests_properties(xmllint_gama_local_update_xml_${test}
+      PROPERTIES DEPENDS gama_local_updated_xml_${test})
+
+  endif()
+
+endforeach(test)
