@@ -50,15 +50,19 @@ int parameters(int argc, char* argv[], Adjustment& adj, OutStream& out);
 
 int main(int argc, char* argv[])
 {
+  if(argc<3) return help();
+
   Adjustment adj;
-  OutStream  out(&std::cout);
+  std::ofstream output_file(argv[2]);
+  OutStream  out(&output_file);
   set_gama_language(en);
 
   try
     {
       if (const int k = parameters(argc, argv, adj, out)) return k;
 
-      adj.read_xml(std::cin);
+      std::ifstream input_file(argv[1]);
+      adj.read_xml(input_file);
 
       if (adj.xmlerror.isValid())
         {
@@ -99,7 +103,7 @@ int help()
 {
   using std::cerr;
 
-  cerr << "Usage: gama-local-xml2txt [options] < std_input > std_output\n\n"
+  cerr << "Usage: gama-local-xml2txt input_file output_file [options]\n\n"
        << "Convert XML adjustment output of gama-local to text format\n\n";
 
   cerr << "Options:\n"
@@ -128,7 +132,7 @@ int parameters(int argc, char* argv[], Adjustment& adj, OutStream& out)
   for (int i=1; i<argc; i++)
     {
       c = argv[i];
-      if (*c != '-') return help();
+      if (*c != '-') continue;
       if (*c && *c == '-') c++;
       if (*c && *c == '-') c++;
 

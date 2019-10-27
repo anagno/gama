@@ -275,3 +275,87 @@ if(OCTAVE_FOUND)
 
 endif()
 
+
+# -------------------------------------------------------------------------
+#
+# gama-local-parameters
+#
+
+file(MAKE_DIRECTORY ${RESULT_DIR}/gama-local-parameters)
+
+add_test(NAME gama_local_par
+  COMMAND gama-local ${INPUT_DIR}/gama-local-par.gkf
+    --xml ${RESULT_DIR}/gama-local-parameters/par.xml
+)
+
+add_test(NAME gama_local_nop
+  COMMAND gama-local ${INPUT_DIR}/gama-local-nop.gkf
+    --xml ${RESULT_DIR}/gama-local-parameters/nop.xml
+    --algorithm gso
+    --cov-band 1
+    --latitude 50.2
+    --ellipsoid wgs84
+)
+
+add_test(NAME gama_local_par_nop_compare 
+  COMMAND ${CMAKE_COMMAND} -E compare_files ${RESULT_DIR}/gama-local-parameters/nop.xml 
+  ${RESULT_DIR}/gama-local-parameters/par.xml
+)
+
+set_tests_properties(gama_local_par_nop_compare 
+  PROPERTIES DEPENDS gama_local_nop)
+
+set_tests_properties(gama_local_par_nop_compare 
+  PROPERTIES DEPENDS gama_local_nop)
+
+add_test(NAME gama_local_par_xml2txt 
+  COMMAND gama-local-xml2txt ${RESULT_DIR}/gama-local-parameters/par.xml ${RESULT_DIR}/gama-local-parameters/par.txt
+)
+
+set_tests_properties(gama_local_par_xml2txt 
+  PROPERTIES DEPENDS gama_local_par)
+
+add_test(NAME gama_local_nop_xml2txt 
+  COMMAND gama-local-xml2txt ${RESULT_DIR}/gama-local-parameters/nop.xml ${RESULT_DIR}/gama-local-parameters/nop.txt
+)
+
+set_tests_properties(gama_local_nop_xml2txt 
+  PROPERTIES DEPENDS gama_local_nop)
+
+
+if(LIBXML2_FOUND)
+
+  set(GAMA_XML "${PROJECT_SOURCE_DIR}/xml")
+
+  add_test(NAME xmllint_gama_local_par
+    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+      --schema ${GAMA_XML}/gama-local.xsd
+      ${INPUT_DIR}/gama-local-par.gkf
+      --noout)
+
+  add_test(NAME xmllint_gama_local_nop
+    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+      --schema ${GAMA_XML}/gama-local.xsd
+      ${INPUT_DIR}/gama-local-nop.gkf
+      --noout)
+
+  add_test(NAME xmllint_gama_local_par_xml2txt 
+    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+      --schema ${GAMA_XML}/gama-local-adjustment.xsd
+      ${RESULT_DIR}/gama-local-parameters/par.xml
+      --noout)
+
+  set_tests_properties(xmllint_gama_local_par_xml2txt 
+      PROPERTIES DEPENDS gama_local_par)
+
+  add_test(NAME xmllint_gama_local_nop_xml2txt 
+    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+      --schema ${GAMA_XML}/gama-local-adjustment.xsd
+      ${RESULT_DIR}/gama-local-parameters/nop.xml
+      --noout)
+
+  set_tests_properties(xmllint_gama_local_nop_xml2txt 
+      PROPERTIES DEPENDS gama_local_nop)
+
+      
+endif()
