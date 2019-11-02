@@ -213,7 +213,7 @@ LocalNetwork::LocalNetwork()
   : pocbod_(0), tst_redbod_(false), pocmer_(0), tst_redmer_(false),
     m_0_apr_(10), konf_pr_(0.95), tol_abs_(1000),
     update_constrained_coordinates_(false), typ_m_0_(empiricka_),
-    tst_rov_opr_(false), tst_vyrovnani_(false), min_n_(0), min_x_(0),
+    tst_rov_opr_(false), tst_vyrovnani_(false), min_n_(0), min_x_(nullptr),
     gons_(true)
 {
   least_squares = nullptr;
@@ -237,6 +237,7 @@ LocalNetwork::~LocalNetwork()
 {
   delete[] min_x_;
   delete   Asp;
+  delete   least_squares;
 }
 
 
@@ -285,7 +286,7 @@ void LocalNetwork::set_algorithm(std::string alg)
   algorithm_ = alg;
   has_algorithm_ = true;
 
-  if (least_squares != nullptr) delete least_squares;
+  delete least_squares;
   least_squares = adjb;
 
   update(Points);
@@ -965,7 +966,7 @@ int LocalNetwork::null_space()
     }
   catch(const MatVecException& vs)
     {
-      if (vs.error != GNU_gama::Exception::BadRegularization) throw;
+      if (vs.error() != GNU_gama::Exception::BadRegularization) throw;
 
       for (int i=1; i<=sum_unknowns(); i++)
         if (lindep(i))
@@ -1056,6 +1057,12 @@ void LocalNetwork::refine_approx()
 // preparing for project equations - Cholesky decomposition of
 // covariance matrix
 
+/* ######################################################################
+ * Functions choldec() and forwardSubstitution were identical in Adj and
+ * LocalNetwork classes. They were declared static in Adj class and
+ * commented out in LocalNetwork in version 2.08.
+ * ######################################################################
+
 void LocalNetwork::cholesky(CovMat& chol)
 {
   chol.cholDec();
@@ -1090,6 +1097,7 @@ void LocalNetwork::forwardSubstitution(const CovMat& chol, Vec& v)
       v(i) /= chol(i,i);
     }
 }
+*/
 
 
 void LocalNetwork::prepareProjectEquations()
@@ -1103,7 +1111,7 @@ void LocalNetwork::prepareProjectEquations()
           Vec t(N);
           CovMat C = (*cluster)->activeCov();
           C /= (m_0_apr_*m_0_apr_);        // covariances ==> cofactors
-          cholesky(C);                     // cofactors   ==> weights
+          Adj::choldec(C);                     // cofactors   ==> weights
 
           for (int j=1; j<=A.cols(); j++)
             {
@@ -1116,12 +1124,12 @@ void LocalNetwork::prepareProjectEquations()
                 }
                 if (empty) continue;
 
-                forwardSubstitution(C, t);
+                Adj::forwardSubstitution(C, t);
                 for (int l=1; l<=N; l++) A(ind_0+l,j) = t(l);
             }
 
           for (int k=1; k<=N; k++) t(k) = b(ind_0+k);
-          forwardSubstitution(C, t);
+          Adj::forwardSubstitution(C, t);
           for (int l=1; l<=N; l++) b(ind_0+l) = t(l);
 
           ind_0 += N;
@@ -1203,7 +1211,7 @@ void LocalNetwork::vyrovnani_()
           Vec t(N), u(N);
           CovMat C = (*cluster)->activeCov();
           C /= (m_0_apr_*m_0_apr_);
-          cholesky(C);
+          Adj::choldec(C);
 
           for (int k=1; k<=N; k++)
             {
