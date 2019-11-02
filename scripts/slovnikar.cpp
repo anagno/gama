@@ -167,8 +167,8 @@ Discard    discard;
 
 // ---------------------------------------------------------------------------
 
-#include <xml/xml_expat.h>
-#include <xml/encoding.h>
+#include <xml_expat.h>
+#include <encoding.h>
 
 using namespace GNU_gama;
 

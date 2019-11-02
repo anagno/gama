@@ -1,8 +1,11 @@
-from conans import ConanFile
+from conans import ConanFile, CMake
+
 
 class Gama(ConanFile):
-   settings = "os", "compiler", "build_type", "arch"
-   generators = "cmake_find_package"
+   name = "GaMa"
+   version = "2.7"
+   settings = "os", "compiler", "build_type", "arch",
+   generators = ["cmake_find_package", "cmake_paths", "virtualenv"]
 
    options = {
        "sqlite3": [True, False],
@@ -23,3 +26,26 @@ class Gama(ConanFile):
        if self.options.libxml2:
            self.requires("libxml2/2.9.9@bincrafters/stable")
 
+   def _configure_cmake(self):
+      cmake = CMake(self)
+      cmake.definitions["CONAN_EXPORTED"] = True
+      cmake.definitions["USE_CONAN"] = "ON"
+      cmake.definitions["BUILD_TESTING"] = "OFF"
+
+      if self.options.sqlite3:
+           cmake.definitions["USE_SQLITE3"] = "ON"
+
+      cmake.verbose = True
+      cmake.configure()
+      return cmake
+
+   def build(self):
+      cmake = self._configure_cmake()
+      cmake.build()
+
+   def package(self):
+      cmake = self._configure_cmake()
+      cmake.install()
+
+
+# sudo apt-get install clang nodejs

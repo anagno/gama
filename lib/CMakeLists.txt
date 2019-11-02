@@ -200,7 +200,8 @@ add_custom_command(OUTPUT gnu_gama/ellipsoids.cpp
                           gnu_gama/ellipsoids.h
                           gnu_gama/ellipsoids.html
                           gnu_gama/ellipsoids.texi
-                   COMMAND ellipsoids_xml
+                   DEPENDS BuildTools
+                   COMMAND ${BuildTools_BUILD_DIR}/ellipsoids_xml
                            ${PROJECT_SOURCE_DIR}/xml/ellipsoids.xml
                            ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama)
 
@@ -216,7 +217,8 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
 
 add_custom_command(OUTPUT gnu_gama/local/language.h
                           gnu_gama/local/language.cpp
-                   COMMAND slovnikar ${language_files}
+                   DEPENDS BuildTools
+                   COMMAND ${BuildTools_BUILD_DIR}/slovnikar ${language_files}
                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
 
 # https://crascit.com/2017/04/18/generated-sources-in-cmake-builds/
