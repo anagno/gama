@@ -1,0 +1,33 @@
+buildType:
+  default: Release
+  choices:
+    debug:
+      short: Debug
+      long: Emit debug information
+      buildType: Debug
+    release:
+      short: Release
+      long: Optimize generated code
+      buildType: Release
+
+conan:
+  default: ON
+  choices:
+    ON:
+      short: USE_CONAN
+      long: Use conan for downloading dependencies
+      settings:
+        USE_CONAN: ON
+        CONAN_EXPORTED: False
+    OFF:
+      short: USE_SYSTEM_LIBRARIES
+      long: Use the libraries provided from the os
+      settings:
+        USE_CONAN: OFF
+        CONAN_EXPORTED: False
+    EXPORT:
+      short: CONAN_EXPORTED
+      long: Use conan to export the package
+      setting:
+        CONAN_EXPORTED: True
+        USE_CONAN: OFF
