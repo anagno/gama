@@ -102,13 +102,13 @@ if(SQLITE3_FOUND)
 endif()
 
 if(USE_CONAN)
-  set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/scripts --install-folder ${CMAKE_CURRENT_BINARY_DIR}/scripts/ --build=missing)
+  set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/scripts --install-folder ${CMAKE_CURRENT_BINARY_DIR}/scripts/)
 endif()
 
 if(NOT CMAKE_CROSSCOMPILING)
-  set(BUILD_TOOS_CMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER})
+  set(BUILD_TOOS_CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
 else()
-  if(NOT DEFINED ENV{BUILD_TOOS_CMAKE_CXX_COMPILER})
+  if(NOT DEFINED BUILD_TOOS_CMAKE_CXX_COMPILER)
     message(FATAL_ERROR 
       " BUILD_TOOS_CMAKE_CXX_COMPILER is not defined.  You must tell CMake which compiler to use."
       "We also need a native compiler for compiling some build tools for generating headers.") 
@@ -120,12 +120,11 @@ ExternalProject_Add(BuildTools
   SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/scripts
   BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/scripts
   EXCLUDE_FROM_ALL
-  # I am overloading the functionality of the UPDAETE_COMMAND to execute conan
+  # I am overloading the functionality of the UPDATE_COMMAND to execute conan
   UPDATE_COMMAND ${conan_configure_command}
   CMAKE_ARGS
     -DCMAKE_BUILD_TYPE=Release
-    -DCMAKE_CXX_COMPILER=g++
-    "-DCMAKE_CXX_FLAGS=-march=native"
+    -DCMAKE_CXX_COMPILER=${BUILD_TOOS_CMAKE_CXX_COMPILER}
     -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
     -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
     -DCMAKE_CXX_STANDARD_REQUIRED=${CMAKE_CXX_STANDARD_REQUIRED}
