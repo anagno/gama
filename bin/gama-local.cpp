@@ -1,5 +1,5 @@
 /* GNU Gama C++ library
-   Copyright (C) 1999, 2002, 2003, 2010, 2011, 2012, 2014, 2018
+   Copyright (C) 1999, 2002, 2003, 2010, 2011, 2012, 2014, 2018, 2020
                  Ales Cepek <cepek@gnu.org>
 
    This file is part of the GNU Gama C++ library.
@@ -21,9 +21,6 @@
 #ifdef   GNU_GAMA_LOCAL_SQLITE_READER
 #include <gnu_gama/local/sqlitereader.h>
 #endif
-#ifdef DEBUG_DISABLE_ACORD2
-#include <gnu_gama/local/results/text/reduced_observations.h>
-#endif
 
 #include <gnu_gama/outstream.h>
 
@@ -38,7 +35,6 @@
 #include <gnu_gama/local/gamadata.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/acord/acord2.h>
-#include <gnu_gama/local/acord/acord.h>
 #include <gnu_gama/local/acord/acordstatistics.h>
 #include <gnu_gama/local/svg.h>
 #include <gnu_gama/local/html.h>
@@ -62,14 +58,14 @@ int help()
   using namespace std;
   using namespace GNU_gama::local;
 
-  cerr << "\n"
+  cout << "\n"
        << "Adjustment of local geodetic network"
        << "        version: "<< GNU_gama::GNU_gama_version()
        << " / " << GNU_gama::GNU_gama_compiler() << "\n"
        << "************************************\n"
-       << "http://www.gnu.org/software/gama/\n\n";
+       << "https://www.gnu.org/software/gama/\n\n";
 
-  cerr <<
+  cout <<
     "Usage: gama-local  input.xml  [options]\n"
 
 #ifdef   GNU_GAMA_LOCAL_SQLITE_READER
@@ -105,7 +101,12 @@ int help()
 
 //  "--obs        observation_equations.txt (obsolete format)\n"
 
-  return 1;
+  cout <<
+    "Report bugs to: <bug-gama@gnu.org>\n"
+    "GNU gama home page: <https://www.gnu.org/software/gama/>\n"
+    "General help using GNU software: <https://www.gnu.org/gethelp/>\n\n";
+
+  return 0;
 }
 
 GNU_gama::local::XMLerror xmlerr;
@@ -447,15 +448,9 @@ int main(int argc, char **argv)
          *
          * Class Acord2 was introduced for better handling of traverses.
          */
-#ifndef DEBUG_DISABLE_ACORD2
+
         Acord2 acord2(IS->PD, IS->OD);
         acord2.execute();
-#else
-        Acord acord(IS->PD, IS->OD);
-        acord.execute();
-
-        ReducedObservationsText(IS,&(acord.RO), cout);
-#endif
 
         if (IS->correction_to_ellipsoid())
           {

@@ -16,6 +16,7 @@ set(INPUT_FILES
     azimuth-distance
     jezerka-ang
     jezerka-dir
+    krasovsky-1926
     triangle-1
     triangle-2
     stroner-levelling-a
@@ -23,7 +24,6 @@ set(INPUT_FILES
     extern-azimuth-distance
     extern-tst-tetrahedron-3-gon
     extern-seq-dsuloha-d
-    bug-2019-04-23-oleg-goussev
     bug-2019-08-06-integer-coordinates
     bug-2019-08-13-traverse-knin_male
     bug-2019-08-20-knin_test
@@ -223,6 +223,30 @@ foreach(test ${INPUT_FILES})
   )
 endforeach(test)
 
+# ------------------------------------------------------------------------
+#
+# check externs
+#
+add_executable(check_externs scripts/check_externs.cpp ../acord2/acord.cpp ../acord2/acord.h)
+
+target_link_libraries(check_externs libgama)  
+
+add_test(NAME check_externs COMMAND check_externs
+  ${INPUT_DIR} ${RESULT_DIR}/gama-local-adjustment ${INPUT_FILES})
+
+foreach(test ${INPUT_FILES})
+  foreach(algo gso) # svd  cholesky envelope)
+    add_test(NAME check_externs_${test}_${algo}
+             COMMAND check_externs
+                     ${INPUT_DIR}
+                     ${RESULT_DIR}/gama-local-adjustment
+                     ${test})
+
+    set_tests_properties(check_externs_${test}_${algo}
+                         PROPERTIES DEPENDS
+                                    gama_local_adjustement_${test}_${algo})
+  endforeach(algo)
+endforeach(test)
 
 if(LIBXML2_FOUND)
 

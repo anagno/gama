@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 
-project (gnu-gama VERSION 2.7.2)
+project (gnu-gama VERSION 2.8.1)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
 set(CMAKE_CXX_STANDARD 14)
 add_definitions(-DGNU_gama_expat_1_1)
-
 
 # Tests
 # https://gitlab.kitware.com/cmake/community/wikis/doc/ctest/Testing-With-CTest#dynamic-analysis

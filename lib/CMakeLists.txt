@@ -89,8 +89,6 @@ set(SRC_GAMA
    gnu_gama/local/acord/approx_heights.h
    gnu_gama/local/acord/approx_vectors.cpp
    gnu_gama/local/acord/approx_vectors.h
-   gnu_gama/local/acord/acord.cpp
-   gnu_gama/local/acord/acord.h
    gnu_gama/local/acord/acord2.cpp
    gnu_gama/local/acord/acord2.h
    gnu_gama/local/acord/acordalgorithm.cpp

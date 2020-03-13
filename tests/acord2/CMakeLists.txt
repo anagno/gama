@@ -19,14 +19,14 @@ set(A2G_FILES
   traverse-04.a2g
   trivial-01.a2g
   trivial-02.a2g
+  trivial-03.a2g
   )
 #   azimuth-01.a2g
 
 add_test(NAME acord2-a2g COMMAND a2g ${RESULT_DIR}/a2g
          ${INPUT_DIR}/a2g ${A2G_FILES})
 
-
-add_executable(a2diff a2diff-main.cpp)
+add_executable(a2diff a2diff-main.cpp acord.h acord.cpp)
 
 target_link_libraries(a2diff libgama)
 
