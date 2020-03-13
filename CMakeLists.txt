@@ -30,56 +30,47 @@ if(BUILD_TESTING)
                          OFF)
 endif()
 
-option(USE_CONAN "Use conan package manager for the installation of the dependencies" OFF)
+if(NOT CONAN_EXPORTED)
 
-if(USE_CONAN)
-  if(NOT CONAN_EXPORTED)
-
-    # Download automatically, you can also just copy the conan.cmake file
-    if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-      message(
-        STATUS
-          "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-      file(
-        DOWNLOAD
-        "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.14/conan.cmake"
-        "${CMAKE_BINARY_DIR}/conan.cmake")
-    endif()
-
-    set(OPTIONAL_CONAN_PARAMETERS OPTIONS)
-
-    if(USE_SQLITE3)
-      set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} sqlite3=True)
-    endif()
-
-    if(BUILD_TESTING)
-      if(USE_LIBXML2)
-        set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} libxml2=True)
-      endif()
-    endif()
-
-    include(${CMAKE_BINARY_DIR}/conan.cmake)
-    conan_check(VERSION 1.19.1 REQUIRED)
-
-    conan_cmake_run(CONANFILE
-                    conanfile.py
-                    BASIC_SETUP
-                    CMAKE_TARGETS
-                    BUILD
-                    missing
-                    ${OPTIONAL_CONAN_PARAMETERS})
-
+  # Download automatically, you can also just copy the conan.cmake file
+  if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+    message(
+      STATUS
+        "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+    file(
+      DOWNLOAD
+      "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.14/conan.cmake"
+      "${CMAKE_BINARY_DIR}/conan.cmake")
   endif()
 
-  include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+  set(OPTIONAL_CONAN_PARAMETERS OPTIONS)
+
+  if(USE_SQLITE3)
+    set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} sqlite3=True)
+  endif()
+
+  if(BUILD_TESTING)
+    if(USE_LIBXML2)
+      set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} libxml2=True)
+    endif()
+  endif()
+
+  include(${CMAKE_BINARY_DIR}/conan.cmake)
+  conan_check(VERSION 1.19.1 REQUIRED)
+
+  conan_cmake_run(CONANFILE
+                  conanfile.py
+                  BASIC_SETUP
+                  CMAKE_TARGETS
+                  BUILD
+                  missing
+                  ${OPTIONAL_CONAN_PARAMETERS})
 
 endif()
 
-if(USE_CONAN)
-  find_package(Expat 2.2 REQUIRED)
-else()
-  find_package(EXPAT 2.2 REQUIRED)
-endif()
+include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+
+find_package(Expat 2.2 REQUIRED)
 
 if(USE_SQLITE3)
   find_package(SQLite3 3.20 REQUIRED)
@@ -101,9 +92,7 @@ if(SQLITE3_FOUND)
   add_definitions(-DGNU_GAMA_LOCAL_SQLITE_READER)
 endif()
 
-if(USE_CONAN)
-  set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/scripts --install-folder ${CMAKE_CURRENT_BINARY_DIR}/scripts/)
-endif()
+set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/scripts --install-folder ${CMAKE_CURRENT_BINARY_DIR}/scripts/)
 
 if(NOT CMAKE_CROSSCOMPILING)
   set(BUILD_TOOS_CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
@@ -128,7 +117,6 @@ ExternalProject_Add(BuildTools
     -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
     -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
     -DCMAKE_CXX_STANDARD_REQUIRED=${CMAKE_CXX_STANDARD_REQUIRED}
-    -DUSE_CONAN=${USE_CONAN}
   INSTALL_COMMAND "")
 
 ExternalProject_Get_property(BuildTools BINARY_DIR)

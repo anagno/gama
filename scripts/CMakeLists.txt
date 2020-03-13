@@ -12,12 +12,8 @@
 cmake_minimum_required(VERSION 3.10)
 project (build-tools)
 
-if(USE_CONAN)
-  include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
-  find_package(Expat 2.2 REQUIRED)
-else()
-  find_package(EXPAT 2.2 REQUIRED)
-endif()
+include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+find_package(Expat 2.2 REQUIRED)
 
 # Really not the best!!! I will have to rethink it!!!
 add_subdirectory(../lib/xml xml)

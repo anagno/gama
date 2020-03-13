@@ -36,7 +36,6 @@ class Gama(ConanFile):
             cmake.definitions["BUILD_TOOS_CMAKE_CXX_COMPILER"] = "g++"
 
       cmake.definitions["CONAN_EXPORTED"] = True
-      cmake.definitions["USE_CONAN"] = "ON"
       cmake.definitions["BUILD_TESTING"] = "OFF"
 
       if self.options.sqlite3:
