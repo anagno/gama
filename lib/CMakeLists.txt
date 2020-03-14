@@ -1,5 +1,3 @@
-add_subdirectory(xml)
-
 # add_definitions(-DDEBUG_ACORD2) add_definitions(-DA2G_DEBUG)
 
 # Library
@@ -213,8 +211,8 @@ add_custom_command(OUTPUT gnu_gama/ellipsoids.cpp
                           gnu_gama/ellipsoids.html
                           gnu_gama/ellipsoids.texi
                    DEPENDS BuildTools
-                   COMMAND ${BuildTools_BUILD_DIR}/ellipsoids_xml
-                           ${PROJECT_SOURCE_DIR}/xml/ellipsoids.xml
+                   COMMAND ${BuildTools_ellipsoids_xml}
+                           ${Xml_SOURCE_DIR}/Schemas/ellipsoids.xml
                            ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama)
 
 # file(GLOB_RECURSE) commands is being misused here
@@ -222,7 +220,7 @@ add_custom_command(OUTPUT gnu_gama/ellipsoids.cpp
 # CMake is not automatically re-run, so the build is unaware of the change.
 # https://cmake.org/cmake/help/v3.10/command/file.html
 file(GLOB_RECURSE language_files
-  ${PROJECT_SOURCE_DIR}/xml/lang/*/*.lang
+  ${Xml_SOURCE_DIR}/Schemas/lang/*/*.lang
 )
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
@@ -230,7 +228,7 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
 add_custom_command(OUTPUT gnu_gama/local/language.h
                           gnu_gama/local/language.cpp
                    DEPENDS BuildTools
-                   COMMAND ${BuildTools_BUILD_DIR}/slovnikar ${language_files}
+                   COMMAND ${BuildTools_slovnikar} ${language_files}
                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
 
 # https://crascit.com/2017/04/18/generated-sources-in-cmake-builds/
@@ -249,7 +247,7 @@ target_include_directories(libgama
                            PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
                                   ${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(libgama xml)
+target_link_libraries(libgama GaMa::Service_Xml)
 
 if(SQLITE3_FOUND)
   if(USE_SQLITE3)

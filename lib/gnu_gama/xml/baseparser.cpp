@@ -20,7 +20,7 @@
 */
 
 #include <gnu_gama/xml/baseparser.h>
-#include <xml/encoding.h>
+#include <Xml/Service/encoding.h>
 #include <cstdlib>
 
 using namespace std;

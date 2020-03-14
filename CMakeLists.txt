@@ -2,12 +2,9 @@ cmake_minimum_required(VERSION 3.10)
 
 project (gnu-gama VERSION 2.8.1)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
-
-set(CMAKE_CXX_STANDARD 14)
-add_definitions(-DGNU_gama_expat_1_1)
 
 # Tests
 # https://gitlab.kitware.com/cmake/community/wikis/doc/ctest/Testing-With-CTest#dynamic-analysis
@@ -93,36 +90,54 @@ if(SQLITE3_FOUND)
   add_definitions(-DGNU_GAMA_LOCAL_SQLITE_READER)
 endif()
 
-set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/scripts --install-folder ${CMAKE_CURRENT_BINARY_DIR}/scripts/)
+add_subdirectory(Xml)
 
-if(NOT CMAKE_CROSSCOMPILING)
-  set(BUILD_TOOS_CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
+# The programs located under Xml/Application are only needed during the build 
+# of the library. These programs generate some source code, which is necessary 
+# for the compilation of the library. So we have to first build them, generate 
+# the code and then build the rest of the library.
+# When cross-compiling the project (e.g. for wasm), we do not really want
+# to cross-compile these programs. What we really want is just to build them 
+# and generate the necessary headers. 
+# So we will also compile them with the native compiler to generate the headers.
+
+# Some resources: 
+# * https://stackoverflow.com/questions/36084785/building-a-tool-immediately-so-it-can-be-used-later-in-same-cmake-run
+# * https://cmake.org/pipermail/cmake/2010-January/034857.html
+
+if(NOT CMAKE_CROSSCOMPILING) 
+  set(BuildTools_ellipsoids_xml ${PROJECT_BINARY_DIR}/bin/ellipsoids_xml)
+  set(BuildTools_slovnikar ${PROJECT_BINARY_DIR}/bin/slovnikar)
+  add_custom_target(BuildTools DEPENDS ellipsoids_xml slovnikar)
 else()
+
   if(NOT DEFINED BUILD_TOOS_CMAKE_CXX_COMPILER)
     message(FATAL_ERROR 
       " BUILD_TOOS_CMAKE_CXX_COMPILER is not defined.  You must tell CMake which compiler to use."
       "We also need a native compiler for compiling some build tools for generating headers.") 
   endif()
+
+  set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/Xml --install-folder ${CMAKE_CURRENT_BINARY_DIR}/BuildTools/)
+
+  include(ExternalProject)
+  ExternalProject_Add(BuildTools
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Xml
+    BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/BuildTools
+    EXCLUDE_FROM_ALL
+    # I am overloading the functionality of the UPDATE_COMMAND to execute conan
+    UPDATE_COMMAND ${conan_configure_command}
+    CMAKE_ARGS
+      -DCMAKE_BUILD_TYPE=Release
+      -DCMAKE_CXX_COMPILER=${BUILD_TOOS_CMAKE_CXX_COMPILER}
+      -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
+      -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
+      -DCMAKE_CXX_STANDARD_REQUIRED=${CMAKE_CXX_STANDARD_REQUIRED}
+    INSTALL_COMMAND "")
+
+  ExternalProject_Get_property(BuildTools BINARY_DIR)
+  set(BuildTools_ellipsoids_xml ${BINARY_DIR}/Application/ellipsoids_xml)
+  set(BuildTools_slovnikar ${BINARY_DIR}/Application/slovnikar)
 endif()
-
-include(ExternalProject)
-ExternalProject_Add(BuildTools
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/scripts
-  BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/scripts
-  EXCLUDE_FROM_ALL
-  # I am overloading the functionality of the UPDATE_COMMAND to execute conan
-  UPDATE_COMMAND ${conan_configure_command}
-  CMAKE_ARGS
-    -DCMAKE_BUILD_TYPE=Release
-    -DCMAKE_CXX_COMPILER=${BUILD_TOOS_CMAKE_CXX_COMPILER}
-    -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
-    -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
-    -DCMAKE_CXX_STANDARD_REQUIRED=${CMAKE_CXX_STANDARD_REQUIRED}
-  INSTALL_COMMAND "")
-
-ExternalProject_Get_property(BuildTools BINARY_DIR)
-set(BuildTools_BUILD_DIR ${BINARY_DIR})
-
 
 add_subdirectory(lib)
 add_subdirectory(bin)

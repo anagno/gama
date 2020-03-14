@@ -6,6 +6,6 @@ set(header_files
 
 # Source Files files
 set(source_files
-    "encoding.cpp"
-    "encoding_cp1251.cpp"
-    "encoding_unknown_handler.cpp")
+    "impl/encoding.cpp"
+    "impl/encoding_cp1251.cpp"
+    "impl/encoding_unknown_handler.cpp")

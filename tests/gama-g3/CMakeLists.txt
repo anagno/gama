@@ -73,7 +73,7 @@ endforeach(test)
 
 if(LIBXML2_FOUND)
 
-  set(GAMA_XML "${PROJECT_SOURCE_DIR}/xml")
+  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Xml/Schemas")
 
   foreach(test ${INPUT_FILES})
     add_test(NAME xmllint_g3_adjustement_xsd_input_${test}

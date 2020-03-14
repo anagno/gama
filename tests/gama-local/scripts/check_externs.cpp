@@ -6,7 +6,7 @@
 #include <unordered_set>
 
 #include <gnu_gama/simplified.h>
-#include <xml/xml_expat.h>
+#include <Xml/Service/xml_expat.h>
 
 using std::cout;
 using std::endl;
