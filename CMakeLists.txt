@@ -69,7 +69,7 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 
 if(USE_SQLITE3)
-  find_package(SQLite3 3.20 REQUIRED)
+  find_package(sqlite3 3.20 REQUIRED)
 endif()
 
 if(BUILD_TESTING)
