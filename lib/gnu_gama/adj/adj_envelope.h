@@ -24,7 +24,7 @@
 
 #include <gnu_gama/adj/adj_basesparse.h>
 #include <gnu_gama/adj/envelope.h>
-#include <gnu_gama/sparse/smatrix_ordering.h>
+#include <Math/Business/smatrix_ordering.h>
 #include <gnu_gama/adj/homogenization.h>
 #include <gnu_gama/movetofront.h>
 #include <vector>

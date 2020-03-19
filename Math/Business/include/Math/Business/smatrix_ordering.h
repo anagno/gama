@@ -22,9 +22,9 @@
 #ifndef GNU_gama_sparse_matrix_ordering_h_GNU_Gama_SparseMatrixOrdering
 #define GNU_gama_sparse_matrix_ordering_h_GNU_Gama_SparseMatrixOrdering
 
-#include <gnu_gama/sparse/intlist.h>
-#include <gnu_gama/sparse/smatrix.h>
-#include <gnu_gama/sparse/smatrix_graph.h>
+#include "intlist.h"
+#include "smatrix.h"
+#include "smatrix_graph.h"
 
 #include <vector>
 

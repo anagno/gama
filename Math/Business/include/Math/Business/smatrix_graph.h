@@ -22,8 +22,8 @@
 #ifndef GNU_gama_matrix_graph_h_GNU_Gama_MatrixGraph
 #define GNU_gama_matrix_graph_h_GNU_Gama_MatrixGraph
 
-#include <gnu_gama/sparse/smatrix.h>
-#include <gnu_gama/sparse/intlist.h>
+#include "smatrix.h"
+#include "intlist.h"
 #include <algorithm>
 #include <set>
 
@@ -122,7 +122,7 @@ namespace GNU_gama {
 }
 
 
-#include <gnu_gama/sparse/smatrix_graph_connected.h>
+#include <Math/Business/smatrix_graph_connected.h>
 
 #endif
 

@@ -24,9 +24,9 @@
 
 
 #include <limits>
-#include <gnu_gama/sparse/smatrix_graph.h>
-#include <gnu_gama/sparse/smatrix_ordering.h>
-#include <gnu_gama/sparse/sbdiagonal.h>
+#include <Math/Business/smatrix_graph.h>
+#include <Math/Business/smatrix_ordering.h>
+#include <Math/Business/sbdiagonal.h>
 #include <Math/Service/symmat.h>
 
 

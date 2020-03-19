@@ -19,9 +19,9 @@
 */
 
 #include <Math/Service/covmat.h>
-#include <gnu_gama/sparse/smatrix.h>
-#include <gnu_gama/sparse/sbdiagonal.h>
-#include <gnu_gama/sparse/intlist.h>
+#include <Math/Business/smatrix.h>
+#include <Math/Business/sbdiagonal.h>
+#include <Math/Business/intlist.h>
 #include <gnu_gama/adj/adj_envelope.h>
 #include <gnu_gama/adj/adj_svd.h>
 #include <gnu_gama/adj/adj_gso.h>

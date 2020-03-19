@@ -25,7 +25,7 @@
 #include <limits>
 #include <gnu_gama/exception.h>
 #include <gnu_gama/adj/adj_basefull.h>
-#include <gnu_gama/sparse/intlist.h>
+#include <Math/Business/intlist.h>
 #include <Math/Service/inderr.h>
 #include <Math/Service/symmat.h>
 

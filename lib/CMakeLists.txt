@@ -47,14 +47,6 @@ set(SRC_GAMA
    gnu_gama/adj/envelope.h
    gnu_gama/adj/homogenization.h
 
-   gnu_gama/sparse/intlist.h
-   gnu_gama/sparse/sbdiagonal.h
-   gnu_gama/sparse/smatrix_graph_connected.h
-   gnu_gama/sparse/smatrix_graph.h
-   gnu_gama/sparse/smatrix_ordering.h
-   gnu_gama/sparse/smatrix.h
-   gnu_gama/sparse/svector.h
-
    gnu_gama/xml/baseparser.cpp
    gnu_gama/xml/baseparser.h
    gnu_gama/xml/htmlparser.cpp
@@ -239,7 +231,7 @@ target_include_directories(libgama
                                   ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(libgama 
-  PUBLIC GaMa::Service_Xml GaMa::Service_Math)
+  PUBLIC GaMa::Service_Xml GaMa::Service_Math GaMa::Business_Math)
 
 if(SQLITE3_FOUND)
   if(USE_SQLITE3)
