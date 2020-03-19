@@ -21,7 +21,7 @@
 #ifndef GNU_Gama_gnu_gama_gnugama_GaMa_OLS_gso_h
 #define GNU_Gama_gnu_gama_gnugama_GaMa_OLS_gso_h
 
-#include <matvec/gso.h>
+#include <Math/Service/gso.h>
 #include <gnu_gama/adj/adj_basefull.h>
 #include <cmath>
 

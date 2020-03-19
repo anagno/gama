@@ -21,7 +21,7 @@
 #ifndef GNU_gama_gMatVec_GSO_h
 #define GNU_gama_gMatVec_GSO_h
 
-#include <matvec/matvec.h>
+#include "matvec.h"
 #include <cmath>
 
 /* Gram-Schmidt Ortogonalization

@@ -21,9 +21,9 @@
 #ifndef GNU_gama_gMatVec_TransVec_h
 #define GNU_gama_gMatVec_TransVec_h
 
+#include "vec.h"
 #include <iostream>
 #include <cmath>
-#include <matvec/vec.h>
 
 namespace GNU_gama {   /** \brief Transpose vector */
 

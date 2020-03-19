@@ -18,7 +18,7 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <matvec/covmat.h>
+#include <Math/Service/covmat.h>
 #include <gnu_gama/adj/adj_input_data.h>
 
 #include <iostream>

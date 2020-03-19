@@ -21,7 +21,7 @@
 #ifndef GNU_gama_gMatVec_Mat_Inv_h
 #define GNU_gama_gMatVec_Mat_Inv_h
 
-#include <matvec/svd.h>
+#include "svd.h"
 
 
 namespace GNU_gama {

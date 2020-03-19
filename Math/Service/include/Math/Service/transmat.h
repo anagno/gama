@@ -21,10 +21,10 @@
 #ifndef GNU_gama_gMatVec_TransMat_h
 #define GNU_gama_gMatVec_TransMat_h
 
+#include "mat.h"
+#include "vec.h"
+#include "transvec.h"
 #include <iostream>
-#include <matvec/mat.h>
-#include <matvec/vec.h>
-#include <matvec/transvec.h>
 
 namespace GNU_gama {   /** \brief Transpose matrix */
 

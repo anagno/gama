@@ -30,7 +30,7 @@
 #include <vector>
 #include <gnu_gama/exception.h>
 #include <gnu_gama/xml/baseparser.h>
-#include <matvec/covmat.h>
+#include <Math/Service/covmat.h>
 
 
 namespace GNU_gama

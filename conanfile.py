@@ -1,7 +1,20 @@
 from conans import ConanFile, CMake
 import platform
 
-class Gama(ConanFile):
+# conan install /home/anagno/Documents/projects/gama -pr cmake -o sqlite3=True
+# cmake /home/anagno/Documents/projects/gama -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=TRUE -DUSE_SQLITE3=TRUE -DCONAN_EXPORTED=TRUE
+# ctest
+# message (STATUS "language_files == ${language_files}")
+# message (FATAL_ERROR "DEBUG: stopping CMake")
+
+# conan install /home/anagno/Documents/projects/gama -pr wasm.profile
+# conan build /home/anagno/Documents/projects/gama --source-folder=/home/anagno/Documents/projects/gama --build-folder=.
+# cmake . -LAH
+# nodejs gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
+
+#https://stackoverflow.com/questions/55635294/how-to-create-packages-with-cmake
+
+class GaMa(ConanFile):
    name = "GaMa"
    version = "2.7"
    settings = "os", "compiler", "build_type", "arch",
@@ -41,7 +54,7 @@ class Gama(ConanFile):
       if self.options.sqlite3:
          cmake.definitions["USE_SQLITE3"] = "ON"
 
-      cmake.verbose = True
+      #cmake.verbose = True
       cmake.configure()
       return cmake
 

@@ -20,9 +20,9 @@
 
 #include <iostream>
 #include <limits>
-#include <matvec/svd.h>
-#include <matvec/matvec.h>
-#include <matvec/sortvec.h>
+#include <Math/Service/svd.h>
+#include <Math/Service/matvec.h>
+#include <Math/Service/sortvec.h>
 
 using namespace std;
 using namespace GNU_gama;

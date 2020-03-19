@@ -18,7 +18,7 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <matvec/matvec.h>
+#include <Math/Service/matvec.h>
 #include <iostream>
 #include <vector>
 #include <cmath>

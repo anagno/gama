@@ -4,3 +4,4 @@ Expat/2.2.9@pix4d/stable
 [generators]
 cmake_find_package
 cmake_paths
+virtualenv

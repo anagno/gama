@@ -26,7 +26,7 @@
 #include <gnu_gama/sparse/smatrix_ordering.h>
 #include <gnu_gama/sparse/svector.h>
 
-#include <matvec/matvec.h>
+#include <Math/Service/matvec.h>
 #include <iostream>
 
 using namespace std;

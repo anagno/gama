@@ -21,7 +21,7 @@
 #ifndef GNU_Gama_gnu_gama_gnugama_GaMa_AdjBase_h
 #define GNU_Gama_gnu_gama_gnugama_GaMa_AdjBase_h
 
-#include <matvec/matvec.h>
+#include <Math/Service/matvec.h>
 
 namespace GNU_gama {
 

@@ -16,8 +16,8 @@
    Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#include <matvec/matvec.h>
-#include <matvec/pinv.h>
+#include <Math/Service/matvec.h>
+#include <Math/Service/pinv.h>
 #include <iostream>
 #include <iomanip>
 

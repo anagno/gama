@@ -21,9 +21,9 @@
 #ifndef GNU_gama_gMatVec_VecBase_h
 #define GNU_gama_gMatVec_VecBase_h
 
+#include "matvecbase.h"
 #include <iostream>
 #include <cmath>
-#include <matvec/matvecbase.h>
 
 namespace GNU_gama {   /** \brief Vector base class. */
 

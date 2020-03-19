@@ -27,7 +27,7 @@
 #include <gnu_gama/sparse/smatrix_graph.h>
 #include <gnu_gama/sparse/smatrix_ordering.h>
 #include <gnu_gama/sparse/sbdiagonal.h>
-#include <matvec/symmat.h>
+#include <Math/Service/symmat.h>
 
 
 namespace GNU_gama {

@@ -22,7 +22,7 @@
 #ifndef GNU_gama_exception_exception_class_hierarchy_exception_h
 #define GNU_gama_exception_exception_class_hierarchy_exception_h
 
-#include <matvec/inderr.h>
+#include <Math/Service/inderr.h>
 #include <string>
 
 namespace GNU_gama { namespace Exception {

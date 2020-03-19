@@ -21,7 +21,7 @@
 #ifndef GNU_gama_gMatVec_Hilbert_Matrix_h
 #define GNU_gama_gMatVec_Hilbert_Matrix_h
 
-#include <matvec/matvec.h>
+#include "matvec.h"
 
 namespace GNU_gama {
 

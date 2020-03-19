@@ -21,7 +21,7 @@
 #ifndef GNU_gama_gMatVec_Cholesky_Decomposition_h
 #define GNU_gama_gMatVec_Cholesky_Decomposition_h
 
-#include <matvec/vecbase.h>
+#include "vecbase.h"
 
 
 namespace GNU_gama {

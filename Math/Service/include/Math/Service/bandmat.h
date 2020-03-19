@@ -21,8 +21,8 @@
 #ifndef GNU_gama_gMatVec_Symmetric_Band_Matrix_h
 #define GNU_gama_gMatVec_Symmetric_Band_Matrix_h
 
-#include <matvec/matvec.h>
-#include <matvec/choldec.h>
+#include "matvec.h"
+#include "choldec.h"
 
 /*
  * Symmetric Band Matrix

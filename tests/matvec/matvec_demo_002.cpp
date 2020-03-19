@@ -21,9 +21,9 @@
 #include <fstream>
 #include <sstream>
 #include <limits>
-#include <matvec/bandmat.h>
-#include <matvec/matvec.h>
-#include <matvec/svd.h>
+#include <Math/Service/bandmat.h>
+#include <Math/Service/matvec.h>
+#include <Math/Service/svd.h>
 
 int main()
 {

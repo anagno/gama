@@ -28,7 +28,7 @@
 
 #include <string>
 #include <vector>
-#include <matvec/covmat.h>
+#include <Math/Service/covmat.h>
 #include <gnu_gama/local/xmlerror.h>
 
 

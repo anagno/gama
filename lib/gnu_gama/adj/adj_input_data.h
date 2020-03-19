@@ -18,7 +18,7 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <matvec/covmat.h>
+#include <Math/Service/covmat.h>
 #include <gnu_gama/sparse/smatrix.h>
 #include <gnu_gama/sparse/sbdiagonal.h>
 #include <gnu_gama/sparse/intlist.h>

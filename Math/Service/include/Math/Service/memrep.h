@@ -22,8 +22,8 @@
 #ifndef GNU_gama_gMatVec_MemRep_h
 #define GNU_gama_gMatVec_MemRep_h
 
+#include "inderr.h"
 #include <cstring>
-#include <matvec/inderr.h>
 
 namespace GNU_gama {   /** \brief Memory repository for matvec objects */
 

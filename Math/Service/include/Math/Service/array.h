@@ -18,22 +18,30 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GNU_gama_gMatVec_Sort_Vec_h
-#define GNU_gama_gMatVec_Sort_Vec_h
+#ifndef GNU_gama_gMatVec_Array_h
+#define GNU_gama_gMatVec_Array_h
 
-#include <algorithm>
-#include <matvec/vecbase.h>
+#include "memrep.h"
 
+namespace GNU_gama {   /** \brief Dynamic array */
 
-namespace GNU_gama {   /** \brief Sort vector elements */
-
-  template <typename Float, typename Index, typename Exc>
-    inline void sort(Vec<Float, Index, Exc>& v)
+  template <typename Type,
+            typename Index=int,
+            typename Exc=Exception::matvec>
+  class Array : public MemRep<Type, Index, Exc>
   {
-    typename Vec<Float, Index, Exc>::iterator b = v.begin();
-    typename Vec<Float, Index, Exc>::iterator e = v.end();
-    std::sort(b, e);
-  }
+  public:
+
+    Array(Index dim) : MemRep<Type, Index, Exc>(dim) {}
+    Index  operator[](Index i) const { return this->begin()[i]; }
+    Index& entry(Index i) { return this->begin()[i]; }
+    void swap(Index i, Index j)
+    {
+      Index *ind = this->begin();
+      Index t = ind[i]; ind[i] = ind[j]; ind[j] = t;
+    }
+
+  };
 
 
 }   // namespace GNU_gama

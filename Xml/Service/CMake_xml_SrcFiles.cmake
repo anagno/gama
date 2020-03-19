@@ -1,11 +1,11 @@
 # Header files
 set(header_files
-    "xml_expat.h"
-    "encoding.h"
+    "include/Xml/Service/xml_expat.h"
+    "include/Xml/Service/encoding.h"
     )
 
 # Source Files files
 set(source_files
-    "impl/encoding.cpp"
-    "impl/encoding_cp1251.cpp"
-    "impl/encoding_unknown_handler.cpp")
+    "src/encoding.cpp"
+    "src/encoding_cp1251.cpp"
+    "src/encoding_unknown_handler.cpp")

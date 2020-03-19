@@ -19,7 +19,7 @@
 */
 
 #include <iostream>
-#include <matvec/matvec.h>
+#include <Math/Service/matvec.h>
 
 using namespace std;
 using namespace GNU_gama;

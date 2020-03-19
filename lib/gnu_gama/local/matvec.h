@@ -21,10 +21,10 @@
 #ifndef gama_local_Bod_Mer_MatVec_H
 #define gama_local_Bod_Mer_MatVec_H
 
-#include <matvec/inderr.h>
+#include <Math/Service/inderr.h>
 #include <gnu_gama/local/float.h>
-#include <matvec/svd.h>
-#include <matvec/covmat.h>
+#include <Math/Service/svd.h>
+#include <Math/Service/covmat.h>
 
 namespace GNU_gama { namespace local {
 

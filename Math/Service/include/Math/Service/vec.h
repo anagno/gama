@@ -21,10 +21,10 @@
 #ifndef GNU_gama_gMatVec_Vec_h
 #define GNU_gama_gMatVec_Vec_h
 
+#include "vecbase.h"
 #include <iostream>
 #include <cmath>
 #include <initializer_list>
-#include <matvec/vecbase.h>
 
 namespace GNU_gama {   /** \brief Vector */
 

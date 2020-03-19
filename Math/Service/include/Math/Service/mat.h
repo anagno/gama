@@ -21,11 +21,12 @@
 #ifndef GNU_gama_gMatVec_Mat_h
 #define GNU_gama_gMatVec_Mat_h
 
+#include "matbase.h"
+#include "array.h"
+
 #include <iostream>
 #include <initializer_list>
 #include <limits>
-#include <matvec/matbase.h>
-#include <matvec/array.h>
 
 namespace GNU_gama {
 

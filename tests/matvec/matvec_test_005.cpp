@@ -16,7 +16,7 @@
    Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#include <matvec/symmat.h>
+#include <Math/Service/symmat.h>
 #include <iostream>
 #include <iomanip>
 #include <cmath>

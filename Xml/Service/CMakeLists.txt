@@ -12,11 +12,8 @@ set_target_properties(Service_Xml
 
 target_include_directories(
   Service_Xml
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/GaMa>
-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/impl)
-
-target_include_directories(Service_Xml PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+         $<INSTALL_INTERFACE:GaMa/${PROJECT_NAME}>
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 target_link_libraries(Service_Xml PUBLIC Expat::Expat)

@@ -19,7 +19,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <matvec/covmat.h>
+#include <Math/Service/covmat.h>
 #include <gnu_gama/visitor.h>
 #include <gnu_gama/model.h>
 #include <gnu_gama/g3/g3_point.h>

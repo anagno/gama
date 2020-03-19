@@ -21,10 +21,10 @@
 #include <iostream>
 #include <sstream>
 #include <limits>
-#include <matvec/symmat.h>
-#include <matvec/sortvec.h>
-#include <matvec/svd.h>
-#include <matvec/matvec.h>
+#include <Math/Service/symmat.h>
+#include <Math/Service/sortvec.h>
+#include <Math/Service/svd.h>
+#include <Math/Service/matvec.h>
 
 
 int main()

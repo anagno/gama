@@ -25,7 +25,7 @@
 
 #include <gnu_gama/adj/adj.h>
 #include <gnu_gama/adj/envelope.h>
-#include <matvec/covmat.h>
+#include <Math/Service/covmat.h>
 #include <gnu_gama/size_to.h>
 #include <set>
 

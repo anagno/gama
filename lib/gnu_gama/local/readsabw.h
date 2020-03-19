@@ -22,7 +22,7 @@
 #ifndef gama_local_read_sparse_Ab_h
 #define gama_local_read_sparse_Ab_h
 
-#include <matvec/matvec.h>
+#include <Math/Service/matvec.h>
 #include <iostream>
 
 namespace GNU_gama { namespace local {

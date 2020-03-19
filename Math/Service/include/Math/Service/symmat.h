@@ -22,9 +22,9 @@
 #ifndef GNU_gama_gMatVec_SymMat_h
 #define GNU_gama_gMatVec_SymMat_h
 
-#include <matvec/matvec.h>
-#include <matvec/choldec.h>
-#include <matvec/unsigned.h>
+#include "matvec.h"
+#include "choldec.h"
+#include "unsigned.h"
 
 
 namespace GNU_gama {   /** \brief Symmetrix matrix */

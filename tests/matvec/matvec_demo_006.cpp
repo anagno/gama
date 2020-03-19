@@ -18,10 +18,10 @@
 
 #include <sstream>
 #include <limits>
-#include <matvec/bandmat.h>
-#include <matvec/matvec.h>
-#include <matvec/covmat.h>
-#include <matvec/symmat.h>
+#include <Math/Service/bandmat.h>
+#include <Math/Service/matvec.h>
+#include <Math/Service/covmat.h>
+#include <Math/Service/symmat.h>
 
 /* test matrix in octave format
 

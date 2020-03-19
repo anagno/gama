@@ -193,15 +193,6 @@ set(SRC_GAMA
    gnu_gama/xml/dataparser_g3.cpp
    gnu_gama/xml/dataparser_g3adj.cpp
    gnu_gama/xml/dataparser.h
-
-   matvec/array.h      matvec/bandmat.h      matvec/choldec.h
-   matvec/covmat.h     matvec/gso.h          matvec/hilbert.h
-   matvec/inderr.h     matvec/jacobian.h     matvec/matbase.h
-   matvec/mat.h        matvec/matvecbase.h   matvec/matvec.h
-   matvec/memrep.h     matvec/pinv.h         matvec/sortvec.h
-   matvec/svd.h        matvec/symmat.h       matvec/transmat.h
-   matvec/transvec.h   matvec/unsigned.h     matvec/vecbase.h
-   matvec/vec.h
 )
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama)
@@ -247,10 +238,11 @@ target_include_directories(libgama
                            PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
                                   ${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(libgama GaMa::Service_Xml)
+target_link_libraries(libgama 
+  PUBLIC GaMa::Service_Xml GaMa::Service_Math)
 
 if(SQLITE3_FOUND)
   if(USE_SQLITE3)
-    target_link_libraries(libgama sqlite3::sqlite3)
+    target_link_libraries(libgama PRIVATE sqlite3::sqlite3)
   endif()
 endif()

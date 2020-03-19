@@ -21,7 +21,7 @@
 #ifndef GNU_gama_gMatVec_MatVecBase_h
 #define GNU_gama_gMatVec_MatVecBase_h
 
-#include <matvec/memrep.h>
+#include "memrep.h"
 
 
 namespace GNU_gama {   /** \brief Matrix/vector base class */

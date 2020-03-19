@@ -34,7 +34,7 @@
    where norm(U) = \sqrt{ \sum_{i=1}^N \sum_{j=1}^N u_{ij}*u_{ij} }.
 */
 
-#include <matvec/matvec.h>
+#include <Math/Service/matvec.h>
 #include <iostream>
 #include <iomanip>
 #include <cmath>

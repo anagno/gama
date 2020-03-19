@@ -19,7 +19,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
-#include <matvec/hilbert.h>
+#include <Math/Service/hilbert.h>
 
 int main()
 {

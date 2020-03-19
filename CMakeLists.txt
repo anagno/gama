@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
 project (gnu-gama VERSION 2.8.1)
 
@@ -68,8 +68,6 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 
-find_package(Expat 2.2 REQUIRED)
-
 if(USE_SQLITE3)
   find_package(SQLite3 3.20 REQUIRED)
 endif()
@@ -90,6 +88,7 @@ if(SQLITE3_FOUND)
   add_definitions(-DGNU_GAMA_LOCAL_SQLITE_READER)
 endif()
 
+add_subdirectory(Math)
 add_subdirectory(Xml)
 
 # The programs located under Xml/Application are only needed during the build 
@@ -106,8 +105,8 @@ add_subdirectory(Xml)
 # * https://cmake.org/pipermail/cmake/2010-January/034857.html
 
 if(NOT CMAKE_CROSSCOMPILING) 
-  set(BuildTools_ellipsoids_xml ${PROJECT_BINARY_DIR}/bin/ellipsoids_xml)
-  set(BuildTools_slovnikar ${PROJECT_BINARY_DIR}/bin/slovnikar)
+  set(BuildTools_ellipsoids_xml ${PROJECT_BINARY_DIR}/Xml/Application/ellipsoids_xml)
+  set(BuildTools_slovnikar ${PROJECT_BINARY_DIR}/Xml/Application/slovnikar)
   add_custom_target(BuildTools DEPENDS ellipsoids_xml slovnikar)
 else()
 

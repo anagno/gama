@@ -22,9 +22,9 @@
 #define GNU_gama_gMatVec_Jacobian_h
 
 
-#include <matvec/transmat.h>
-#include <matvec/mat.h>
-#include <matvec/vec.h>
+#include "transmat.h"
+#include "mat.h"
+#include "vec.h"
 
 
 namespace GNU_gama {
