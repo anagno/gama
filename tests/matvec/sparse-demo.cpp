@@ -18,13 +18,13 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <Math/Business/intlist.h>
-#include <Math/Business/sbdiagonal.h>
-#include <Math/Business/smatrix.h>
-#include <Math/Business/smatrix_graph.h>
-//       <Math/Business/smatrix_graph_connected.h>
-#include <Math/Business/smatrix_ordering.h>
-#include <Math/Business/svector.h>
+#include <Math/Service/intlist.h>
+#include <Math/Service/sbdiagonal.h>
+#include <Math/Service/smatrix.h>
+#include <Math/Service/smatrix_graph.h>
+//       <Math/Service/smatrix_graph_connected.h>
+#include <Math/Service/smatrix_ordering.h>
+#include <Math/Service/svector.h>
 
 #include <Math/Service/matvec.h>
 #include <iostream>

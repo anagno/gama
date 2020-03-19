@@ -122,7 +122,7 @@ namespace GNU_gama {
 }
 
 
-#include <Math/Business/smatrix_graph_connected.h>
+#include <Math/Service/smatrix_graph_connected.h>
 
 #endif
 

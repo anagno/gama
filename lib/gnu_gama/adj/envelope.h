@@ -24,9 +24,9 @@
 
 
 #include <limits>
-#include <Math/Business/smatrix_graph.h>
-#include <Math/Business/smatrix_ordering.h>
-#include <Math/Business/sbdiagonal.h>
+#include <Math/Service/smatrix_graph.h>
+#include <Math/Service/smatrix_ordering.h>
+#include <Math/Service/sbdiagonal.h>
 #include <Math/Service/symmat.h>
 
 

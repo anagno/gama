@@ -28,8 +28,8 @@
 #include <gnu_gama/ellipsoids.h>
 #include <gnu_gama/g3/g3_point.h>
 #include <gnu_gama/g3/g3_observation.h>
-#include <Math/Business/smatrix.h>
-#include <Math/Business/sbdiagonal.h>
+#include <Math/Service/smatrix.h>
+#include <Math/Service/sbdiagonal.h>
 #include <gnu_gama/adj/adj.h>
 #include <gnu_gama/e3.h>
 #include <list>

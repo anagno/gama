@@ -23,7 +23,7 @@
 #include <gnu_gama/g3/g3_cluster.h>
 #include <gnu_gama/outstream.h>
 #include <gnu_gama/adj/adj.h>
-#include <Math/Business/smatrix_graph.h>
+#include <Math/Service/smatrix_graph.h>
 #include <iomanip>
 
 

@@ -19,8 +19,6 @@ set(SRC_GAMA
    gnu_gama/outstream.h
    gnu_gama/pointbase.h
    gnu_gama/radian.h
-   gnu_gama/comb.cpp
-   gnu_gama/comb.h
    gnu_gama/size_to.h
    gnu_gama/size_to.cpp
    gnu_gama/simplified.h
@@ -231,7 +229,7 @@ target_include_directories(libgama
                                   ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(libgama 
-  PUBLIC GaMa::Service_Xml GaMa::Service_Math GaMa::Business_Math)
+  PUBLIC GaMa::Service_Xml GaMa::Service_Math) #GaMa::Business_Math)
 
 if(SQLITE3_FOUND)
   if(USE_SQLITE3)
