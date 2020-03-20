@@ -33,7 +33,7 @@
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/observation.h>
 #include <Math/Business/statan.h>
-#include <gnu_gama/utf8.h>
+#include <Parsing/Business/utf8.h>
 #include <algorithm>
 
 /* replaced by a lambda function below, see KS test */

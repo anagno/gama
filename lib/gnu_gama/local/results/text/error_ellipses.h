@@ -23,7 +23,7 @@
 
 #include <gnu_gama/local/network.h>
 #include <Math/Business/statan.h>
-#include <gnu_gama/utf8.h>
+#include <Parsing/Business/utf8.h>
 #include <cmath>
 
 namespace GNU_gama { namespace local {

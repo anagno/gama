@@ -37,7 +37,7 @@
 #include <gnu_gama/local/observation.h>
 #include <Math/Business/statan.h>
 #include <gnu_gama/gon2deg.h>
-#include <gnu_gama/utf8.h>
+#include <Parsing/Business/utf8.h>
 
 namespace GNU_gama { namespace local {
 

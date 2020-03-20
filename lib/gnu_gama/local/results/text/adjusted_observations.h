@@ -33,7 +33,7 @@
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/gon2deg.h>
 #include <gnu_gama/local/results/text/underline.h>
-#include <gnu_gama/utf8.h>
+#include <Parsing/Business/utf8.h>
 
 namespace GNU_gama { namespace local {
 

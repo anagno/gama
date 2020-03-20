@@ -19,7 +19,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  $
 */
 
-#include <gnu_gama/utf8.h>
+#include "Parsing/Business/utf8.h"
 
 /* http://en.wikipedia.org/wiki/UTF-8
    ----------------------------------

@@ -24,7 +24,7 @@
 
 #include <gnu_gama/intfloat.h>
 #include <gnu_gama/local/pointid.h>
-#include <gnu_gama/utf8.h>
+#include <Parsing/Business/utf8.h>
 #include <cstdlib>
 #include <sstream>
 

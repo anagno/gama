@@ -22,11 +22,12 @@
 #ifndef Utf8_LENGTH_UTF8_Length_utf8_length_utf8_lengthutf8_h
 #define Utf8_LENGTH_UTF8_Length_utf8_length_utf8_lengthutf8_h
 
+#include "ParsingDLL.h"
 #include <string>
 
 namespace GNU_gama {
 
-  class Utf8 {
+  class ParsingAPI Utf8 {
   public:
 
     static std::size_t length  (std::string);

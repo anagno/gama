@@ -36,7 +36,7 @@
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/format.h>
 #include <Math/Business/statan.h>
-#include <gnu_gama/utf8.h>
+#include <Parsing/Business/utf8.h>
 #include <gnu_gama/local/results/text/underline.h>
 #include <cstring>
 

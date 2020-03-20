@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 find_package(Expat 2.2 REQUIRED)
 
+add_subdirectory(Business)
 add_subdirectory(Service)
 
 if(NOT CMAKE_CROSSCOMPILING) 
