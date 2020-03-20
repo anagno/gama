@@ -250,7 +250,7 @@ endforeach(test)
 
 if(LIBXML2_FOUND)
 
-  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Xml/Schemas")
+  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
   foreach(test ${INPUT_FILES})
     add_test(NAME xmllint_gama_local_xsd_${test}
@@ -349,7 +349,7 @@ set_tests_properties(gama_local_nop_xml2txt
 
 if(LIBXML2_FOUND)
 
-  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Xml/Schemas")
+  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
   add_test(NAME xmllint_gama_local_par
     COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
@@ -464,7 +464,7 @@ if(SQLITE3_FOUND)
 
 
   file(MAKE_DIRECTORY ${RESULT_DIR}/gama-local-sqlite-reader)
-  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Xml/Schemas")
+  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
   add_test(NAME gama_local_xml2sql_fixed-azimuth
     COMMAND gama-local-xml2sql

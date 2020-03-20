@@ -67,7 +67,7 @@ const char* version = "1.00";
 #include <string>
 #include <cstring>
 #include <list>
-#include <Xml/Service/encoding.h>
+#include <Parsing/Service/encoding.h>
 
 using namespace std;
 using namespace GNU_gama;

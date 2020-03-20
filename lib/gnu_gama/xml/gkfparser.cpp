@@ -28,7 +28,7 @@
 #include <Math/Business/radian.h>
 
 #include <gnu_gama/xml/gkfparser.h>
-#include <Xml/Service/encoding.h>
+#include <Parsing/Service/encoding.h>
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/cluster.h>
 #include <gnu_gama/local/language.h>

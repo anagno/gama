@@ -89,9 +89,9 @@ if(SQLITE3_FOUND)
 endif()
 
 add_subdirectory(Math)
-add_subdirectory(Xml)
+add_subdirectory(Parsing)
 
-# The programs located under Xml/Application are only needed during the build 
+# The programs located under Parsing/Application are only needed during the build 
 # of the library. These programs generate some source code, which is necessary 
 # for the compilation of the library. So we have to first build them, generate 
 # the code and then build the rest of the library.
@@ -105,8 +105,8 @@ add_subdirectory(Xml)
 # * https://cmake.org/pipermail/cmake/2010-January/034857.html
 
 if(NOT CMAKE_CROSSCOMPILING) 
-  set(BuildTools_ellipsoids_xml ${PROJECT_BINARY_DIR}/Xml/Application/ellipsoids_xml)
-  set(BuildTools_slovnikar ${PROJECT_BINARY_DIR}/Xml/Application/slovnikar)
+  set(BuildTools_ellipsoids_xml ${PROJECT_BINARY_DIR}/Parsing/Application/ellipsoids_xml)
+  set(BuildTools_slovnikar ${PROJECT_BINARY_DIR}/Parsing/Application/slovnikar)
   add_custom_target(BuildTools DEPENDS ellipsoids_xml slovnikar)
 else()
 
@@ -116,11 +116,11 @@ else()
       "We also need a native compiler for compiling some build tools for generating headers.") 
   endif()
 
-  set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/Xml --install-folder ${CMAKE_CURRENT_BINARY_DIR}/BuildTools/)
+  set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/Parsing --install-folder ${CMAKE_CURRENT_BINARY_DIR}/BuildTools/)
 
   include(ExternalProject)
   ExternalProject_Add(BuildTools
-    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Xml
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Parsing
     BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/BuildTools
     EXCLUDE_FROM_ALL
     # I am overloading the functionality of the UPDATE_COMMAND to execute conan
