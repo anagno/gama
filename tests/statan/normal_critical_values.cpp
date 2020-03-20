@@ -18,10 +18,12 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <Math/Business/statan.h>
+
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include "gnu_gama/statan.h"
+
 
 using namespace GNU_gama;
 using namespace std;

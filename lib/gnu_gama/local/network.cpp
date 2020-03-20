@@ -37,7 +37,7 @@
 #include <gnu_gama/local/local_linearization.h>
 #include <gnu_gama/local/itstream.h>
 #include <gnu_gama/local/skipcomm.h>
-#include <gnu_gama/statan.h>
+#include <Math/Business/statan.h>
 #include <Math/Service/smatrix_graph.h>
 #include <gnu_gama/version.h>
 #include <gnu_gama/ellipsoids.h>

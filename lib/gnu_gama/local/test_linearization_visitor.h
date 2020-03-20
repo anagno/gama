@@ -34,7 +34,7 @@
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/bearing.h>
 #include <gnu_gama/local/results/text/underline.h>
-#include <gnu_gama/statan.h>
+#include <Math/Business/statan.h>
 #include <gnu_gama/utf8.h>
 #include <gnu_gama/visitor.h>
 #include <cmath>

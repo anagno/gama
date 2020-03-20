@@ -32,7 +32,7 @@
 
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/observation.h>
-#include <gnu_gama/statan.h>
+#include <Math/Business/statan.h>
 #include <gnu_gama/utf8.h>
 #include <algorithm>
 

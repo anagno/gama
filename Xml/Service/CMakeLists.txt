@@ -1,6 +1,6 @@
 include(CMake_xml_SrcFiles.cmake)
 
-add_library(Service_Xml SHARED ${source_files})
+add_library(Service_Xml ${source_files})
 
 add_library(GaMa::Service_Xml ALIAS Service_Xml)
 

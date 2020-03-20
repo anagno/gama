@@ -20,6 +20,8 @@
 #ifndef GNU_gama_gnu_gama_StatAn_h
 #define GNU_gama_gnu_gama_StatAn_h
 
+#include "MathDLL.h"
+
 #include <cmath>
 #include <algorithm>
 
@@ -41,7 +43,7 @@ namespace GNU_gama {
  *
  * \param N degrees of freedom
  */
-double Student(double alfa, int N);
+MathAPI double Student(double alfa, int N);
 
 /** \brief For given probability computes critical value of normalized
  *  normal distribution N(0,1).
@@ -51,7 +53,7 @@ double Student(double alfa, int N);
  *        interval (0, 1); function doesn;t check the value of the
  *        parameter
  */
-double Normal(double alfa);
+MathAPI double Normal(double alfa);
 
 /** \brief Function computes in the given point x value D(x) of
  * distributive normalized normal distribution and the value of its
@@ -61,11 +63,11 @@ double Normal(double alfa);
  * \param D  cumulative distribution
  * \param f  probability density function
  */
-void NormalDistribution(double x, double& D, double& f);
+MathAPI void NormalDistribution(double x, double& D, double& f);
 
 /** \brief Kolmogorov-Smirnov probability function
  */
-double KSprob(double);
+MathAPI double KSprob(double);
 
 /** \brief Kolmogorov-Smirnov test.
  *
@@ -74,12 +76,12 @@ double KSprob(double);
  * \param prob   significance level
 */
 
-void KStest(double Data[], int n, double (*Func)(double),
+MathAPI void KStest(double Data[], int n, double (*Func)(double),
             double& ks, double& prob);
 
 /** \brief For the given probability and degrees of freedom computes
  * critical value of Chi-square distribution.  */
-double Chi_square(double probability, int degrees_of_freedom);
+MathAPI double Chi_square(double probability, int degrees_of_freedom);
 
 }      /* namespace GNU_gama::local */
 

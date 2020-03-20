@@ -21,7 +21,7 @@
 
 #include <sstream>
 #include <gnu_gama/latlong.h>
-#include <gnu_gama/radian.h>
+#include <Math/Business/radian.h>
 
 namespace
 {

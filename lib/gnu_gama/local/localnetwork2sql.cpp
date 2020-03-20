@@ -25,7 +25,7 @@
 #include <gnu_gama/xml/gkfparser.h>
 #include <gnu_gama/local/gamadata.h>
 #include <gnu_gama/version.h>
-#include <gnu_gama/statan.h>
+#include <Math/Business/statan.h>
 #include <gnu_gama/size_to.h>
 #include <iostream>
 

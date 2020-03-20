@@ -23,11 +23,13 @@ class GaMa(ConanFile):
    options = {
        "sqlite3": [True, False],
        "libxml2": [True, False],
+       "shared": [True, False],
        }
 
    default_options = {
        "sqlite3": False,
        "libxml2": False,
+       "shared": False,
        }
 
    def requirements(self):

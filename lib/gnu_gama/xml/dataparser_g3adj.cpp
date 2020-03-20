@@ -22,7 +22,7 @@
 #include <gnu_gama/g3/g3_adjres.h>
 #include <gnu_gama/xml/dataparser.h>
 #include <gnu_gama/gon2deg.h>
-#include <gnu_gama/radian.h>
+#include <Math/Business/radian.h>
 #include <cstring>
 
 using namespace std;

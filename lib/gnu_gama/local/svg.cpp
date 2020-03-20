@@ -32,7 +32,7 @@
 #include <utility>
 #include <set>
 #include <gnu_gama/local/svg.h>
-#include <gnu_gama/radian.h>
+#include <Math/Business/radian.h>
 
 using namespace GNU_gama::local;
 using std::abs;   // floating point std::abs() from <cmath>

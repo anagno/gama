@@ -22,7 +22,7 @@
 #include <gnu_gama/g3/g3_observation.h>
 #include <gnu_gama/g3/g3_model.h>
 #include <gnu_gama/latlong.h>
-#include <gnu_gama/radian.h>
+#include <Math/Business/radian.h>
 #include <cmath>
 #include <iomanip>
 

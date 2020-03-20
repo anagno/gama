@@ -27,7 +27,7 @@
 #include <gnu_gama/version.h>
 #include <gnu_gama/local/language.h>
 #include <gnu_gama/local/results/text/underline.h>
-#include <gnu_gama/statan.h>
+#include <Math/Business/statan.h>
 #include <gnu_gama/gon2deg.h>
 #include <gnu_gama/outstream.h>
 

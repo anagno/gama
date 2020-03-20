@@ -17,8 +17,8 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-#include <gnu_gama/statan.h>
-#include <gnu_gama/radian.h>
+#include "Math/Business/statan.h"
+#include "Math/Business/radian.h"
 #include <cfloat>
 #include <cmath>
 #include <iostream>
