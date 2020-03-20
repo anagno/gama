@@ -335,7 +335,7 @@ namespace GNU_gama { namespace local {
               {
                 u_mer = (u1->to() == u2->to() ?
                          u2->value()
-                         : 2*M_PI-u2->value());
+                         : 2*GNU_gama::PI-u2->value());
                 pom_sez.push_back(u_mer);
                 j = SM_U.erase(j);
                 delete(u2);
@@ -349,9 +349,9 @@ namespace GNU_gama { namespace local {
                (pom_sez[size/2-1] + pom_sez[size/2])/2 :
                pom_sez[(size+1)/2-1]);
         Angle* UU;
-        if(med >= M_PI)
+        if(med >= GNU_gama::PI)
           UU = new Angle(u1->from(),u1->fs(),u1->to(),
-                         M_PI*2-med);
+                         GNU_gama::PI*2-med);
         else
           UU = new Angle(u1->from(),u1->to(),u1->fs(),med);
         SM.push_back(UU);
@@ -374,7 +374,7 @@ namespace GNU_gama { namespace local {
               {
                 u_mer = (u1->to() == u2->to() ?
                          u2->value() :
-                         2*M_PI-u2->value());
+                         2*GNU_gama::PI-u2->value());
                 pom_sez.push_back(u_mer);
                 j = SM_U.erase(j);
                 delete(u2);
@@ -388,9 +388,9 @@ namespace GNU_gama { namespace local {
                (pom_sez[size/2-1] + pom_sez[size/2])/2 :
                pom_sez[(size+1)/2-1]);
         Angle* UU;
-        if(med >= M_PI)
+        if(med >= GNU_gama::PI)
           UU = new Angle(u1->from(),u1->fs(),u1->to(),
-                         M_PI*2-med);
+                         GNU_gama::PI*2-med);
         else
           UU = new Angle(u1->from(),u1->to(),u1->fs(),med);
         SM.push_back(UU);

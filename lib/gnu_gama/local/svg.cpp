@@ -529,18 +529,18 @@ void GamaLocalSVG::svg_ellipse(const PointID& pid, double &a, double &b, double 
       {
         // right handed
       case LocalCoordinateSystem::CS::EN: ; break;
-      case LocalCoordinateSystem::CS::NW: alpha += M_PI/2; break;
-      case LocalCoordinateSystem::CS::SE: alpha += M_PI/2; break;
+      case LocalCoordinateSystem::CS::NW: alpha += GNU_gama::PI/2; break;
+      case LocalCoordinateSystem::CS::SE: alpha += GNU_gama::PI/2; break;
       case LocalCoordinateSystem::CS::WS: ; break;
         // left handed
-      case LocalCoordinateSystem::CS::NE: alpha += M_PI/2; break;
-      case LocalCoordinateSystem::CS::SW: alpha += M_PI/2; break;
+      case LocalCoordinateSystem::CS::NE: alpha += GNU_gama::PI/2; break;
+      case LocalCoordinateSystem::CS::SW: alpha += GNU_gama::PI/2; break;
       case LocalCoordinateSystem::CS::ES: break;
       case LocalCoordinateSystem::CS::WN: break;
       default:
         ;
       }
 
-     while (alpha < 0)      alpha += 2*M_PI;
-     while (alpha > 2*M_PI) alpha -= 2*M_PI;
+     while (alpha < 0)      alpha += 2*GNU_gama::PI;
+     while (alpha > 2*GNU_gama::PI) alpha -= 2*GNU_gama::PI;
 }

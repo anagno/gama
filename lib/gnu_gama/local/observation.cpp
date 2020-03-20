@@ -24,6 +24,8 @@
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/gon2deg.h>
 
+#include <Math/Business/radian.h>
+
 
 namespace GNU_gama { namespace local
 {
@@ -122,7 +124,7 @@ void DisplayObservationVisitor::visit(Direction* obs)
   xml_name = "direction";
   str_from = obs->from().str();
   str_to   = obs->to().str();
-  double m = R2G*(obs->value());
+  double m = GNU_gama::RAD_TO_GON*(obs->value());
   if (lnet->gons())
     str_val =  std::to_string(m);
   else
@@ -137,7 +139,7 @@ void DisplayObservationVisitor::visit(Angle* obs)
   str_from = obs->from().str();
   str_bs   = obs->bs().str();
   str_fs   = obs->fs().str();
-  double m = R2G*(obs->value());
+  double m = GNU_gama::RAD_TO_GON*(obs->value());
   if (lnet->gons())
     str_val =  std::to_string(m);
   else
@@ -171,7 +173,7 @@ void DisplayObservationVisitor::visit(Z_Angle* obs)
   xml_name = "z-angle";
   str_from = obs->from().str();
   str_to   = obs->to().str();
-  double m = R2G*(obs->value());
+  double m = GNU_gama::RAD_TO_GON*(obs->value());
   if (lnet->gons())
     str_val =  std::to_string(m);
   else
@@ -242,7 +244,7 @@ void DisplayObservationVisitor::visit(Azimuth* obs)
   xml_name = "azimuth";
   str_from = obs->from().str();
   str_to   = obs->to().str();
-  double m = R2G*(obs->value());
+  double m = GNU_gama::RAD_TO_GON*(obs->value());
   if (lnet->gons())
     str_val =  std::to_string(m);
   else

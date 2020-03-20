@@ -28,6 +28,7 @@
 #include <gnu_gama/local/language.h>
 #include <gnu_gama/local/results/text/underline.h>
 #include <Math/Business/statan.h>
+#include <Math/Business/radian.h>
 #include <gnu_gama/gon2deg.h>
 #include <gnu_gama/outstream.h>
 
@@ -972,7 +973,7 @@ void adjusted_parameters(Stream& cout,const Adjustment& adj)
                     alfa = 0;
                   else {
                     alfa = std::atan2(2*cyx, cxx-cyy)/2;
-                    if (alfa < 0) alfa += M_PI;
+                    if (alfa < 0) alfa += GNU_gama::PI;
                   }
                 }
 
@@ -990,7 +991,7 @@ void adjusted_parameters(Stream& cout,const Adjustment& adj)
                 cout << b << ' ';
                 cout.width(7);
                 cout.setf(ios_base::fixed, ios_base::floatfield);
-                double ea = alfa/M_PI*200;
+                double ea = alfa/GNU_gama::PI*200;
                 if (!adj.gons) ea *= 360.0/400;
                 cout << ea << ' ';
 

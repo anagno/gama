@@ -23,11 +23,6 @@
 #ifndef GNU_gama_gons_to_degrees_h_GNU_Gama_gon2deg_gon2deg
 #define GNU_gama_gons_to_degrees_h_GNU_Gama_gon2deg_gon2deg
 
-#ifndef M_PI
-//           3.141592653589793238462643383279502884197169399375105820...
-#define M_PI 3.14159265358979323846264338327950288419716939937510
-#endif
-
 namespace GNU_gama {
 
   // sign 0  conversion without sign

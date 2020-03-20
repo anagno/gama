@@ -195,16 +195,16 @@ void ReducedObservationsText(GNU_gama::local::LocalNetwork* IS,
             out.precision(6);
             out.width(maxval_obs);
 	    if (IS->gons())
-		out << R2G*(it->orig_value()) << " ";
+		out << GNU_gama::RAD_TO_GON*(it->orig_value()) << " ";
 	    else
-		out << GNU_gama::gon2deg(R2G*it->orig_value(), 0, 2) << " ";
+		out << GNU_gama::gon2deg(GNU_gama::RAD_TO_GON*it->orig_value(), 0, 2) << " ";
             out.width(maxval_obs);
 	    if ( it->reduced() )
 	    {
 		if (IS->gons())
-		    out << R2G*pm->value();
+		    out << GNU_gama::RAD_TO_GON*pm->value();
 		else
-		    out << GNU_gama::gon2deg(R2G*pm->value(), 0, 2);
+		    out << GNU_gama::gon2deg(GNU_gama::RAD_TO_GON*pm->value(), 0, 2);
 	    }
 	    else
 		out << str_nonexist.c_str();

@@ -17,10 +17,11 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+#include <Math/Business/radian.h>
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <gnu_gama/local/float.h>
 #include "compare_xml_adjustment.h"
 
 using GNU_gama::LocalNetworkAdjustmentResults;
@@ -503,8 +504,8 @@ int compare_xml_adjustment(GNU_gama::LocalNetworkAdjustmentResults* html,
             H.xml_tag == "zenith-angle" ||
             H.xml_tag == "azimuth")
           {
-            dobs = std::asin(std::sin(dobs*G2R))*R2G;
-            dadj = std::asin(std::sin(dadj*G2R))*R2G;
+            dobs = std::asin(std::sin(dobs*GNU_gama::GON_TO_RAD))*GNU_gama::RAD_TO_GON;
+            dadj = std::asin(std::sin(dadj*GNU_gama::GON_TO_RAD))*GNU_gama::RAD_TO_GON;
 
             if (std::abs(dobs) > std::abs(dang)) dang = dobs;
             if (std::abs(dadj) > std::abs(dang)) dang = dadj;

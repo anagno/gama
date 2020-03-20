@@ -17,6 +17,8 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+#include <Math/Business/radian.h>
+
 #include "a2g.h"
 #include <fstream>
 #include <cctype>
@@ -231,7 +233,7 @@ try
           bearing_distance(points_[standpoint], points_[target], b, d);
 
           osstr << "   <direction to ='" << target << "' val='"
-                << setprecision(4) << trang(b/M_PI*200) << "' />\n";
+                << setprecision(4) << trang(b/GNU_gama::PI*200) << "' />\n";
         }
       else if (s0 == distance_)
         {
@@ -253,7 +255,7 @@ try
           osstr << "   <distance  to ='" << target
                 << "' val='" << d << "' />\n";
           osstr << "   <direction to ='" << target  << "' val='"
-                << setprecision(4) << trang(b/M_PI*200) << "' />\n";
+                << setprecision(4) << trang(b/GNU_gama::PI*200) << "' />\n";
         }
       else if (s0 == angle_)
         {
@@ -267,7 +269,7 @@ try
           double angle = sign*(br - bl);
 
           osstr << "   <angle bs='" << left << "' fs='" << right << "' val='"
-                << setprecision(4) << angle/M_PI*200 << "' />\n";
+                << setprecision(4) << angle/GNU_gama::PI*200 << "' />\n";
         }
       else if (s0 == azimuth_)
         {
@@ -275,11 +277,11 @@ try
           inp >> target;
           double b, d;
           bearing_distance(points_[standpoint], points_[target], b, d);
-          double a = M_PI/2 - b;
-          if (ang_right_handed_) a = 2*M_PI - a;
+          double a = GNU_gama::PI/2 - b;
+          if (ang_right_handed_) a = 2*GNU_gama::PI - a;
 
           osstr << "   <azimuth  to ='" << target
-                << "' val='" << setprecision(4) << a/M_PI*200 << "' />\n";
+                << "' val='" << setprecision(4) << a/GNU_gama::PI*200 << "' />\n";
         }
     }
 

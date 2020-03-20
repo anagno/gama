@@ -1,5 +1,5 @@
 #include <gnu_gama/local/test_linearization_visitor.h>
-#include <cmath>
+#include <Math/Business/radian.h>
 
 void GNU_gama::local::TestLinearizationVisitor::visit(Distance* obs)
 {
@@ -24,11 +24,11 @@ void GNU_gama::local::TestLinearizationVisitor::visit(Angle* obs)
   double cx2 = cil2.x() + x(cil2.index_x())/1000;
   double ds2, dd2;
   GNU_gama::local::bearing_distance(sy, sx, cy2, cx2, ds2, dd2);
-  mer = obs->value() + v(i)*CC2R - ds2 + ds;
-  while (mer >  M_PI) mer -= 2*M_PI;
-  while (mer < -M_PI) mer += 2*M_PI;
+  mer = obs->value() + v(i)*GNU_gama::CC_TO_RAD - ds2 + ds;
+  while (mer >  GNU_gama::PI) mer -= 2*GNU_gama::PI;
+  while (mer < -GNU_gama::PI) mer += 2*GNU_gama::PI;
   pol  = mer*std::max(dd,dd2)*1000;
-  mer *= R2CC;
+  mer *= GNU_gama::RAD_TO_CC;
 }
 
 void GNU_gama::local::TestLinearizationVisitor::visit(S_Distance* obs)
@@ -80,12 +80,12 @@ void GNU_gama::local::TestLinearizationVisitor::visit(Direction* obs)
   double ds, dd;
   computeBearingAndDistance(obs, ds, dd);
   double orp = obs->orientation();
-  mer = obs->value() + v(i)*CC2R + orp + x(obs->index_orientation())*CC2R;
+  mer = obs->value() + v(i)*GNU_gama::CC_TO_RAD + orp + x(obs->index_orientation())*GNU_gama::CC_TO_RAD;
   mer -= ds;
-  while (mer >  M_PI) mer -= 2*M_PI;
-  while (mer < -M_PI) mer += 2*M_PI;
+  while (mer >  GNU_gama::PI) mer -= 2*GNU_gama::PI;
+  while (mer < -GNU_gama::PI) mer += 2*GNU_gama::PI;
   pol  = mer*dd*1000;
-  mer *= R2CC;
+  mer *= GNU_gama::RAD_TO_CC;
 }
 
 

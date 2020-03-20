@@ -347,7 +347,7 @@ bool AcordTraverse::calculate_traverse()
           if (i != 0 && a != nullptr)
             {
               if (a->bs() == traverse_points_[i - 1] && a->fs() == traverse_points_[i + 1]) tmp_bearings.push_back(a->value());
-              if (a->fs() == traverse_points_[i - 1] && a->bs() == traverse_points_[i + 1]) tmp_bearings.push_back(2 * M_PI - (a->value()));
+              if (a->fs() == traverse_points_[i - 1] && a->bs() == traverse_points_[i + 1]) tmp_bearings.push_back(2 * GNU_gama::PI - (a->value()));
             }
           auto dir = AC.get_dir(it->second);
           if (dir.second)
@@ -397,10 +397,10 @@ bool AcordTraverse::calculate_traverse()
 
           if (known_dirs == 11)
             {
-              while (angle_from_dirs > 2 * M_PI)
-                angle_from_dirs -= 2 * M_PI;
+              while (angle_from_dirs > 2 * GNU_gama::PI)
+                angle_from_dirs -= 2 * GNU_gama::PI;
               while (angle_from_dirs < 0)
-                angle_from_dirs += 2 * M_PI;
+                angle_from_dirs += 2 * GNU_gama::PI;
               tmp_bearings.push_back(angle_from_dirs);
               angle_from_dirs = 0;
               known_dirs = 0;
@@ -430,7 +430,7 @@ bool AcordTraverse::calculate_traverse()
               if (sp->test_orientation() && itt->second->from() == traverse_points_[i + 1] && (known_dirs == 00 || known_dirs == 01))
                 {
 				  known_dirs += 10;
-                  double dirval = dir.first-M_PI;
+                  double dirval = dir.first-GNU_gama::PI;
                   angle_from_dirs += dirval+ sp->orientation();
                 }
               else if (sp->test_orientation() && (known_dirs == 00 || known_dirs == 10))
@@ -444,7 +444,7 @@ bool AcordTraverse::calculate_traverse()
                             {
                               traverse.push_back({ itt->second->from(),PD[itt->second->from()] });
                               known_dirs += 1;
-                              double dirval = M_PI - dir.first;
+                              double dirval = GNU_gama::PI - dir.first;
                               angle_from_dirs += (dirval + sp->orientation());
                               front_ori = { dir.first + sp->orientation(), true };
                             }
@@ -455,7 +455,7 @@ bool AcordTraverse::calculate_traverse()
                       if (itt->second->from() == traverse_points_[i - 1])
                         {
                           known_dirs += 1;
-                          double dirval = M_PI + dir.first;
+                          double dirval = GNU_gama::PI + dir.first;
                           angle_from_dirs -= dirval+ sp->orientation();
                         }
                     }
@@ -464,10 +464,10 @@ bool AcordTraverse::calculate_traverse()
 
           if (known_dirs == 11)
             {
-              while (angle_from_dirs > 2 * M_PI)
-                angle_from_dirs -= 2 * M_PI;
+              while (angle_from_dirs > 2 * GNU_gama::PI)
+                angle_from_dirs -= 2 * GNU_gama::PI;
               while (angle_from_dirs < 0)
-                angle_from_dirs += 2 * M_PI;
+                angle_from_dirs += 2 * GNU_gama::PI;
               tmp_bearings.push_back(angle_from_dirs);
               angle_from_dirs = 0;
               known_dirs = 0;
@@ -477,10 +477,10 @@ bool AcordTraverse::calculate_traverse()
       if(tmp_bearings.empty() && known_dirs == 10 && i==0 && tr_type == AC.closed_traverse)
         {
           front_ori = { 0, true };
-          while (angle_from_dirs > 2 * M_PI)
-            angle_from_dirs -= 2 * M_PI;
+          while (angle_from_dirs > 2 * GNU_gama::PI)
+            angle_from_dirs -= 2 * GNU_gama::PI;
           while (angle_from_dirs < 0)
-            angle_from_dirs += 2 * M_PI;
+            angle_from_dirs += 2 * GNU_gama::PI;
           tmp_bearings.push_back(angle_from_dirs);
           angle_from_dirs = 0;
           known_dirs = 0;
@@ -536,10 +536,10 @@ bool AcordTraverse::calculate_traverse()
   if (front_ori.second)
     {
       double b = front_ori.first + angles.front();
-      while (b > 2*M_PI)
-        b -= 2 * M_PI;
+      while (b > 2*GNU_gama::PI)
+        b -= 2 * GNU_gama::PI;
       while (b < 0)
-        b += 2 * M_PI;
+        b += 2 * GNU_gama::PI;
       bearings.push_back(b);
       dX.push_back(distances.front() * std::cos(b));
       dY.push_back(distances.front() * std::sin(b));
@@ -547,11 +547,11 @@ bool AcordTraverse::calculate_traverse()
   if (distances.size() != angles.size()) return false;
   for (Acord2::size_type j = 1; j < angles.size();++j)
     {
-      double b = angles[j] + bearings[j - 1] - M_PI;
-      while (b > 2 * M_PI)
-        b -= 2 * M_PI;
+      double b = angles[j] + bearings[j - 1] - GNU_gama::PI;
+      while (b > 2 * GNU_gama::PI)
+        b -= 2 * GNU_gama::PI;
       while (b < 0)
-        b += 2 * M_PI;
+        b += 2 * GNU_gama::PI;
       bearings.push_back(b);
       dX.push_back(distances[j] * std::cos(b));
       dY.push_back(distances[j] * std::sin(b));

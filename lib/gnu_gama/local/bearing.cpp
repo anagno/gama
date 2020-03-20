@@ -20,7 +20,6 @@
 
 #include <cmath>
 #include <gnu_gama/local/bearing.h>
-#include <gnu_gama/local/float.h>
 #include <gnu_gama/local/gamadata.h>
 
 namespace GNU_gama { namespace local {
@@ -49,7 +48,7 @@ void bearing_distance(double ya, double xa, double yb, double xb,
      }
 
    double s  = std::atan2( dy , dx );
-   b = s >= 0 ? s : s + 2*M_PI;
+   b = s >= 0 ? s : s + 2*GNU_gama::PI;
 }
 
 

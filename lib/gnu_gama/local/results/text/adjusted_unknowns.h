@@ -226,7 +226,7 @@ void AdjustedUnknowns(GNU_gama::local::LocalNetwork* IS, OutStream& out)
               const PointID cb = IS->unknown_pointid(i);
               out << Utf8::leftPad(cb.str(), IS->maxw_id()) << "  ";
               StandPoint* k = IS->unknown_standpoint(i);
-              double z = y_sign*( k->orientation() )*R2G;
+              double z = y_sign*( k->orientation() )*GNU_gama::RAD_TO_GON;
               if (z <  0 ) z += 400;
               if (z > 400) z -= 400;
               out.setf(ios_base::fixed, ios_base::floatfield);

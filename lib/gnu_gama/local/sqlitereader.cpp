@@ -22,6 +22,8 @@
 
 #ifdef   GNU_GAMA_LOCAL_SQLITE_READER
 
+#include <Math/Business/radian.h>
+
 #include <gnu_gama/local/sqlitereader.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/xml/dataobject.h>
@@ -507,7 +509,7 @@ int sqlite_db_readConfigurationInfo(void* data, int argc, char** argv, char**)
 
         using namespace std;
         if (argv[11])
-          d->lnet->set_latitude(atoi(argv[11]) * M_PI / 200);
+          d->lnet->set_latitude(atoi(argv[11]) * GNU_gama::PI / 200);
 
         if (argv[12])
           d->lnet->set_ellipsoid(argv[12]);

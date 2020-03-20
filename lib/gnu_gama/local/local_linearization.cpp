@@ -23,6 +23,8 @@
 #include <gnu_gama/local/local_linearization.h>
 #include <gnu_gama/local/bearing.h>
 
+#include <Math/Business/radian.h>
+
 using namespace GNU_gama::local;
 using namespace std;
 
@@ -34,7 +36,7 @@ void LocalLinearization::direction(const Direction* obs) const
    double s, d;
    bearing_distance(sbod, cbod, s, d);
    // const double p = m0 / obs->stdDev();
-   const double K = 10*R2G/d;
+   const double K = 10*GNU_gama::RAD_TO_GON/d;
    const double ps = K*sin(s);
    const double pc = K*cos(s);
 
@@ -42,7 +44,7 @@ void LocalLinearization::direction(const Direction* obs) const
    StandPoint* sp = const_cast<StandPoint*>(csp);
 
    // double w = p*p;                                       // weight
-   double a = (obs->value() + sp->orientation() - s)*R2CC;  // rhs
+   double a = (obs->value() + sp->orientation() - s)*GNU_gama::RAD_TO_CC;  // rhs
 
    while (a > 200e4)
       a -= 400e4;
@@ -367,7 +369,7 @@ void LocalLinearization::z_angle(const Z_Angle* obs) const
    if (d == 0 || sd == 0)
      throw GNU_gama::local::Exception(T_POBS_zero_or_negative_zenith_angle);
 
-   double k  = 10*R2G/(d*sd*sd);
+   double k  = 10*GNU_gama::RAD_TO_GON/(d*sd*sd);
 
    // double p = M_0 / stdDev();
    double px =  k * dz * dx;
@@ -377,10 +379,10 @@ void LocalLinearization::z_angle(const Z_Angle* obs) const
 
    double za = acos(dz/sd);
 
-   if (obs->value() > M_PI) za = 2*M_PI - za;
+   if (obs->value() > GNU_gama::PI) za = 2*GNU_gama::PI - za;
    double a  = (obs->value() - za);
 
-   rhs = a * R2CC; // abs. term in cc
+   rhs = a * GNU_gama::RAD_TO_CC; // abs. term in cc
    size = 0;
    if (sbod.free_xy())
    {
@@ -430,8 +432,8 @@ void LocalLinearization::angle(const Angle* obs) const
    bearing_distance(PD[obs->from()], PD[obs->bs()], s1, d1);
    bearing_distance(PD[obs->from()], PD[obs->fs()], s2, d2);
    // double p = m0 / obs->stdDev();
-   const double K1 = 10*R2G/d1;
-   const double K2 = 10*R2G/d2;
+   const double K1 = 10*GNU_gama::RAD_TO_GON/d1;
+   const double K2 = 10*GNU_gama::RAD_TO_GON/d2;
    const double ps1 = K1*sin(s1);
    const double pc1 = K1*cos(s1);
    const double ps2 = K2*sin(s2);
@@ -439,8 +441,8 @@ void LocalLinearization::angle(const Angle* obs) const
 
    // double w = p*p;                          // weight
    double ds = s2 - s1;
-   if (ds < 0) ds += 2*M_PI;
-   double a = (obs->value() - ds)*R2CC;        // rhs
+   if (ds < 0) ds += 2*GNU_gama::PI;
+   double a = (obs->value() - ds)*GNU_gama::RAD_TO_CC;        // rhs
    // "big" positive/negative angle transformed to "lesser" positive/negative
    while (a > 200e4)
       a -= 400e4;
@@ -491,14 +493,14 @@ void LocalLinearization::azimuth(const Azimuth* obs) const
    LocalPoint& cbod = PD[obs->to()];
    double s, d;
    bearing_distance(sbod, cbod, s, d);
-   const double K = 10*R2G/d;
+   const double K = 10*GNU_gama::RAD_TO_GON/d;
    const double ps = K*sin(s);
    const double pc = K*cos(s);
 
    // const StandPoint*  csp = static_cast<const StandPoint*>(obs->ptr_cluster()); ... unused
    // StandPoint* sp = const_cast<StandPoint*>(csp); ... unused
 
-   double a = (obs->value() + PD.xNorthAngle() - s)*R2CC;  // rhs
+   double a = (obs->value() + PD.xNorthAngle() - s)*GNU_gama::RAD_TO_CC;  // rhs
 
    while (a > 200e4)
       a -= 400e4;

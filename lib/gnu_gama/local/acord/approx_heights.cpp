@@ -21,6 +21,7 @@
 */
 
 #include <gnu_gama/local/acord/approx_heights.h>
+#include <Math/Business/radian.h>
 #include <iostream>
 
 using namespace std;
@@ -62,7 +63,7 @@ void ApproximateHeights::make_heights()
        iza != OHD.ZA.end(); ++iza)
     {
 
-      const double too_small_zenith_angle = 1 * G2R;
+      const double too_small_zenith_angle = 1 * GNU_gama::GON_TO_RAD;
 
       bool is_heights = false;
 
@@ -81,15 +82,15 @@ void ApproximateHeights::make_heights()
           const PointID& To2     = distance->to();
           const double& Vdist  = distance->value();
 
-          // I transfer value of Vzenit into interval <0,M_PI>
-          while (Vzenit < 0)   Vzenit+=2*M_PI;
-          while (Vzenit > 2*M_PI) Vzenit-=2*M_PI;
-          if (Vzenit > M_PI)   Vzenit = 2*M_PI - Vzenit;
+          // I transfer value of Vzenit into interval <0,GNU_gama::PI>
+          while (Vzenit < 0)   Vzenit+=2*GNU_gama::PI;
+          while (Vzenit > 2*GNU_gama::PI) Vzenit-=2*GNU_gama::PI;
+          if (Vzenit > GNU_gama::PI)   Vzenit = 2*GNU_gama::PI - Vzenit;
 
           if ( ( ( (From == From2) &&  (To == To2  ) ) ||
                  ( (From == To2)   &&  (To == From2) ) ) &&
                (fabs(Vzenit) > too_small_zenith_angle) &&
-               (fabs(Vzenit) < M_PI-too_small_zenith_angle) )
+               (fabs(Vzenit) < GNU_gama::PI-too_small_zenith_angle) )
             {
               OHD.tmpHD.push_back(H_Diff(From,To,Vdist / tan(Vzenit)));
               is_heights = true;

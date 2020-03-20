@@ -30,7 +30,8 @@
 #ifndef gama_local_Bod_Mer_Mereni_H
 #define gama_local_Bod_Mer_Mereni_H
 
-#include <gnu_gama/local/float.h>
+#include <Math/Business/radian.h>
+
 #include <gnu_gama/local/pointid.h>
 #include <gnu_gama/local/exception.h>
 #include <gnu_gama/local/language.h>
@@ -170,8 +171,8 @@ namespace GNU_gama { namespace local {
 
       void norm_rad_val()
       {
-          while (value_ >= 2*M_PI) value_ -= 2*M_PI;
-          while (value_ <   0    ) value_ += 2*M_PI;
+          while (value_ >= 2*GNU_gama::PI) value_ -= 2*GNU_gama::PI;
+          while (value_ <   0    ) value_ += 2*GNU_gama::PI;
       }
 
       GNU_gama::Cluster<Observation>* cluster {nullptr};

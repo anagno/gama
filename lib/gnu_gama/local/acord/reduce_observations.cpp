@@ -189,7 +189,7 @@ void ReducedObservations::reduce_sdistance(ReducedObs* r_obs)
         observed_za = ZA_from_to_cluster.average();
 
         if (ZA_to_from_cluster.count() )
-            refraction_angle = M_PI/2 + gravity_angle/2 - 0.5 *
+            refraction_angle = GNU_gama::PI/2 + gravity_angle/2 - 0.5 *
                                      (ZA_from_to_cluster.average() +
                                       ZA_to_from_cluster.average() );
     }
@@ -198,9 +198,9 @@ void ReducedObservations::reduce_sdistance(ReducedObs* r_obs)
             observed_za = ZA_from_to.average();
         else
             if ( ZA_to_from_cluster.average() )
-                observed_za = M_PI + gravity_angle - ZA_to_from_cluster.average();
+                observed_za = GNU_gama::PI + gravity_angle - ZA_to_from_cluster.average();
             else
-                observed_za = M_PI + gravity_angle - ZA_to_from.average();
+                observed_za = GNU_gama::PI + gravity_angle - ZA_to_from.average();
 
 
     const double d2 = (orig_value * orig_value) + dh*dh - 2 * orig_value * dh *
@@ -311,7 +311,7 @@ void ReducedObservations::reduce_zangle(ReducedObs* r_obs)
     gravity_angle = orig_value / (EarthRadius + Hm);
 
     if ( ZA_to_from_cluster.count() )
-        refraction_angle = M_PI/2 + gravity_angle/2 - 0.5 *
+        refraction_angle = GNU_gama::PI/2 + gravity_angle/2 - 0.5 *
                            (orig_value + ZA_to_from_cluster.average() );
     double sdist;
 

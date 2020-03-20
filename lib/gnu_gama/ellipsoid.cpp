@@ -115,12 +115,12 @@ void Ellipsoid::xyz2blh(double  x, double  y, double  z,
       l = 0;
       if (z > 0)
         {
-          b = M_PI/2;
+          b = GNU_gama::PI/2;
           h = z - Ime2*N(b);
         }
       else
         {
-          b = -M_PI/2;
+          b = -GNU_gama::PI/2;
           h = -z - Ime2*N(b);
         }
       return;

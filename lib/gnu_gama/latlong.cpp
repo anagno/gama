@@ -31,7 +31,7 @@ namespace
     if (neg) rad = -rad;
 
     int d, m;
-    rad *= RAD_TO_DEG;
+    rad *= GNU_gama::RAD_TO_DEG;
     d    = int(rad);
 
     rad -= d;

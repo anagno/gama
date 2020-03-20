@@ -307,7 +307,7 @@ namespace GNU_gama { namespace local {
       LocalPoint B1 = (*(SB->find(h2->bs()))).second;
       LocalPoint B2 = (*(SB->find(h2->fs()))).second;
       double uu = bearing(SD.solution_1(),B2) - bearing(SD.solution_1(),B1);
-      uu += (uu < 0 ? 2*M_PI : 0);
+      uu += (uu < 0 ? 2*GNU_gama::PI : 0);
       // uu should be equal to h2->value(), but ...  uu is either
       // value() or value()+-PI
       if((uu < (h2->value()+0.1)) && (uu > (h2->value()-0.1)))
@@ -318,7 +318,7 @@ namespace GNU_gama { namespace local {
       if(SD.number_of_solutions() > 1)
         {
           uu = bearing(SD.solution_2(),B2) - bearing(SD.solution_2(),B1);
-          uu += (uu < 0 ? 2*M_PI : 0);
+          uu += (uu < 0 ? 2*GNU_gama::PI : 0);
           if((uu < (h2->value()+0.1)) && (uu > (h2->value()-0.1)))
 	  { // added { to avoid dangling else 
             if(number_of_solutions_ == 1)
@@ -388,7 +388,7 @@ namespace GNU_gama { namespace local {
       LocalPoint B1 = (*(SB->find(h2->bs()))).second;
       LocalPoint B2 = (*(SB->find(h2->fs()))).second;
       double uu = bearing(DD.solution_1(),B2) - bearing(DD.solution_1(),B1);
-      uu += (uu < 0 ? 2*M_PI : 0);
+      uu += (uu < 0 ? 2*GNU_gama::PI : 0);
       // uu should be equalto h2->value(), but ...  uu is either
       // value() or value()+-PI
       if((uu < (h2->value()+0.1)) && (uu > (h2->value()-0.1)))
@@ -399,7 +399,7 @@ namespace GNU_gama { namespace local {
       if(DD.number_of_solutions() > 1)
         {
           uu = bearing(DD.solution_2(),B2) - bearing(DD.solution_2(),B1);
-          uu += (uu < 0 ? 2*M_PI : 0);
+          uu += (uu < 0 ? 2*GNU_gama::PI : 0);
           if((uu < (h2->value()+0.1)) && (uu > (h2->value()-0.1)))
 	  { // added { to avoid dangling else 
             if(number_of_solutions_ == 1)
@@ -475,8 +475,8 @@ namespace GNU_gama { namespace local {
         {
           uu1 = bearing(DD.solution_1(),B2) - bearing(DD.solution_1(),B1);
           uu2 = bearing(DD.solution_1(),B4) - bearing(DD.solution_1(),B3);
-          uu1 += (uu1 < 0 ? 2*M_PI : 0);
-          uu2 += (uu2 < 0 ? 2*M_PI : 0);
+          uu1 += (uu1 < 0 ? 2*GNU_gama::PI : 0);
+          uu2 += (uu2 < 0 ? 2*GNU_gama::PI : 0);
           // uu should be equal to h2->value(), but ...  uu is either
           // value() or value()+-PI
           Vyhovuje1 = (uu1 < (h1->value()+0.1)) && (uu1 > (h1->value()-0.1));
@@ -495,8 +495,8 @@ namespace GNU_gama { namespace local {
           {
             uu1 = bearing(DD.solution_2(),B2) - bearing(DD.solution_2(),B1);
             uu2 = bearing(DD.solution_2(),B4) - bearing(DD.solution_2(),B3);
-            uu1 += (uu1 < 0 ? 2*M_PI : 0);
-            uu2 += (uu2 < 0 ? 2*M_PI : 0);
+            uu1 += (uu1 < 0 ? 2*GNU_gama::PI : 0);
+            uu2 += (uu2 < 0 ? 2*GNU_gama::PI : 0);
             Vyhovuje1 = (uu1 < (h1->value()+0.1)) && (uu1 > (h1->value()-0.1));
             Vyhovuje2 = (uu2 < (h2->value()+0.1)) && (uu2 > (h2->value()-0.1));
             if(Vyhovuje1 && Vyhovuje2)

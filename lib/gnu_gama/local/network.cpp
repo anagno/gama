@@ -38,6 +38,7 @@
 #include <gnu_gama/local/itstream.h>
 #include <gnu_gama/local/skipcomm.h>
 #include <Math/Business/statan.h>
+#include <Math/Business/radian.h>
 #include <Math/Service/smatrix_graph.h>
 #include <gnu_gama/version.h>
 #include <gnu_gama/ellipsoids.h>
@@ -122,11 +123,11 @@ public:
     }
     void visit(Direction* /*obs*/)
     {
-        check(fabs(b(indm)*d0/(10*R2G)));
+        check(fabs(b(indm)*d0/(10*GNU_gama::RAD_TO_DEG)));
     }
     void visit(Angle* /*obs*/)
     {
-        check(fabs(b(indm)*d0/(10*R2G)));
+        check(fabs(b(indm)*d0/(10*GNU_gama::RAD_TO_DEG)));
     }
     void visit(H_Diff* obs)
     {
@@ -145,7 +146,7 @@ public:
     {
         double dz = stan->z() - cil->z();
         double d3 = sqrt(dz*dz + d0*d0);
-        check(fabs(b(indm)*d3/(10*R2G)));
+        check(fabs(b(indm)*d3/(10*GNU_gama::RAD_TO_DEG)));
     }
 
     void visit(X* obs)
@@ -182,7 +183,7 @@ public:
 
     void visit(Azimuth* /*obs*/)
     {
-        check(fabs(b(indm)*d0/(10*R2G)));
+        check(fabs(b(indm)*d0/(10*GNU_gama::RAD_TO_DEG)));
     }
 
 private:
@@ -223,7 +224,7 @@ LocalNetwork::LocalNetwork()
   set_max_linearization_iterations();
   // epoch_         = 0.0;
   // has_epoch_     = false;
-  // latitude_      = M_PI/4.0;
+  // latitude_      = GNU_gama::PI/4.0;
   // has_latitude_  = false;
   // ellipsoid_     = "";
   // has_ellipsoid_ = false;
@@ -1017,7 +1018,7 @@ void LocalNetwork::std_error_ellipse(const PointID& cb,
      return;
   }
   alfa = atan2(2*cyx, cxx-cyy)/2;
-  if (alfa < 0) alfa += M_PI;
+  if (alfa < 0) alfa += GNU_gama::PI;
 }
 
 // 1.7.09 added optional update of constrained coordinates; inspired
@@ -1046,8 +1047,8 @@ void LocalNetwork::refine_approx()
       {
         StandPoint* standpoint = unknown_standpoint(i);
         double ori =
-          ( standpoint->orientation() )*R2G + x(i)/10000;
-        standpoint->set_orientation( ori*G2R );
+          ( standpoint->orientation() )*GNU_gama::RAD_TO_GON + x(i)/10000;
+        standpoint->set_orientation( ori*GNU_gama::GON_TO_RAD );
       }
 
   update(Residuals);

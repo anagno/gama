@@ -50,8 +50,8 @@ void AcordAzimuth::prepare()
           if (to < from)
             {
               std::swap(from, to);
-              val += M_PI;
-              if (val > 2*M_PI) val -= 2*M_PI;
+              val += GNU_gama::PI;
+              if (val > 2*GNU_gama::PI) val -= 2*GNU_gama::PI;
             }
 
           azimuths_[pair_(from, to)].values.push_back(val);
@@ -151,7 +151,7 @@ void AcordAzimuth::execute()
         {
           double x0 =  PD[b].x();
           double y0 =  PD[b].y();
-          double bb  = iter.second.value + M_PI + PD.xNorthAngle();
+          double bb  = iter.second.value + GNU_gama::PI + PD.xNorthAngle();
           double x  = x0 + iter.second.distance*cos(bb);
           double y  = y0 + iter.second.distance*sin(bb);
           PD[a].set_xy(x, y);

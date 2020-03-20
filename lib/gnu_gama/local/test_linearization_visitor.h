@@ -35,6 +35,7 @@
 #include <gnu_gama/local/bearing.h>
 #include <gnu_gama/local/results/text/underline.h>
 #include <Math/Business/statan.h>
+#include <Math/Business/radian.h>
 #include <gnu_gama/utf8.h>
 #include <gnu_gama/visitor.h>
 #include <cmath>
@@ -154,7 +155,7 @@ public:
       {
         dms = IS->degrees();
         out << T_GaMa_direction;
-        mer = (obs->value())*R2G;
+        mer = (obs->value())*GNU_gama::RAD_TO_GON;
         out.precision(angularPrecision);
       }
     void visit(Angle* obs)
@@ -164,7 +165,7 @@ public:
         const int w = IS->maxw_obs() + 2 + 2*(IS->maxw_id());
         out << Utf8::leftPad((obs->fs()).str(), w);
         out << T_GaMa_angle;
-        mer = (obs->value())*R2G;
+        mer = (obs->value())*GNU_gama::RAD_TO_GON;
         out.precision(angularPrecision);
       }
     void visit(S_Distance* obs)

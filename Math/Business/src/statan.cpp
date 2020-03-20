@@ -39,7 +39,7 @@ double Student(double palfa, int N)
 
    if (N <= 1)
    {
-      double a = M_PI/2*alfa;
+      double a = GNU_gama::PI/2*alfa;
       double stu_ = cos(a)/sin(a);
       if (palfa > 0.5) stu_ = -stu_;
       return stu_;
@@ -56,7 +56,7 @@ double Student(double palfa, int N)
    double a = 1.0/(r-0.5);
    double b = 48.0/(a*a);
    double c = ((20700.0*a/b-98.0)*a-16.0)*a+96.36;
-   double d = ((94.5/(b+c)-3.0)/b+1.0)*sqrt(M_PI/2*a)*r;
+   double d = ((94.5/(b+c)-3.0)/b+1.0)*sqrt(GNU_gama::PI/2*a)*r;
    double x = d*alfa, xx = 2.0/r;
    double y = pow(x,xx);
 
@@ -214,7 +214,7 @@ double KSprob(double x)
 
    if (x < 1.18)
      {
-       const double pi2  = M_PI*M_PI;
+       const double pi2  = GNU_gama::PI*GNU_gama::PI;
        const double xx8  = 8*x*x;
 
        sum = 0;
@@ -224,7 +224,7 @@ double KSprob(double x)
          sum += term;
          if (term < eps) break;
        }
-       sum *= sqrt(2*M_PI)/x;
+       sum *= sqrt(2*GNU_gama::PI)/x;
      }
    else
      {

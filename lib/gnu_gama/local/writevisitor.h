@@ -67,9 +67,9 @@ public:
 
       out << " bs=\"" << obs.bs()  << '"' << " fs=\"" << obs.fs() << '"' << " val=\"";
       if (Observation::gons)
-        out << std::setprecision(Format::gon_p()) << obs.value()*R2G;
+        out << std::setprecision(Format::gon_p()) << obs.value()*GNU_gama::RAD_TO_GON;
       else
-        out << GNU_gama::gon2deg(obs.value()*R2G, 2, Format::gon_p());
+        out << GNU_gama::gon2deg(obs.value()*GNU_gama::RAD_TO_GON, 2, Format::gon_p());
       out << '"';
 
       if (obs.check_std_dev())
@@ -89,9 +89,9 @@ public:
 
       out << " to=\"" << obs.to() << '"' << " val=\"";
       if (Observation::gons)
-        out << std::setprecision(Format::gon_p()  ) << obs.value()*R2G;
+        out << std::setprecision(Format::gon_p()  ) << obs.value()*GNU_gama::RAD_TO_GON;
       else
-        out << GNU_gama::gon2deg(obs.value()*R2G, 2, Format::gon_p());
+        out << GNU_gama::gon2deg(obs.value()*GNU_gama::RAD_TO_GON, 2, Format::gon_p());
       out << '"';
 
       if (obs.check_std_dev())
@@ -200,9 +200,9 @@ public:
 
       out << " to=\"" << obs.to() << '"' << " val=\"";
       if (Observation::gons)
-        out << std::setprecision(Format::gon_p()) << obs.value()*R2G;
+        out << std::setprecision(Format::gon_p()) << obs.value()*GNU_gama::RAD_TO_GON;
       else
-        out << GNU_gama::gon2deg(obs.value()*R2G, 2, Format::gon_p());
+        out << GNU_gama::gon2deg(obs.value()*GNU_gama::RAD_TO_GON, 2, Format::gon_p());
       out << '"';
 
       if (obs.check_std_dev())
@@ -222,9 +222,9 @@ public:
 
       out << " to=\"" << obs.to() << '"' << " val=\"";
       if (Observation::gons)
-        out << std::setprecision(Format::gon_p()  ) << obs.value()*R2G;
+        out << std::setprecision(Format::gon_p()  ) << obs.value()*GNU_gama::RAD_TO_GON;
       else
-        out << GNU_gama::gon2deg(obs.value()*R2G, 2, Format::gon_p());
+        out << GNU_gama::gon2deg(obs.value()*GNU_gama::RAD_TO_GON, 2, Format::gon_p());
       out << '"';
 
       if (obs.check_std_dev())

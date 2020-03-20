@@ -97,8 +97,8 @@ void Select_solution_g2d::calculation()
               PB2 = (*(SB->find(u->fs()))).second;
               double uu1 = bearing(B1,PB2)-bearing(B1,PB1);
               double uu2 = bearing(B2,PB2)-bearing(B2,PB1);
-              uu1 += (uu1 < 0 ? 2*M_PI : 0);
-              uu2 += (uu2 < 0 ? 2*M_PI : 0);
+              uu1 += (uu1 < 0 ? 2*GNU_gama::PI : 0);
+              uu2 += (uu2 < 0 ? 2*GNU_gama::PI : 0);
               tol1 = (g2d_distance(B1,PB1)+g2d_distance(B1,PB2))/2;
               tol2 = (g2d_distance(B2,PB1)+g2d_distance(B2,PB2))/2;
               delta1 = fabs(u->value()-uu1);

@@ -60,21 +60,21 @@ namespace GNU_gama { namespace local {
             throw g2d_exc("ApproxPoint::makeAngle : missing direction");
           double angle = s2->value() - s1->value();
           return new Angle(s1->from(),s1->to(),s2->to(),
-                           (angle < 0 ? angle+2*M_PI : angle));
+                           (angle < 0 ? angle+2*GNU_gama::PI : angle));
         }
       Direction* makeBearing(const Angle* u, const PointID& cb)
         {
           PointID point = (u->to() == cb ? u->fs() : u->to());
           double sm = bearing(SB[u->from()],SB[point]);
           sm += (u->to() == cb ? -u->value() : u->value());
-          sm += (sm < 0 ? 2*M_PI : 0);
-          sm -= (sm >= 2*M_PI ? 2*M_PI : 0);
+          sm += (sm < 0 ? 2*GNU_gama::PI : 0);
+          sm -= (sm >= 2*GNU_gama::PI ? 2*GNU_gama::PI : 0);
           return new Direction(u->from(),cb,sm);
         }
       Direction* makeBearing(const Direction* s, const PointID& cb)
         {
           double sm = s->value() + s->orientation();
-          sm -= (sm >= 2*M_PI ? 2*M_PI : 0);
+          sm -= (sm >= 2*GNU_gama::PI ? 2*GNU_gama::PI : 0);
           return new Direction(s->from(),cb,sm);
         }
       bool KnownTarget(ObservationList::const_iterator i)

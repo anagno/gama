@@ -34,6 +34,7 @@
 #include <sstream>
 #include <gnu_gama/xml/localnetworkxml.h>
 #include <Math/Business/statan.h>
+#include <Math/Business/radian.h>
 #include <gnu_gama/gon2deg.h>
 #include <gnu_gama/version.h>
 #include <gnu_gama/xsd.h>
@@ -119,7 +120,7 @@ public:
       if (!s.empty()) out << " extern=\"" << s << "\"";
       out << ">";
       ostr->precision(angular);
-      double m = R2G*(obs->value());
+      double m = GNU_gama::RAD_TO_GON*(obs->value());
       *ostr << " <obs>" << m << "</obs>";
       m += v(i)/10000;
       if (m < 0) m += 400;
@@ -135,7 +136,7 @@ public:
       if (!s.empty()) out << " extern=\"" << s << "\"";
       out << ">";
       ostr->precision(angular);
-      double m = R2G*(obs->value());
+      double m = GNU_gama::RAD_TO_GON*(obs->value());
       *ostr << " <obs>" << m << "</obs>";
       m += v(i)/10000;
       if (m < 0) m += 400;
@@ -181,7 +182,7 @@ public:
       if (!s.empty()) out << " extern=\"" << s << "\"";
       out << ">";
       ostr->precision(angular);
-      double m = R2G*(obs->value());
+      double m = GNU_gama::RAD_TO_GON *(obs->value());
       *ostr << " <obs>" << m << "</obs>";
       m += v(i)/10000;
       *ostr << "<adj>" << m << "</adj>";
@@ -282,7 +283,7 @@ public:
       if (!s.empty()) out << " extern=\"" << s << "\"";
       out << ">";
       ostr->precision(angular);
-      double m = R2G*(obs->value());
+      double m = GNU_gama::RAD_TO_GON*(obs->value());
       *ostr << " <obs>" << m << "</obs>";
       m += v(i)/10000;
       if (m < 0) m += 400;
@@ -355,7 +356,7 @@ void LocalNetworkXML::write(std::ostream& out) const
         out << "   epoch=\""<< netinfo->epoch() << "\"\n";
 
       if (netinfo->has_latitude())
-        out << "   latitude=\"" << netinfo->latitude()/M_PI*200 << "\"\n";
+        out << "   latitude=\"" << netinfo->latitude()/GNU_gama::PI*200 << "\"\n";
 
       if (netinfo->has_ellipsoid())
         out << "   ellipsoid=\"" << netinfo->ellipsoid() << "\"\n";
@@ -804,7 +805,7 @@ void  LocalNetworkXML::orientation_shifts(std::ostream& out,
         StandPoint* k = netinfo->unknown_standpoint(i);
         ind[++dim] =  k->index_orientation();
 
-        double z = y_sign*( k->orientation() )*R2G;
+        double z = y_sign*( k->orientation() )*GNU_gama::RAD_TO_GON;
         if (z <  0 ) z += 400;
         if (z > 400) z -= 400;
         out.setf(ios_base::fixed, ios_base::floatfield);

@@ -25,6 +25,7 @@
 
 #include "check_xyz.h"
 #include <gnu_gama/xml/localnetwork_adjustment_results.h>
+#include <Math/Business/radian.h>
 
 using GNU_gama::local::LocalNetwork;
 using GNU_gama::LocalNetworkAdjustmentResults;
@@ -173,15 +174,15 @@ int main(int argc, char* argv[])
             double dy = F.y() - T.y();
             double D  = std::sqrt(dx*dx + dy*dy);
 
-            double p = obs->value()*R2G + r(i+1)/10000;
+            double p = obs->value()*GNU_gama::RAD_TO_GON + r(i+1)/10000;
             while (p >= 400) p -= 400;
             while (p  <  0 ) p += 400;
             double q = A.adj;
             while (q >= 400) q -= 400;
             while (q  <  0 ) q += 400;
 
-            dfobs = D*std::sin((p-q)*G2R);
-            dfstd = D*std::sin((lnet->stdev_obs(i+1) - A.stdev)*CC2R);
+            dfobs = D*std::sin((p-q)*GNU_gama::GON_TO_RAD);
+            dfstd = D*std::sin((lnet->stdev_obs(i+1) - A.stdev)*GNU_gama::CC_TO_RAD);
          }
         else
           {

@@ -19,49 +19,26 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef GNU_gama_gnu_gama_radian_h_gnugamaradian_h
-#define GNU_gama_gnu_gama_radian_h_gnugamaradian_h
-
+#pragma once
 
 namespace GNU_gama {
 
-#ifndef M_PI
-#define M_PI          3.14159265358979323846264338328
-#endif
+inline constexpr double PI = 3.141592653589793238462643383279502884197169399375105820;
 
-#ifndef RAD_TO_GON
-#define RAD_TO_GON    200.0/M_PI
-#endif
+inline constexpr double RAD_TO_GON = 200.0/PI;
 
-#ifndef GON_TO_RAD
-#define GON_TO_RAD    M_PI/200.0
-#endif
+inline constexpr double GON_TO_RAD = PI/200.0;
 
-#ifndef RAD_TO_CC
-#define RAD_TO_CC     200.0e4/M_PI
-#endif
+inline constexpr double RAD_TO_CC = 200.0e4/PI;
 
-#ifndef CC_TO_RAD
-#define CC_TO_RAD     M_PI/200.0e4
-#endif
+inline constexpr double CC_TO_RAD = PI/200.0e4;
 
-#ifndef RAD_TO_DEG
-#define RAD_TO_DEG    180.0/M_PI
-#endif
+inline constexpr double RAD_TO_DEG = 180.0/PI;
 
-#ifndef DEG_TO_RAD
-#define DEG_TO_RAD    M_PI/180.0
-#endif
+inline constexpr double DEG_TO_RAD = PI/180.0;
 
-#ifndef RAD_TO_SS
-#define RAD_TO_SS     648000.0/M_PI
-#endif
+inline constexpr double RAD_TO_SS = 648000.0/PI;
 
-#ifndef SS_TO_RAD
-#define SS_TO_RAD     M_PI/648000.0
-#endif
+inline constexpr double SS_TO_RAD = PI/648000.0;
 
-}
-
-
-#endif
+} // namespace GNU_gama

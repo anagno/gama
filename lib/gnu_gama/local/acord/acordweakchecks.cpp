@@ -147,10 +147,10 @@ AcordWeakChecks::check_traverse_endpoint(Acord2::Point pt)
                 {
                   double calc_dir = bearing(PD[obs->from()], pt.coords);
                   double calc_dist = distance(PD[obs->from()], pt.coords);
-                  while (calc_dir > 2 * M_PI)
-                    calc_dir -= 2 * M_PI;
+                  while (calc_dir > 2 * GNU_gama::PI)
+                    calc_dir -= 2 * GNU_gama::PI;
                   while (calc_dir < 0)
-                    calc_dir += 2 * M_PI;
+                    calc_dir += 2 * GNU_gama::PI;
                   if (std::abs(std::sin(std::abs(calc_dir - dir.first-
 					  sp->orientation()))*calc_dist) <
                       AC.median_max_norm_)
@@ -233,10 +233,10 @@ bool AcordWeakChecks::check_point(Acord2::Point pt)
                 {
                   double calc_dir = bearing(PD[obs->from()], pt.coords);
                   double calc_dist = distance(PD[obs->from()], pt.coords);
-                  while (calc_dir > 2 * M_PI)
-                    calc_dir -= 2 * M_PI;
+                  while (calc_dir > 2 * GNU_gama::PI)
+                    calc_dir -= 2 * GNU_gama::PI;
                   while (calc_dir < 0)
-                    calc_dir += 2 * M_PI;
+                    calc_dir += 2 * GNU_gama::PI;
                   double diff = std::abs(std::sin(std::abs(calc_dir - dir.first -
                                          sp->orientation()))*calc_dist);
                   if (diff > maxdiff) maxdiff = diff;
@@ -284,10 +284,10 @@ bool AcordWeakChecks::check_point(Acord2::Point pt)
                 {
                   double calc_dir = bearing(pt.coords, PD[obs->from()]);
                   double calc_dist = distance(pt.coords, PD[obs->from()]);
-                  while (calc_dir > 2 * M_PI)
-                    calc_dir -= 2 * M_PI;
+                  while (calc_dir > 2 * GNU_gama::PI)
+                    calc_dir -= 2 * GNU_gama::PI;
                   while (calc_dir < 0)
-                    calc_dir += 2 * M_PI;
+                    calc_dir += 2 * GNU_gama::PI;
                   double diff = std::abs(std::sin(std::abs(calc_dir - dir.first -
                                          sp->orientation()))*calc_dist);
                   if (diff > maxdiff) maxdiff = diff;

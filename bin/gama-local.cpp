@@ -18,6 +18,8 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+#include <Math/Business/radian.h>
+
 #ifdef   GNU_GAMA_LOCAL_SQLITE_READER
 #include <gnu_gama/local/sqlitereader.h>
 #endif
@@ -397,7 +399,7 @@ int main(int argc, char **argv)
             latitude = atof(argv_latitude);
           }
 
-        IS->set_latitude(latitude * M_PI/200);
+        IS->set_latitude(latitude * GNU_gama::PI/200);
       }
 
 

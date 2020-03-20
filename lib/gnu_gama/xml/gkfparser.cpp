@@ -25,6 +25,8 @@
 #include <cmath>
 #include <utility>
 
+#include <Math/Business/radian.h>
+
 #include <gnu_gama/xml/gkfparser.h>
 #include <Xml/Service/encoding.h>
 #include <gnu_gama/local/observation.h>
@@ -537,7 +539,7 @@ namespace GNU_gama { namespace local {
                   return error(T_GKF_undefined_value_of_attribute
                                + jmeno + " = " + hodnota);
               }
-            lnet.set_latitude(dm * M_PI / 200);
+            lnet.set_latitude(dm * GNU_gama::PI / 200);
           }
         else if (jmeno == "ellipsoid")
           {
@@ -830,7 +832,7 @@ namespace GNU_gama { namespace local {
             standpoint = new StandPoint(&OD);
             OD.clusters.push_back( standpoint );
           }
-        Angle* d = new Angle(ss, sl, sp, dm*G2R);
+        Angle* d = new Angle(ss, sl, sp, dm*GNU_gama::GON_TO_RAD);
         d->set_extern(ex);
         d->set_from_dh(df);
         d->set_to_dh(dt);
@@ -958,7 +960,7 @@ namespace GNU_gama { namespace local {
             standpoint = new StandPoint(&OD);
             OD.clusters.push_back( standpoint );
           }
-        Z_Angle* d = new Z_Angle(ss, sc, dm*G2R);
+        Z_Angle* d = new Z_Angle(ss, sc, dm*GNU_gama::GON_TO_RAD);
         d->set_extern(ex);
         d->set_from_dh(df);
         d->set_to_dh(dt);
@@ -1104,7 +1106,7 @@ namespace GNU_gama { namespace local {
 
     try
       {
-        Direction* d = new Direction(standpoint_id, sc, dm*G2R);
+        Direction* d = new Direction(standpoint_id, sc, dm*GNU_gama::GON_TO_RAD);
         d->set_extern(ex);
         d->set_from_dh(df);
         d->set_to_dh(dt);
@@ -1167,7 +1169,7 @@ namespace GNU_gama { namespace local {
 
     try
       {
-        Azimuth* d = new Azimuth(ss, sc, dm*G2R);
+        Azimuth* d = new Azimuth(ss, sc, dm*GNU_gama::GON_TO_RAD);
         d->set_extern(ex);
         d->set_from_dh(df);
         d->set_to_dh(dt);

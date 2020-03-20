@@ -22,7 +22,6 @@
 #define gama_local_Bod_Mer_MatVec_H
 
 #include <Math/Service/inderr.h>
-#include <gnu_gama/local/float.h>
 #include <Math/Service/svd.h>
 #include <Math/Service/covmat.h>
 

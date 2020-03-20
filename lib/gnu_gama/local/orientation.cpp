@@ -121,11 +121,11 @@ void Orientation::orientation(ObservationList::const_iterator& mer,
               }
               double sn = direction->value();
               double df = zn - sn;
-              // if (df < 0) df += 2*M_PI;  ......  gnu_gama/local-1.1.13
-              while (df > M_PI)
-                df -= 2*M_PI;
-              while (df < -M_PI)
-                df += 2*M_PI;
+              // if (df < 0) df += 2*GNU_gama::PI;  ......  gnu_gama/local-1.1.13
+              while (df > GNU_gama::PI)
+                df -= 2*GNU_gama::PI;
+              while (df < -GNU_gama::PI)
+                df += 2*GNU_gama::PI;
               sz.push_back(df);
             }
         }
@@ -141,7 +141,7 @@ void Orientation::orientation(ObservationList::const_iterator& mer,
       std::sort(sz.begin(), sz.end());
       double l1a = sz[(n-1)/2];
       double l1b = sz[n/2];
-      if (std::abs(l1b - l1a) > M_PI/2 && n < 3)
+      if (std::abs(l1b - l1a) > GNU_gama::PI/2 && n < 3)
         l1 = l1a;
       else
         l1 = (sz[n/2] + sz[(n-1)/2]) / 2;
@@ -149,7 +149,7 @@ void Orientation::orientation(ObservationList::const_iterator& mer,
       for (decltype(n) i=0; i<n; i++)
         d += std::abs(sz[i] - l1);
       d /= n;
-      if (l1 < 0) l1 += 2*M_PI;
+      if (l1 < 0) l1 += 2*GNU_gama::PI;
     }
 
   z = l1;

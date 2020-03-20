@@ -129,7 +129,7 @@ void ErrorEllipses(GNU_gama::local::LocalNetwork* IS, OutStream& out)
                IS->std_error_ellipse(point_id, a, b, alfa);
                // if (y_sign == -1)
                //   {
-               //     // 1.7.10 alfa = 2*M_PI - alfa;
+               //     // 1.7.10 alfa = 2*GNU_gama::PI - alfa;
                //   }
                out.width(7);
                if (a < 1000)
@@ -145,7 +145,7 @@ void ErrorEllipses(GNU_gama::local::LocalNetwork* IS, OutStream& out)
                out << b << ' ';
                out.width(7);
                out.setf(ios_base::fixed, ios_base::floatfield);
-               double ea = alfa*R2G;
+               double ea = alfa*GNU_gama::RAD_TO_GON;
                if (IS->degrees()) ea *= 360.0/400;
                out << ea << ' ';
 

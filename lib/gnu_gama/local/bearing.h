@@ -22,7 +22,6 @@
 #define gama_local_Bod_Mer_BMFCE_H
 
 #include <cmath>
-#include <gnu_gama/local/float.h>
 #include <gnu_gama/local/gamadata.h>
 
 namespace GNU_gama { namespace local {

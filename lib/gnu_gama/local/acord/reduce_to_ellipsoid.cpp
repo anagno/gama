@@ -184,13 +184,13 @@ bool ReduceToEllipsoid::reduce_direction_to_ellipsoid(Direction* obs)
             else
                 if ( (p3id == from) && (p2id == to) )
                 {
-                    zenithSum += (M_PI - o->value());
+                    zenithSum += (GNU_gama::PI - o->value());
                     ++zenithNum;
                 }
         }
     }
 
-    double zenith23 = (zenithNum ? (zenithSum / zenithNum) : M_PI/2 );
+    double zenith23 = (zenithNum ? (zenithSum / zenithNum) : GNU_gama::PI/2 );
 
     double correction = -EF.central_angle12(p2)/tan(zenith23)*sin(bearing23 - bearing21);
 

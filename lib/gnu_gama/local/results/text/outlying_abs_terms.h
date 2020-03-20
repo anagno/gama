@@ -79,7 +79,7 @@ public:
         out << T_GaMa_direction;
         out.precision(angularPrecision);
         out.width(width);
-        double m = R2G*(obs->value());
+        double m = GNU_gama::RAD_TO_GON*(obs->value());
         if (IS->gons())
             out << m << " ";
         else
@@ -94,7 +94,7 @@ public:
         out << T_GaMa_angle;
         out.precision(angularPrecision);
         out.width(width);
-        double m = R2G*(obs->value());
+        double m = GNU_gama::RAD_TO_GON*(obs->value());
         if (IS->gons())
             out << m << " ";
         else
@@ -124,7 +124,7 @@ public:
         out << T_GaMa_z_angle;
         out.precision(angularPrecision);
         out.width(width);
-        double m = R2G*(obs->value());
+        double m = GNU_gama::RAD_TO_GON*(obs->value());
         if (IS->gons())
             out << m << " ";
         else
@@ -190,7 +190,7 @@ public:
         out << T_GaMa_azimuth;
         out.precision(angularPrecision);
         out.width(width);
-        double m = R2G*(obs->value());
+        double m = GNU_gama::RAD_TO_GON*(obs->value());
         if (IS->gons())
             out << m << " ";
         else

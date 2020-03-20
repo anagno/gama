@@ -25,6 +25,7 @@
 
 #include <gnu_gama/local/html.h>
 #include <Math/Business/statan.h>
+#include <Math/Business/radian.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/writevisitor.h>
 #include <gnu_gama/local/language.h>
@@ -302,7 +303,7 @@ private:
 
   void angular()
   {
-    double val = R2G*obs->value();
+    double val = GNU_gama::RAD_TO_GON*obs->value();
     double adj = val + lnet->residuals()(index)/10000;
     if (adj < 0) adj += 400;
     if (adj >= 400) adj -= 400;
@@ -1234,7 +1235,7 @@ void GamaLocalHTML::htmlUnknowns()
             {
               const PointID cb = lnet->unknown_pointid(i);
               StandPoint* k = lnet->unknown_standpoint(i);
-              double z = y_sign*( k->orientation() )*R2G;
+              double z = y_sign*( k->orientation() )*GNU_gama::RAD_TO_GON;
               if (z <  0 ) z += 400;
               if (z > 400) z -= 400;
 
@@ -1421,7 +1422,7 @@ void GamaLocalHTML::htmlUnknowns()
                 lnet->std_error_ellipse(point_id, a, b, alfa);
                 out << tdRight(a, (a<1000 ? 'F' : 'E'), 1, Nell, Nell);
                 out << tdRight(b, (b<1000 ? 'F' : 'E'), 1, Nell, Nell);
-                double ea = alfa*R2G;
+                double ea = alfa*GNU_gama::GON_TO_RAD;
                 if (lnet->degrees()) ea *= 360.0/400;
                 out << tdRight(ea, (ea<1000 ? 'F' : 'E'), 1, Nell, Nell);
 

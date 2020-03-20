@@ -24,7 +24,7 @@
 #include <sstream>
 #include <iomanip>
 #include <cctype>
-#include <cmath>
+#include <Math/Business/radian.h>
 
 using namespace std;
 
@@ -122,8 +122,8 @@ double dms2rad(double dms)
     double d = int(dms);  dms -= d;  dms *= 100;
     double m = int(dms);  dms -= m;  dms *= 100;
 
-    double r = sgn*(d/180.0 + m/10800.0 + dms/648000.0) * M_PI;
-    double z = 2*M_PI;
+    double r = sgn*(d/180.0 + m/10800.0 + dms/648000.0) * GNU_gama::PI;
+    double z = 2*GNU_gama::PI;
     while (r >= z) r -= z;
     while (r <  0) r += z;
 
@@ -132,7 +132,7 @@ double dms2rad(double dms)
 
 double rad2dms(double rad)
 {
-    rad *= 180/M_PI;
+    rad *= 180/GNU_gama::PI;
     while (rad >= 360) rad -= 360;
     while (rad <   0 ) rad += 360;
 

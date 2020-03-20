@@ -26,6 +26,7 @@
 #include <gnu_gama/local/gamadata.h>
 #include <gnu_gama/version.h>
 #include <Math/Business/statan.h>
+#include <Math/Business/radian.h>
 #include <gnu_gama/size_to.h>
 #include <iostream>
 
@@ -102,14 +103,14 @@ public:
     }
     void visit(Direction* obs)
     {
-      double m = obs->value()*R2G;
+      double m = obs->value()*GNU_gama::RAD_TO_GON;
       double r = residuals(index)/10000;
 
       ostr << "'direction', '" << obs->from() << "', '" << obs->to() << "', NULL, " << m << ", " << m+r;
     }
     void visit(Angle* obs)
     {
-        double m = obs->value()*R2G;
+        double m = obs->value()*GNU_gama::RAD_TO_GON;
         double r = residuals(index)/10000;
 
         ostr << "'angle', '" << obs->from() << "', '" << obs->bs() << "', '"
@@ -131,7 +132,7 @@ public:
     }
     void visit(Z_Angle* obs)
     {
-      double m = obs->value()*R2G;
+      double m = obs->value()*GNU_gama::RAD_TO_GON;
       double r = residuals(index)/10000;
 
       ostr << "'zenith-angle', '" << obs->from() << "', '" << obs->to() << "', NULL, " << m << ", " << m+r;
@@ -180,7 +181,7 @@ public:
     }
     void visit(Azimuth* obs)
     {
-      double m = obs->value()*R2G;
+      double m = obs->value()*GNU_gama::RAD_TO_GON;
       double r = residuals(index)/10000;
 
       ostr << "'azimuth', '" << obs->from() << "', '" << obs->to() << "', NULL, " << m << ", " << m+r;
@@ -898,7 +899,7 @@ void LocalNetwork2sql::write(std::ostream& ostr, std::string conf)
             if (netinfo->unknown_type(i) != 'R') continue;
 
             StandPoint* k = netinfo->unknown_standpoint(i);
-            double z = y_sign*( k->orientation() )*R2G;
+            double z = y_sign*( k->orientation() )*GNU_gama::RAD_TO_GON;
             double c = y_sign*x(i)/10000;
 
             ostr << "insert into gnu_gama_local_adj_orientation_shifts "

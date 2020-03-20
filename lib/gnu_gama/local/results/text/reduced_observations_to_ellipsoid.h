@@ -73,7 +73,7 @@ void ReducedObservationsToEllipsoidText(GNU_gama::local::LocalNetwork* IS,
 
 	   double orig_value = ci->second;
            double value      = o->value();
-	   double diff       = R2G*(value - orig_value);
+	   double diff       = GNU_gama::RAD_TO_GON*(value - orig_value);
 
 	   int oz = 0;
 	   int dz = 0;
@@ -193,14 +193,14 @@ void ReducedObservationsToEllipsoidText(GNU_gama::local::LocalNetwork* IS,
               out.precision(6);
               out.width(maxval_obs);
               if (IS->gons())
-                  out << R2G*orig_value << " ";
+                  out << GNU_gama::RAD_TO_GON*orig_value << " ";
               else
-                  out << GNU_gama::gon2deg(R2G*orig_value, 0, 2) << " ";
+                  out << GNU_gama::gon2deg(GNU_gama::RAD_TO_GON*orig_value, 0, 2) << " ";
               out.width(maxval_obs);
               if (IS->gons())
-                  out << R2G*pm->value();
+                  out << GNU_gama::RAD_TO_GON*pm->value();
               else
-                  out << GNU_gama::gon2deg(R2G*pm->value(), 0, 2);
+                  out << GNU_gama::gon2deg(GNU_gama::RAD_TO_GON*pm->value(), 0, 2);
               out << " ";
           }
           else if (// Direction* d =
@@ -210,14 +210,14 @@ void ReducedObservationsToEllipsoidText(GNU_gama::local::LocalNetwork* IS,
               out.precision(6);
               out.width(maxval_obs);
               if (IS->gons())
-                  out << R2G*orig_value << " ";
+                  out << GNU_gama::RAD_TO_GON*orig_value << " ";
               else
-                  out << GNU_gama::gon2deg(R2G*orig_value, 0, 2) << " ";
+                  out << GNU_gama::gon2deg(GNU_gama::RAD_TO_GON*orig_value, 0, 2) << " ";
               out.width(maxval_obs);
               if (IS->gons())
-                  out << R2G*pm->value();
+                  out << GNU_gama::RAD_TO_GON*pm->value();
               else
-                  out << GNU_gama::gon2deg(R2G*pm->value(), 0, 2);
+                  out << GNU_gama::gon2deg(GNU_gama::RAD_TO_GON*pm->value(), 0, 2);
               out << " ";
           }
        }   // ***************************************************
@@ -225,10 +225,10 @@ void ReducedObservationsToEllipsoidText(GNU_gama::local::LocalNetwork* IS,
        out.precision(4);
        out.width(maxval_dh);
        if (IS->gons())
-           out << R2G*(orig_value - pm->value())*10000;
+           out << GNU_gama::RAD_TO_GON*(orig_value - pm->value())*10000;
        else
-           out << R2G*0.9*(orig_value - pm->value())*3600;
-           //out << GNU_gama::gon2deg(R2G*(orig_value - pm->value()), 0, 2);
+           out << GNU_gama::RAD_TO_GON*0.9*(orig_value - pm->value())*3600;
+           //out << GNU_gama::gon2deg(GNU_gama::RAD_TO_DEG*(orig_value - pm->value()), 0, 2);
        out << "\n";
        out.flush();
 
