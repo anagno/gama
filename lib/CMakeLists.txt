@@ -182,7 +182,7 @@ add_custom_command(OUTPUT gnu_gama/ellipsoids.cpp
                           gnu_gama/ellipsoids.texi
                    DEPENDS BuildTools
                    COMMAND ${BuildTools_ellipsoids_xml}
-                           ${Xml_SOURCE_DIR}/Schemas/ellipsoids.xml
+                           ${Parsing_SOURCE_DIR}/Schemas/ellipsoids.xml
                            ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama)
 
 # file(GLOB_RECURSE) commands is being misused here
@@ -190,7 +190,7 @@ add_custom_command(OUTPUT gnu_gama/ellipsoids.cpp
 # CMake is not automatically re-run, so the build is unaware of the change.
 # https://cmake.org/cmake/help/v3.10/command/file.html
 file(GLOB_RECURSE language_files
-  ${Xml_SOURCE_DIR}/Schemas/lang/*/*.lang
+  ${Parsing_SOURCE_DIR}/Schemas/lang/*/*.lang
 )
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
