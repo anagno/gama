@@ -22,7 +22,7 @@
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/cluster.h>
 #include <gnu_gama/local/network.h>
-#include <gnu_gama/gon2deg.h>
+#include <Math/Business/gon2deg.h>
 
 #include <Math/Business/radian.h>
 

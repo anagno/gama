@@ -20,7 +20,6 @@
 */
 
 #include <gnu_gama/xml/dataparser.h>
-#include <gnu_gama/gon2deg.h>
 #include <Math/Business/radian.h>
 #include <cstring>
 

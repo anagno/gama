@@ -31,7 +31,7 @@
 
 #include <gnu_gama/local/results/text/underline.h>
 #include <gnu_gama/local/network.h>
-#include <gnu_gama/gon2deg.h>
+#include <Math/Business/gon2deg.h>
 #include <Parsing/Business/utf8.h>
 #include <cctype>
 #include <iomanip>

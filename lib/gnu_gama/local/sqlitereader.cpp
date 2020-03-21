@@ -27,7 +27,7 @@
 #include <gnu_gama/local/sqlitereader.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/xml/dataobject.h>
-#include <gnu_gama/intfloat.h>
+#include <Math/Business/intfloat.h>
 
 #include <string>
 #include <sstream>

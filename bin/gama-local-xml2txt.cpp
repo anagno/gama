@@ -29,7 +29,7 @@
 #include <gnu_gama/local/results/text/underline.h>
 #include <Math/Business/statan.h>
 #include <Math/Business/radian.h>
-#include <gnu_gama/gon2deg.h>
+#include <Math/Business/gon2deg.h>
 #include <gnu_gama/outstream.h>
 
 

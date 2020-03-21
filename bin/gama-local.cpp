@@ -28,7 +28,7 @@
 
 #include <cstring>
 #include <gnu_gama/version.h>
-#include <gnu_gama/intfloat.h>
+#include <Math/Business/intfloat.h>
 #include <gnu_gama/xml/localnetworkoctave.h>
 #include <gnu_gama/xml/localnetworkxml.h>
 #include <gnu_gama/xml/gkfparser.h>

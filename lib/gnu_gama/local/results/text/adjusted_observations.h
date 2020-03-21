@@ -31,7 +31,7 @@
 #define GaMa_GaMaProg_Vyrovnana_Pozorovani_h_
 
 #include <gnu_gama/local/network.h>
-#include <gnu_gama/gon2deg.h>
+#include <Math/Business/gon2deg.h>
 #include <gnu_gama/local/results/text/underline.h>
 #include <Parsing/Business/utf8.h>
 

@@ -32,8 +32,8 @@
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/cluster.h>
 #include <gnu_gama/local/language.h>
-#include <gnu_gama/intfloat.h>
-#include <gnu_gama/gon2deg.h>
+#include <Math/Business/intfloat.h>
+#include <Math/Business/gon2deg.h>
 #include <gnu_gama/xsd.h>
 #include <gnu_gama/size_to.h>
 

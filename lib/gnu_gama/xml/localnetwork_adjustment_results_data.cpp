@@ -29,7 +29,7 @@
 #include <stack>
 #include <sstream>
 #include <gnu_gama/xml/localnetwork_adjustment_results_data.h>
-#include <gnu_gama/intfloat.h>
+#include <Math/Business/intfloat.h>
 #include <gnu_gama/xml/htmlparser.h>
 
 using namespace std;

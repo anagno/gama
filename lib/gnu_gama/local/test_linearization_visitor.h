@@ -29,7 +29,7 @@
 #ifndef GaMa_GaMaProg_Prehled_Test_Chyby_z_Linearizace_h_
 #define GaMa_GaMaProg_Prehled_Test_Chyby_z_Linearizace_h_
 
-#include <gnu_gama/gon2deg.h>
+#include <Math/Business/gon2deg.h>
 #include <gnu_gama/local/gamadata.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/bearing.h>

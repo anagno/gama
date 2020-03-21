@@ -22,7 +22,7 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <gnu_gama/intfloat.h>
+#include <Math/Business/intfloat.h>
 #include <gnu_gama/local/pointid.h>
 #include <Parsing/Business/utf8.h>
 #include <cstdlib>

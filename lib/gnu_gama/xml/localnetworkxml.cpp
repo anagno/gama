@@ -35,7 +35,6 @@
 #include <gnu_gama/xml/localnetworkxml.h>
 #include <Math/Business/statan.h>
 #include <Math/Business/radian.h>
-#include <gnu_gama/gon2deg.h>
 #include <gnu_gama/version.h>
 #include <gnu_gama/xsd.h>
 

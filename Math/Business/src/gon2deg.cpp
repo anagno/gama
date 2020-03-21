@@ -19,8 +19,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <gnu_gama/gon2deg.h>
-#include <gnu_gama/intfloat.h>
+#include <Math/Business/gon2deg.h>
+#include <Math/Business/intfloat.h>
 #include <sstream>
 #include <iomanip>
 #include <cctype>
