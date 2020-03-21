@@ -23,18 +23,20 @@
 #ifndef GNU_gama_gons_to_degrees_h_GNU_Gama_gon2deg_gon2deg
 #define GNU_gama_gons_to_degrees_h_GNU_Gama_gon2deg_gon2deg
 
+#include "MathDLL.h"
+
 namespace GNU_gama {
 
   // sign 0  conversion without sign
   //      1  sign left-padded
   //      2  sign right-padded
   //      3  signed with leading spaces trimmed
-  std::string gon2deg(double gon,  int sign, int prec);
+  MathAPI std::string gon2deg(double gon,  int sign, int prec);
 
-  bool        deg2gon(std::string, double &);
+  MathAPI bool        deg2gon(std::string, double &);
 
-  double dms2rad(double);
-  double rad2dms(double);
+  MathAPI double dms2rad(double);
+  MathAPI double rad2dms(double);
 }
 
 #endif

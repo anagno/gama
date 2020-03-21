@@ -4,8 +4,6 @@
 set(SRC_GAMA
    gnu_gama/e3.cpp
    gnu_gama/e3.h
-   gnu_gama/ellipsoid.cpp
-   gnu_gama/ellipsoid.h
    gnu_gama/exception.h
    gnu_gama/model.h
    gnu_gama/movetofront.h

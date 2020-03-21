@@ -20,7 +20,7 @@
 */
 
 #include <cmath>
-#include <gnu_gama/ellipsoid.h>
+#include <Math/Business/ellipsoid.h>
 #include <Math/Business/radian.h>
 
 

@@ -22,9 +22,11 @@
 #ifndef GNU_gama_gnu_gama_local_ellipsoid_H_ELLIPSOID_H_
 #define GNU_gama_gnu_gama_local_ellipsoid_H_ELLIPSOID_H_
 
+#include "MathDLL.h"
+
 namespace GNU_gama {
 
-  class Ellipsoid {
+  class MathAPI Ellipsoid {
   public:
 
     double a() const { return A;  }
