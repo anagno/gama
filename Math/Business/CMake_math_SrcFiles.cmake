@@ -2,6 +2,7 @@
 set(header_files
     "include/Math/Business/gon2deg.h"
     "include/Math/Business/intfloat.h"
+    "include/Math/Business/latlong.h"
     "include/Math/Business/radian.h"
     "include/Math/Business/statan.h"
    )
@@ -9,4 +10,5 @@ set(header_files
 # Source Files files
 set(source_files
     "src/gon2deg.cpp"
+    "src/latlong.cpp"
     "src/statan.cpp")

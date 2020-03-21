@@ -21,7 +21,7 @@
 #include <gnu_gama/g3/g3_point.h>
 #include <gnu_gama/g3/g3_observation.h>
 #include <gnu_gama/g3/g3_model.h>
-#include <gnu_gama/latlong.h>
+#include <Math/Business/latlong.h>
 #include <Math/Business/radian.h>
 #include <cmath>
 #include <iomanip>
