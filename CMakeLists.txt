@@ -89,6 +89,7 @@ if(SQLITE3_FOUND)
 endif()
 
 add_subdirectory(Math)
+add_subdirectory(Utilities)
 add_subdirectory(Parsing)
 
 # The programs located under Parsing/Application are only needed during the build 

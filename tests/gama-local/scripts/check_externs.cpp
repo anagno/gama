@@ -5,7 +5,7 @@
 #include <utility>
 #include <unordered_set>
 
-#include <gnu_gama/simplified.h>
+#include <Utilities/Service/simplified.h>
 #include <Parsing/Service/xml_expat.h>
 
 using std::cout;

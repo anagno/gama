@@ -13,8 +13,6 @@ set(SRC_GAMA
    gnu_gama/pointbase.h
    gnu_gama/size_to.h
    gnu_gama/size_to.cpp
-   gnu_gama/simplified.h
-   gnu_gama/simplified.cpp
    gnu_gama/version.h
    gnu_gama/visitor.h
    gnu_gama/xsd.h
@@ -216,7 +214,7 @@ target_include_directories(libgama
                                   ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(libgama 
-  PUBLIC GaMa::Service_Parsing GaMa::Business_Parsing GaMa::Service_Math GaMa::Business_Math)
+  PUBLIC GaMa::Service_Parsing GaMa::Business_Parsing GaMa::Service_Math GaMa::Business_Math GaMa::Service_Utilities)
 
 include(GenerateExportHeader)
 generate_export_header(libgama

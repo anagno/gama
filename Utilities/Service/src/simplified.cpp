@@ -18,7 +18,7 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <gnu_gama/simplified.h>
+#include <Utilities/Service/simplified.h>
 #include <cctype>
 
 // Returns a string that has whitespace removed from the start and the

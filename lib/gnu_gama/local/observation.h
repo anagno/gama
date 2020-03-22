@@ -36,7 +36,7 @@
 #include <gnu_gama/local/exception.h>
 #include <gnu_gama/local/language.h>
 #include <gnu_gama/visitor.h>
-#include <gnu_gama/simplified.h>
+#include <Utilities/Service/simplified.h>
 
 #include <iostream>
 #include <vector>

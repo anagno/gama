@@ -26,7 +26,7 @@
 #include <sstream>
 #include <vector>
 #include <iomanip>
-#include <gnu_gama/simplified.h>
+#include <Utilities/Service/simplified.h>
 #include <gnu_gama/local/bearing.h>
 #include <gnu_gama/local/acord/acord2.h>
 #include <gnu_gama/local/lcoords.h>
