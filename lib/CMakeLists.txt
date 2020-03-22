@@ -2,8 +2,6 @@
 
 # Library
 set(SRC_GAMA
-   gnu_gama/e3.cpp
-   gnu_gama/e3.h
    gnu_gama/exception.h
    gnu_gama/version.h
    gnu_gama/xsd.h

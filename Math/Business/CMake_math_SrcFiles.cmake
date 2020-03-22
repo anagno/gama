@@ -1,5 +1,6 @@
 # Header files
 set(header_files
+    "include/Math/Business/e3.h"
     "include/Math/Business/ellipsoid.h"
     "include/Math/Business/gon2deg.h"
     "include/Math/Business/intfloat.h"
@@ -13,6 +14,7 @@ set(header_files
 
 # Source Files files
 set(source_files
+    "src/e3.cpp"
     "src/ellipsoid.cpp"
     "src/gon2deg.cpp"
     "src/latlong.cpp"

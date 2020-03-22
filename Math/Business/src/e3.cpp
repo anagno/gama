@@ -19,7 +19,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <gnu_gama/e3.h>
+#include <Math/Business/e3.h>
 #include <cmath>
 
 using namespace GNU_gama;

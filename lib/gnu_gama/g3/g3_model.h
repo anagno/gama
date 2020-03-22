@@ -30,7 +30,7 @@
 #include <Math/Service/smatrix.h>
 #include <Math/Service/sbdiagonal.h>
 #include <gnu_gama/adj/adj.h>
-#include <gnu_gama/e3.h>
+#include <Math/Business/e3.h>
 #include <list>
 
 namespace GNU_gama {
