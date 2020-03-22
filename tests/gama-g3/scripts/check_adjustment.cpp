@@ -6,7 +6,7 @@
 #include <list>
 #include <map>
 #include <gnu_gama/xml/dataparser.h>
-#include <gnu_gama/size_to.h>
+#include <Utilities/Service/size_to.h>
 
 using std::cerr;
 using std::cout;

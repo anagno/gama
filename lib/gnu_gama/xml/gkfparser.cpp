@@ -35,7 +35,7 @@
 #include <Math/Business/intfloat.h>
 #include <Math/Business/gon2deg.h>
 #include <gnu_gama/xsd.h>
-#include <gnu_gama/size_to.h>
+#include <Utilities/Service/size_to.h>
 
 namespace {
   typedef std::pair<double, bool> DB_pair;

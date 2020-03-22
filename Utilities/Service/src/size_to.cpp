@@ -18,7 +18,7 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <gnu_gama/size_to.h>
+#include <Utilities/Service/size_to.h>
 
 namespace GNU_gama
 {

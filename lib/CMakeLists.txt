@@ -11,8 +11,6 @@ set(SRC_GAMA
    gnu_gama/outstream.cpp
    gnu_gama/outstream.h
    gnu_gama/pointbase.h
-   gnu_gama/size_to.h
-   gnu_gama/size_to.cpp
    gnu_gama/version.h
    gnu_gama/visitor.h
    gnu_gama/xsd.h

@@ -27,7 +27,7 @@
 #include <gnu_gama/version.h>
 #include <Math/Business/statan.h>
 #include <Math/Business/radian.h>
-#include <gnu_gama/size_to.h>
+#include <Utilities/Service/size_to.h>
 #include <iostream>
 
 using namespace GNU_gama::local;

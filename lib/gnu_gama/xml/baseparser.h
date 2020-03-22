@@ -27,7 +27,7 @@
 
 #include <Parsing/Service/xml_expat.h>
 #include <Math/Business/intfloat.h>
-#include <gnu_gama/size_to.h>
+#include <Utilities/Service/size_to.h>
 #include <string>
 #include <list>
 
