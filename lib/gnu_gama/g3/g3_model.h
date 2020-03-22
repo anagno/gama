@@ -24,7 +24,6 @@
 
 #include <gnu_gama/model.h>
 #include <Math/Business/pointbase.h>
-#include <gnu_gama/obsdata.h>
 #include <gnu_gama/ellipsoids.h>
 #include <gnu_gama/g3/g3_point.h>
 #include <gnu_gama/g3/g3_observation.h>

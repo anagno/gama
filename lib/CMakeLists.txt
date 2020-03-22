@@ -7,7 +7,6 @@ set(SRC_GAMA
    gnu_gama/exception.h
    gnu_gama/model.h
    gnu_gama/movetofront.h
-   gnu_gama/obsdata.h
    gnu_gama/version.h
    gnu_gama/xsd.h
 

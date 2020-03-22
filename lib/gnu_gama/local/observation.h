@@ -42,7 +42,7 @@
 #include <vector>
 #include <utility>
 
-#include <gnu_gama/obsdata.h>
+#include <Math/Business/obsdata.h>
 #include <gnu_gama/local/matvec.h>
 
 namespace GNU_gama { namespace local {

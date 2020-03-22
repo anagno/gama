@@ -21,7 +21,7 @@
 #ifndef gama_local_Cluster_of_observations_h
 #define gama_local_Cluster_of_observations_h
 
-#include <gnu_gama/obsdata.h>
+#include <Math/Business/obsdata.h>
 #include <Utilities/Service/simplified.h>
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/matvec.h>
