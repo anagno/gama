@@ -24,7 +24,7 @@
 #include <gnu_gama/local/sqlitereader.h>
 #endif
 
-#include <gnu_gama/outstream.h>
+#include <Parsing/Business/outstream.h>
 
 #include <cstring>
 #include <gnu_gama/version.h>

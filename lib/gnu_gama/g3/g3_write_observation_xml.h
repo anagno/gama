@@ -24,7 +24,6 @@
 
 
 #include <gnu_gama/g3/g3_observation.h>
-#include <gnu_gama/outstream.h>
 #include <iomanip>
 
 

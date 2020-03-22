@@ -30,7 +30,7 @@
 #include <Math/Business/statan.h>
 #include <Math/Business/radian.h>
 #include <Math/Business/gon2deg.h>
-#include <gnu_gama/outstream.h>
+#include <Parsing/Business/outstream.h>
 
 
 using namespace GNU_gama::local;

@@ -21,7 +21,6 @@
 
 #include <gnu_gama/g3/g3_model.h>
 #include <gnu_gama/g3/g3_cluster.h>
-#include <gnu_gama/outstream.h>
 #include <gnu_gama/adj/adj.h>
 #include <Math/Service/smatrix_graph.h>
 #include <iomanip>
