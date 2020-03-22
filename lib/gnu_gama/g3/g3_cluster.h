@@ -24,7 +24,6 @@
 #ifndef GNU_gama_g3_cluster_g3clustergnugamag3cluster_gnu_gama_g3_cluster
 #define GNU_gama_g3_cluster_g3clustergnugamag3cluster_gnu_gama_g3_cluster
 
-#include <gnu_gama/model.h>
 #include <gnu_gama/exception.h>
 #include <gnu_gama/g3/g3_model.h>
 #include <iostream>

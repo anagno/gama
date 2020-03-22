@@ -20,7 +20,6 @@
 */
 
 #include <Math/Service/covmat.h>
-#include <gnu_gama/model.h>
 #include <gnu_gama/g3/g3_point.h>
 
 

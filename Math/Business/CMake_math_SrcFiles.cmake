@@ -4,6 +4,7 @@ set(header_files
     "include/Math/Business/gon2deg.h"
     "include/Math/Business/intfloat.h"
     "include/Math/Business/latlong.h"
+    "include/Math/Business/model.h"
     "include/Math/Business/obsdata.h"
     "include/Math/Business/pointbase.h"
     "include/Math/Business/radian.h"
