@@ -26,7 +26,7 @@
 #include <gnu_gama/adj/envelope.h>
 #include <Math/Service/smatrix_ordering.h>
 #include <gnu_gama/adj/homogenization.h>
-#include <gnu_gama/movetofront.h>
+#include <Utilities/Service/movetofront.h>
 #include <vector>
 
 namespace GNU_gama {
