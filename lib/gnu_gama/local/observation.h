@@ -35,7 +35,7 @@
 #include <gnu_gama/local/pointid.h>
 #include <gnu_gama/local/exception.h>
 #include <gnu_gama/local/language.h>
-#include <gnu_gama/visitor.h>
+#include <Utilities/Service/visitor.h>
 #include <Utilities/Service/simplified.h>
 
 #include <iostream>

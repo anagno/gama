@@ -23,7 +23,7 @@
 #define GNU_gama_mathematical_model_h_gnugamamodel_gnu_gama_gmodel_h
 
 #include <gnu_gama/obsdata.h>
-#include <gnu_gama/visitor.h>
+#include <Utilities/Service/visitor.h>
 
 namespace GNU_gama {
 

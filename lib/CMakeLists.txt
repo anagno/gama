@@ -9,7 +9,6 @@ set(SRC_GAMA
    gnu_gama/movetofront.h
    gnu_gama/obsdata.h
    gnu_gama/version.h
-   gnu_gama/visitor.h
    gnu_gama/xsd.h
 
    gnu_gama/adj/adj_base.h

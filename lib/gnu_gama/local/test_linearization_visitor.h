@@ -37,7 +37,7 @@
 #include <Math/Business/statan.h>
 #include <Math/Business/radian.h>
 #include <Parsing/Business/utf8.h>
-#include <gnu_gama/visitor.h>
+#include <Utilities/Service/visitor.h>
 #include <cmath>
 #include <algorithm>
 
