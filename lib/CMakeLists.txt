@@ -10,7 +10,6 @@ set(SRC_GAMA
    gnu_gama/obsdata.h
    gnu_gama/outstream.cpp
    gnu_gama/outstream.h
-   gnu_gama/pointbase.h
    gnu_gama/version.h
    gnu_gama/visitor.h
    gnu_gama/xsd.h

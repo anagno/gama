@@ -23,7 +23,7 @@
 #define GNU_gama_g3_model_h_gnugamag3modelh_gnu_gama_g3model
 
 #include <gnu_gama/model.h>
-#include <gnu_gama/pointbase.h>
+#include <Math/Business/pointbase.h>
 #include <gnu_gama/obsdata.h>
 #include <gnu_gama/ellipsoids.h>
 #include <gnu_gama/g3/g3_point.h>
