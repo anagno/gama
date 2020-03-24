@@ -24,7 +24,7 @@
  */
 
 #include <gnu_gama/local/gamadata.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 double GNU_gama::local::PointData::xNorthAngle() const
 {

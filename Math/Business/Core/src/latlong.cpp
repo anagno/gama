@@ -20,8 +20,8 @@
 */
 
 #include <sstream>
-#include <Math/Business/latlong.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/latlong.h>
+#include <Math/Business/Core/radian.h>
 
 namespace
 {

@@ -24,8 +24,8 @@
  */
 
 #include <gnu_gama/local/html.h>
-#include <Math/Business/statan.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/statan.h>
+#include <Math/Business/Core/radian.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/writevisitor.h>
 #include <gnu_gama/local/language.h>

@@ -30,11 +30,11 @@
 #include <list>
 #include <gnu_gama/exception.h>
 #include <gnu_gama/local/gamadata.h>
-#include <gnu_gama/adj/adj_basefull.h>
-#include <gnu_gama/adj/adj_basesparse.h>
+#include <Math/Business/Adjustment/adj_basefull.h>
+#include <Math/Business/Adjustment/adj_basesparse.h>
 #include <gnu_gama/local/cluster.h>
 #include <gnu_gama/local/local_revision.h>
-#include <gnu_gama/adj/adj.h>
+#include <Math/Business/Adjustment/adj.h>
 
 namespace GNU_gama { namespace local
 {

@@ -22,7 +22,7 @@
 #ifndef GNU_gama_mathematical_model_h_gnugamamodel_gnu_gama_gmodel_h
 #define GNU_gama_mathematical_model_h_gnugamamodel_gnu_gama_gmodel_h
 
-#include <Math/Business/obsdata.h>
+#include <Math/Business/Core/obsdata.h>
 #include <Utilities/Service/visitor.h>
 
 namespace GNU_gama {

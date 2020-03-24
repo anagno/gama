@@ -19,58 +19,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef GNU_gama_exception_exception_class_hierarchy_exception_h
-#define GNU_gama_exception_exception_class_hierarchy_exception_h
+#pragma once
 
 #include <Math/Service/inderr.h>
 #include <string>
 
 namespace GNU_gama { namespace Exception {
 
-   /** \section GNU gama exceptions
-   *
-   * \a Exception::base and \a Exception::matvec are defined in
-   * <lib/matvec/inderr>
-   *
-   * Classes \a GNU_gama::local::Exception,
-   * GNU_gama::local::ParserException and
-   * GNU_gama::local::MatVecException are only typedefs to \a
-   * Exception::string, \a Exception::parser and
-   * GNU_gama::Exception::matvec respectively.
-   *
-   * Class \a g2d_exc is limited to Median namespace usage.
-  */
-
-  class string : public base {
+  class adjustment : public base {
   public:
 
-    const std::string  str;
+    const std::string str;
 
-    string(const std::string& s) : str(s) {}
-    ~string() noexcept {}
+    adjustment(const std::string& s) : str(s) {}
+    ~adjustment() noexcept {}
 
-    string* clone() const { return new string(*this); }
+    adjustment* clone() const { return new adjustment(*this); }
     void    raise() const { throw *this; }
 
     const char* what() const noexcept { return str.c_str(); }
   };
 
-
-  class parser : public string {
-  public:
-
-    const int line, error_code;
-
-    parser(const std::string& s, int r, int c)
-      : string(s), line(r), error_code(c)
-      {
-      }
-
-    parser* clone() const { return new parser(*this); }
-    void    raise() const { throw *this; }
-  };
-
-
 }}
-
-#endif

@@ -23,8 +23,8 @@
 #define GNU_Gama_Homogenization_gnu_gama_homogenization_homogenization_h
 
 
-#include <gnu_gama/adj/adj.h>
-#include <gnu_gama/adj/envelope.h>
+#include "adj.h"
+#include "envelope.h"
 #include <Math/Service/covmat.h>
 #include <Utilities/Service/size_to.h>
 #include <set>

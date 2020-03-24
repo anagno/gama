@@ -33,8 +33,8 @@
 #include <algorithm>
 #include <sstream>
 #include <gnu_gama/xml/localnetworkxml.h>
-#include <Math/Business/statan.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/statan.h>
+#include <Math/Business/Core/radian.h>
 #include <gnu_gama/version.h>
 #include <gnu_gama/xsd.h>
 

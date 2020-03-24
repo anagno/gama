@@ -24,7 +24,7 @@
 
 #include <string>
 #include <sstream>
-#include <gnu_gama/adj/adj.h>
+#include <Math/Business/Adjustment/adj.h>
 #include <gnu_gama/g3/g3_model.h>
 #include <gnu_gama/g3/g3_adjres.h>
 

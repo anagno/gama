@@ -21,7 +21,7 @@
 
 #include <gnu_gama/g3/g3_adjres.h>
 #include <gnu_gama/xml/dataparser.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 #include <cstring>
 
 using namespace std;

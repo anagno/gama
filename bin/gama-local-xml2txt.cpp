@@ -27,9 +27,9 @@
 #include <gnu_gama/version.h>
 #include <gnu_gama/local/language.h>
 #include <gnu_gama/local/results/text/underline.h>
-#include <Math/Business/statan.h>
-#include <Math/Business/radian.h>
-#include <Math/Business/gon2deg.h>
+#include <Math/Business/Core/statan.h>
+#include <Math/Business/Core/radian.h>
+#include <Math/Business/Core/gon2deg.h>
 #include <Parsing/Business/outstream.h>
 
 

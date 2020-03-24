@@ -22,15 +22,15 @@
 #ifndef GNU_gama_g3_model_h_gnugamag3modelh_gnu_gama_g3model
 #define GNU_gama_g3_model_h_gnugamag3modelh_gnu_gama_g3model
 
-#include <Math/Business/model.h>
-#include <Math/Business/pointbase.h>
+#include <Math/Business/Core/model.h>
+#include <Math/Business/Core/pointbase.h>
 #include <gnu_gama/ellipsoids.h>
 #include <gnu_gama/g3/g3_point.h>
 #include <gnu_gama/g3/g3_observation.h>
 #include <Math/Service/smatrix.h>
 #include <Math/Service/sbdiagonal.h>
-#include <gnu_gama/adj/adj.h>
-#include <Math/Business/e3.h>
+#include <Math/Business/Adjustment/adj.h>
+#include <Math/Business/Core/e3.h>
 #include <list>
 
 namespace GNU_gama {

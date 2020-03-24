@@ -19,7 +19,7 @@
 */
 
 #include <Math/Service/covmat.h>
-#include <gnu_gama/adj/adj_input_data.h>
+#include "adj_input_data.h"
 
 #include <iostream>
 

@@ -25,7 +25,7 @@
 #include <stack>
 #include <sstream>
 #include <gnu_gama/xml/localnetwork_adjustment_results.h>
-#include <Math/Business/intfloat.h>
+#include <Math/Business/Core/intfloat.h>
 #include <gnu_gama/xml/htmlparser.h>
 #include <gnu_gama/xsd.h>
 

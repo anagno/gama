@@ -1,5 +1,5 @@
 #include <gnu_gama/local/test_linearization_visitor.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 void GNU_gama::local::TestLinearizationVisitor::visit(Distance* obs)
 {

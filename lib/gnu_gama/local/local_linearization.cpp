@@ -23,7 +23,7 @@
 #include <gnu_gama/local/local_linearization.h>
 #include <gnu_gama/local/bearing.h>
 
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 using namespace GNU_gama::local;
 using namespace std;

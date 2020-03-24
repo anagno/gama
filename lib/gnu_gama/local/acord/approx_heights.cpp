@@ -21,7 +21,7 @@
 */
 
 #include <gnu_gama/local/acord/approx_heights.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 #include <iostream>
 
 using namespace std;

@@ -23,8 +23,8 @@
 
 #include <algorithm>
 #include <limits>
-#include <gnu_gama/exception.h>
-#include <gnu_gama/adj/adj_basefull.h>
+#include "AdjustmentException.h"
+#include "adj_basefull.h"
 #include <Math/Service/intlist.h>
 #include <Math/Service/inderr.h>
 #include <Math/Service/symmat.h>

@@ -21,7 +21,7 @@
 #ifndef GNU_Gama_gnu_gama_gnu_gama_GaMa_OLS_svd_h
 #define GNU_Gama_gnu_gama_gnu_gama_GaMa_OLS_svd_h
 
-#include <gnu_gama/adj/adj_basefull.h>
+#include "adj_basefull.h"
 #include <Math/Service/svd.h>
 #include <cmath>
 

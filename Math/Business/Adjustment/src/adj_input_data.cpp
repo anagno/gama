@@ -18,7 +18,7 @@
     along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <gnu_gama/adj/adj_input_data.h>
+#include "Math/Business/Adjustment/adj_input_data.h"
 
 using namespace GNU_gama;
 using namespace std;

@@ -20,7 +20,7 @@
 
 #include <gnu_gama/g3/g3_model.h>
 #include <gnu_gama/g3/g3_cluster.h>
-#include <gnu_gama/adj/adj.h>
+#include <Math/Business/Adjustment/adj.h>
 #include <Utilities/Service/visitor.h>
 #include <iomanip>
 #include <algorithm>

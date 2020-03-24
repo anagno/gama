@@ -26,7 +26,7 @@
 #include <iostream>
 #include <unordered_set>
 #include <gnu_gama/xml/htmlparser.h>
-#include <Math/Business/gon2deg.h>
+#include <Math/Business/Core/gon2deg.h>
 
 using namespace GNU_gama;
 

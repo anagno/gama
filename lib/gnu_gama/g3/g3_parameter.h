@@ -25,8 +25,8 @@
 
 #include <cstddef>
 #include <list>
-#include <Math/Business/model.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/model.h>
+#include <Math/Business/Core/radian.h>
 
 
 namespace GNU_gama { namespace g3 {

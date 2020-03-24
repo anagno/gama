@@ -19,7 +19,7 @@
 */
 
 #include <gnu_gama/xml/dataparser.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 #include <cstring>
 
 using namespace std;

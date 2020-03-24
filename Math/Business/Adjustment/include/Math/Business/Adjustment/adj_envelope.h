@@ -22,10 +22,10 @@
 #define GNU_Gama_gnu_gama_adj_envelope_gnugamaadjenvelope_adj_envelope_h
 
 
-#include <gnu_gama/adj/adj_basesparse.h>
-#include <gnu_gama/adj/envelope.h>
+#include "adj_basesparse.h"
+#include "envelope.h"
 #include <Math/Service/smatrix_ordering.h>
-#include <gnu_gama/adj/homogenization.h>
+#include "homogenization.h"
 #include <Utilities/Service/movetofront.h>
 #include <vector>
 

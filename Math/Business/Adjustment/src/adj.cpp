@@ -18,8 +18,8 @@
     along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <gnu_gama/adj/adj.h>
-#include <gnu_gama/adj/adj_input_data.h>
+#include "Math/Business/Adjustment/adj.h"
+#include "Math/Business/Adjustment/adj_input_data.h"
 #include <Utilities/Service/size_to.h>
 #include <vector>
 #include <cstddef>

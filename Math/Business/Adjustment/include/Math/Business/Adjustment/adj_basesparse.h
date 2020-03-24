@@ -22,7 +22,7 @@
 #ifndef GNU_Gama_gnu_gama_gnugama_GaMa_AdjBaseSparse_h
 #define GNU_Gama_gnu_gama_gnugama_GaMa_AdjBaseSparse_h
 
-#include <gnu_gama/adj/adj_base.h>
+#include "adj_base.h"
 
 namespace GNU_gama {
 

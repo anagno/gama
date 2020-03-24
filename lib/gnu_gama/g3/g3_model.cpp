@@ -22,7 +22,7 @@
 #include <gnu_gama/g3/g3_model.h>
 #include <gnu_gama/g3/g3_cluster.h>
 #include <Parsing/Business/outstream.h>
-#include <gnu_gama/adj/adj.h>
+#include <Math/Business/Adjustment/adj.h>
 #include <iomanip>
 
 

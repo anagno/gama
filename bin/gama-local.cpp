@@ -18,7 +18,7 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 #ifdef   GNU_GAMA_LOCAL_SQLITE_READER
 #include <gnu_gama/local/sqlitereader.h>
@@ -28,7 +28,7 @@
 
 #include <cstring>
 #include <gnu_gama/version.h>
-#include <Math/Business/intfloat.h>
+#include <Math/Business/Core/intfloat.h>
 #include <gnu_gama/xml/localnetworkoctave.h>
 #include <gnu_gama/xml/localnetworkxml.h>
 #include <gnu_gama/xml/gkfparser.h>

@@ -22,9 +22,9 @@
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/cluster.h>
 #include <gnu_gama/local/network.h>
-#include <Math/Business/gon2deg.h>
+#include <Math/Business/Core/gon2deg.h>
 
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 
 namespace GNU_gama { namespace local

@@ -20,8 +20,8 @@
 */
 
 #include <cmath>
-#include <Math/Business/ellipsoid.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/ellipsoid.h>
+#include <Math/Business/Core/radian.h>
 
 
 using namespace std;

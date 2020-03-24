@@ -22,7 +22,7 @@
 #ifndef gama_local_acord_ReduceToElipsoid_header_h
 #define gama_local_acord_ReduceToElipsoid_header_h
 
-#include <Math/Business/ellipsoid.h>
+#include <Math/Business/Core/ellipsoid.h>
 
 #include <gnu_gama/local/gamadata.h>
 #include <algorithm>

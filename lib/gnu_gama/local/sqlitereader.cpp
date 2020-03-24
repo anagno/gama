@@ -22,12 +22,12 @@
 
 #ifdef   GNU_GAMA_LOCAL_SQLITE_READER
 
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 #include <gnu_gama/local/sqlitereader.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/xml/dataobject.h>
-#include <Math/Business/intfloat.h>
+#include <Math/Business/Core/intfloat.h>
 
 #include <string>
 #include <sstream>

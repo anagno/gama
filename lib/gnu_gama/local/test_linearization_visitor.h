@@ -29,13 +29,13 @@
 #ifndef GaMa_GaMaProg_Prehled_Test_Chyby_z_Linearizace_h_
 #define GaMa_GaMaProg_Prehled_Test_Chyby_z_Linearizace_h_
 
-#include <Math/Business/gon2deg.h>
+#include <Math/Business/Core/gon2deg.h>
 #include <gnu_gama/local/gamadata.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/bearing.h>
 #include <gnu_gama/local/results/text/underline.h>
-#include <Math/Business/statan.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/statan.h>
+#include <Math/Business/Core/radian.h>
 #include <Parsing/Business/utf8.h>
 #include <Utilities/Service/visitor.h>
 #include <cmath>

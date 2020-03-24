@@ -19,12 +19,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <Math/Business/gon2deg.h>
-#include <Math/Business/intfloat.h>
+#include <Math/Business/Core/gon2deg.h>
+#include <Math/Business/Core/intfloat.h>
 #include <sstream>
 #include <iomanip>
 #include <cctype>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 using namespace std;
 

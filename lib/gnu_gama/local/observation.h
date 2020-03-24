@@ -30,7 +30,7 @@
 #ifndef gama_local_Bod_Mer_Mereni_H
 #define gama_local_Bod_Mer_Mereni_H
 
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 #include <gnu_gama/local/pointid.h>
 #include <gnu_gama/local/exception.h>
@@ -42,7 +42,7 @@
 #include <vector>
 #include <utility>
 
-#include <Math/Business/obsdata.h>
+#include <Math/Business/Core/obsdata.h>
 #include <gnu_gama/local/matvec.h>
 
 namespace GNU_gama { namespace local {

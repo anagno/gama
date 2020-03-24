@@ -6,20 +6,6 @@ set(SRC_GAMA
    gnu_gama/version.h
    gnu_gama/xsd.h
 
-   gnu_gama/adj/adj_base.h
-   gnu_gama/adj/adj_basefull.h
-   gnu_gama/adj/adj_basesparse.h
-   gnu_gama/adj/adj_chol.h
-   gnu_gama/adj/adj_envelope.h
-   gnu_gama/adj/adj.cpp
-   gnu_gama/adj/adj.h
-   gnu_gama/adj/adj_input_data.cpp
-   gnu_gama/adj/adj_input_data.h
-   gnu_gama/adj/adj_gso.h
-   gnu_gama/adj/adj_svd.h
-   gnu_gama/adj/envelope.h
-   gnu_gama/adj/homogenization.h
-
    gnu_gama/xml/baseparser.cpp
    gnu_gama/xml/baseparser.h
    gnu_gama/xml/htmlparser.cpp
@@ -203,7 +189,13 @@ target_include_directories(libgama
                                   ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(libgama 
-  PUBLIC GaMa::Service_Parsing GaMa::Business_Parsing GaMa::Service_Math GaMa::Business_Math GaMa::Service_Utilities)
+  PUBLIC 
+    GaMa::Service_Parsing 
+    GaMa::Business_Parsing 
+    GaMa::Service_Math 
+    GaMa::Business_MathCore 
+    GaMa::Business_MathAdjustment
+    GaMa::Service_Utilities)
 
 include(GenerateExportHeader)
 generate_export_header(libgama

@@ -26,7 +26,7 @@
 // BaseParser is just a simple C++ wrapper for XML parser expat
 
 #include <Parsing/Service/xml_expat.h>
-#include <Math/Business/intfloat.h>
+#include <Math/Business/Core/intfloat.h>
 #include <Utilities/Service/size_to.h>
 #include <string>
 #include <list>

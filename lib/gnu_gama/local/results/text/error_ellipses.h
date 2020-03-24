@@ -22,7 +22,7 @@
 #define GaMa_GaMaProg_Prehled_Elipsy_Chyb_h_
 
 #include <gnu_gama/local/network.h>
-#include <Math/Business/statan.h>
+#include <Math/Business/Core/statan.h>
 #include <Parsing/Business/utf8.h>
 #include <cmath>
 

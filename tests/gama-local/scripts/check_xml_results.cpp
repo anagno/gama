@@ -25,7 +25,7 @@
 
 #include "check_xyz.h"
 #include <gnu_gama/xml/localnetwork_adjustment_results.h>
-#include <Math/Business/radian.h>
+#include <Math/Business/Core/radian.h>
 
 using GNU_gama::local::LocalNetwork;
 using GNU_gama::LocalNetworkAdjustmentResults;

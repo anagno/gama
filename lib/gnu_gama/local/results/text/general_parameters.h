@@ -35,7 +35,7 @@
 #include <gnu_gama/local/writevisitor.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/format.h>
-#include <Math/Business/statan.h>
+#include <Math/Business/Core/statan.h>
 #include <Parsing/Business/utf8.h>
 #include <gnu_gama/local/results/text/underline.h>
 #include <cstring>

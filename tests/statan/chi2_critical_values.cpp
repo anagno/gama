@@ -18,7 +18,7 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <Math/Business/statan.h>
+#include <Math/Business/Core/statan.h>
 
 #include <iostream>
 #include <vector>
