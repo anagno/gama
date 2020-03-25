@@ -73,7 +73,6 @@ set(SRC_GAMA
    gnu_gama/local/local_linearization.h
    gnu_gama/local/localnetwork2sql.cpp
    gnu_gama/local/localnetwork2sql.h
-   gnu_gama/local/lpoint.h
    gnu_gama/local/median/g2d_cogo.cpp
    gnu_gama/local/median/g2d_cogo.h
    gnu_gama/local/median/g2d_coordinates.cpp
