@@ -1,5 +1,6 @@
 # Header files
 set(header_files
+    "include/Math/Core/Business/angobs.h"
     "include/Math/Core/Business/e3.h"
     "include/Math/Core/Business/ellipsoid.h"
     "include/Math/Core/Business/gon2deg.h"

@@ -26,7 +26,7 @@
 #include <Math/Business/Core/lpoint.h>
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/cluster.h>
-#include <gnu_gama/local/angobs.h>
+#include <Math/Business/Core/angobs.h>
 #include <Math/Business/Core/lcoords.h>
 
 #include <map>
