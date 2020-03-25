@@ -5,6 +5,7 @@ set(header_files
     "include/Math/Core/Business/gon2deg.h"
     "include/Math/Core/Business/intfloat.h"
     "include/Math/Core/Business/latlong.h"
+    "include/Math/Core/Business/lcoords.h"
     "include/Math/Core/Business/lpoint.h"
     "include/Math/Core/Business/model.h"
     "include/Math/Core/Business/obsdata.h"
@@ -19,4 +20,5 @@ set(source_files
     "src/ellipsoid.cpp"
     "src/gon2deg.cpp"
     "src/latlong.cpp"
+    "src/lcoords.cpp"
     "src/statan.cpp")

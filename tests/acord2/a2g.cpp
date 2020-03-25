@@ -29,7 +29,7 @@
 #include <Utilities/Service/simplified.h>
 #include <gnu_gama/local/bearing.h>
 #include <gnu_gama/local/acord/acord2.h>
-#include <gnu_gama/local/lcoords.h>
+#include <Math/Business/Core/lcoords.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/xml/gkfparser.h>
 

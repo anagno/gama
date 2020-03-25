@@ -67,8 +67,6 @@ set(SRC_GAMA
    gnu_gama/local/format.h
    gnu_gama/local/gamadata.cpp
    gnu_gama/local/gamadata.h
-   gnu_gama/local/lcoords.cpp
-   gnu_gama/local/lcoords.h
    gnu_gama/local/local_linearization.cpp
    gnu_gama/local/local_linearization.h
    gnu_gama/local/localnetwork2sql.cpp

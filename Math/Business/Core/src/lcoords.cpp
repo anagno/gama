@@ -19,7 +19,7 @@
 */
 
 
-#include <gnu_gama/local/lcoords.h>
+#include "Math/Business/Core/lcoords.h"
 
 using namespace GNU_gama::local;
 

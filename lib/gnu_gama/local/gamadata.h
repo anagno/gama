@@ -27,7 +27,7 @@
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/cluster.h>
 #include <gnu_gama/local/angobs.h>
-#include <gnu_gama/local/lcoords.h>
+#include <Math/Business/Core/lcoords.h>
 
 #include <map>
 #include <list>
