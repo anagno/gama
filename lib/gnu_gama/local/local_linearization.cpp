@@ -21,7 +21,7 @@
 */
 
 #include <gnu_gama/local/local_linearization.h>
-#include <gnu_gama/local/bearing.h>
+#include <Math/Business/Core/bearing.h>
 
 #include <Math/Business/Core/radian.h>
 

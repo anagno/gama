@@ -19,8 +19,9 @@
 */
 
 #include <cmath>
-#include <gnu_gama/local/bearing.h>
-#include <gnu_gama/local/gamadata.h>
+#include "Math/Business/Core/bearing.h"
+#include "Math/Business/Core/lpoint.h"
+#include "Math/Business/Core/radian.h"
 
 namespace GNU_gama { namespace local {
 

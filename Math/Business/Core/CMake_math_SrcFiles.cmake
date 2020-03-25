@@ -1,6 +1,7 @@
 # Header files
 set(header_files
     "include/Math/Core/Business/angobs.h"
+    "include/Math/Core/Business/bearing.h"
     "include/Math/Core/Business/e3.h"
     "include/Math/Core/Business/ellipsoid.h"
     "include/Math/Core/Business/gon2deg.h"
@@ -17,6 +18,7 @@ set(header_files
 
 # Source Files files
 set(source_files
+    "src/bearing.cpp"
     "src/e3.cpp"
     "src/ellipsoid.cpp"
     "src/gon2deg.cpp"

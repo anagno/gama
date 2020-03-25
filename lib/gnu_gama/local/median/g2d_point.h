@@ -27,7 +27,7 @@
 #define gama_local_g2d_point_h_GNU_gama_local_Median_Pribl_b_H
 
 #include <gnu_gama/local/gamadata.h>
-#include <gnu_gama/local/bearing.h>
+#include <Math/Business/Core/bearing.h>
 #include <gnu_gama/local/median/g2d_exception.h>
 #include <gnu_gama/local/median/g2d_helper.h>
 

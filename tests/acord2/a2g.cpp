@@ -27,7 +27,7 @@
 #include <vector>
 #include <iomanip>
 #include <Utilities/Service/simplified.h>
-#include <gnu_gama/local/bearing.h>
+#include <Math/Business/Core/bearing.h>
 #include <gnu_gama/local/acord/acord2.h>
 #include <Math/Business/Core/lcoords.h>
 #include <gnu_gama/local/network.h>

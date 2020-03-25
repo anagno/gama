@@ -32,7 +32,7 @@
 #include <Math/Business/Core/gon2deg.h>
 #include <gnu_gama/local/gamadata.h>
 #include <gnu_gama/local/network.h>
-#include <gnu_gama/local/bearing.h>
+#include <Math/Business/Core/bearing.h>
 #include <gnu_gama/local/results/text/underline.h>
 #include <Math/Business/Core/statan.h>
 #include <Math/Business/Core/radian.h>

@@ -20,7 +20,7 @@
 
 #include <gnu_gama/local/acord/acordweakchecks.h>
 #include <gnu_gama/local/acord/acord2.h>
-#include <gnu_gama/local/bearing.h>
+#include <Math/Business/Core/bearing.h>
 #include <gnu_gama/local/orientation.h>
 
 using namespace GNU_gama::local;

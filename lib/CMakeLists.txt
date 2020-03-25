@@ -23,8 +23,6 @@ set(SRC_GAMA
    gnu_gama/xml/gkfparser.cpp
    gnu_gama/xml/gkfparser.h
 
-   gnu_gama/local/bearing.cpp
-   gnu_gama/local/bearing.h
    gnu_gama/local/html.cpp
    gnu_gama/local/html.h
    gnu_gama/local/cluster.h

@@ -36,7 +36,7 @@
 
 #include <limits>
 #include <gnu_gama/local/median/g2d_helper.h>
-#include <gnu_gama/local/bearing.h>
+#include <Math/Business/Core/bearing.h>
 
 using namespace std;
 
