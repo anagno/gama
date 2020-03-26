@@ -4,15 +4,28 @@ python: "3.7"
 dist: bionic
 compiler:
   - gcc
+  - clang 
+
+env:
+  matrix:
+    - CONAN_PROFILE=.travis/native
+    - CONAN_PROFILE=.travis/wasm
+
 install:
-# Install conan
   - pip install conan
   - conan user
 
 before_script:
-  - conan install . -pr .travis/native --build=missing
+  # not nice. Improve in general the build for both native and wasm
+  - if [[ "${CONAN_PROFILE}" == '.travis/wasm' ]]; then
+    conan install Parsing/ --build=missing ;
+    fi
+  - conan install . -pr ${CONAN_PROFILE} --build=missing
 
 script:
   - conan build .
   - source activate.sh
-  - ctest .
+  # Do not execute for the moment the test in wasm
+  - if [[ "${CONAN_PROFILE}" != '.travis/wasm' ]]; then
+    ctest . ;
+    fi
