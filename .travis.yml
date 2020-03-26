@@ -1,15 +1,27 @@
-os: linux
 language: python
 python: "3.7"
-dist: bionic
-compiler:
-  - gcc
-  - clang 
 
-env:
-  matrix:
-    - CONAN_PROFILE=.travis/native
-    - CONAN_PROFILE=.travis/wasm
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+      compiler: gcc
+      env:
+        - CONAN_PROFILE=.travis/native
+
+    - os: linux
+      dist: bionic
+      compiler:
+          - gcc
+          - clang 
+      env:
+        - CONAN_PROFILE=.travis/wasm
+
+    # Python is not supported in windows
+    #- os: windows
+    #  env:
+    #    - CONAN_PROFILE=.travis/native
+
 
 install:
   - pip install conan
