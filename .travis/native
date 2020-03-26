@@ -1,0 +1,8 @@
+include(default)
+
+[options]
+sqlite3=True
+libxml2=True
+
+[build_requires]
+cmake_installer/3.16.3@conan/stable

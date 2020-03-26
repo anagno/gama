@@ -456,7 +456,7 @@ if(SQLITE3_FOUND)
 
   add_executable(sqlite_init_db  scripts/sqlite_init_db.cpp)
 
-  target_link_libraries(sqlite_init_db libgama)
+  target_link_libraries(sqlite_init_db libgama sqlite3::sqlite3)
 
   add_executable(check_xml_coordinates  scripts/check_xml_coordinates.cpp)
 

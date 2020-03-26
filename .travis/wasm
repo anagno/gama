@@ -1,0 +1,15 @@
+include(native)
+
+[settings]
+os=Emscripten
+arch=x86
+os_build=Linux
+arch_build=x86_64
+build_type=Release
+compiler=clang
+compiler.version=10
+compiler.libcxx=libc++
+
+[build_requires]
+emsdk_installer/1.39.6@bincrafters/stable
+

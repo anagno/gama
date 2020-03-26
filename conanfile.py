@@ -51,10 +51,13 @@ class GaMa(ConanFile):
             cmake.definitions["BUILD_TOOS_CMAKE_CXX_COMPILER"] = "g++"
 
       cmake.definitions["CONAN_EXPORTED"] = True
-      cmake.definitions["BUILD_TESTING"] = "OFF"
+      cmake.definitions["BUILD_TESTING"] = "ON"
 
       if self.options.sqlite3:
          cmake.definitions["USE_SQLITE3"] = "ON"
+
+      if self.options.libxml2:
+         cmake.definitions["USE_LIBXML2"] = "ON"
 
       #cmake.verbose = True
       cmake.configure()
