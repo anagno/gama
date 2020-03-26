@@ -1,15 +1,16 @@
-language: python
-python: "3.7"
-
 matrix:
   include:
     - os: linux
+      language: python
+      python: "3.7"
       dist: bionic
       compiler: gcc
       env:
         - CONAN_PROFILE=.travis/native
 
     - os: linux
+      language: python
+      python: "3.7"
       dist: bionic
       compiler:
           - gcc
@@ -17,10 +18,14 @@ matrix:
       env:
         - CONAN_PROFILE=.travis/wasm
 
-    # Python is not supported in windows
-    #- os: windows
-    #  env:
-    #    - CONAN_PROFILE=.travis/native
+    - os: windows
+      language: sh
+      python: "3.7"
+      before_install:
+        - choco install python3 --version 3.7
+        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+      env:
+        - CONAN_PROFILE=.travis/native
 
 
 install:
