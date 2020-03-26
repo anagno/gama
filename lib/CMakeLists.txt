@@ -102,8 +102,6 @@ set(SRC_GAMA
    gnu_gama/local/medianf.h
    gnu_gama/local/observation.cpp
    gnu_gama/local/observation.h
-   gnu_gama/local/pointid.cpp
-   gnu_gama/local/pointid.h
    gnu_gama/local/readsabw.h
    gnu_gama/local/skipcomm.cpp
    gnu_gama/local/skipcomm.h

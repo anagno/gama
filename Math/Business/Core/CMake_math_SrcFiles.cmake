@@ -12,6 +12,7 @@ set(header_files
     "include/Math/Core/Business/model.h"
     "include/Math/Core/Business/obsdata.h"
     "include/Math/Core/Business/pointbase.h"
+    "include/Math/Core/Business/pointid.h"
     "include/Math/Core/Business/radian.h"
     "include/Math/Core/Business/statan.h"
    )
@@ -24,4 +25,5 @@ set(source_files
     "src/gon2deg.cpp"
     "src/latlong.cpp"
     "src/lcoords.cpp"
+    "src/pointid.cpp"
     "src/statan.cpp")

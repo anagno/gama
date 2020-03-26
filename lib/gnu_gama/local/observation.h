@@ -32,7 +32,7 @@
 
 #include <Math/Business/Core/radian.h>
 
-#include <gnu_gama/local/pointid.h>
+#include <Math/Business/Core/pointid.h>
 #include <gnu_gama/local/exception.h>
 #include <gnu_gama/local/language.h>
 #include <Utilities/Service/visitor.h>

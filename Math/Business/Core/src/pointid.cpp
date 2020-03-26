@@ -22,9 +22,8 @@
   along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <Math/Business/Core/intfloat.h>
-#include <gnu_gama/local/pointid.h>
-#include <Parsing/Business/utf8.h>
+#include "Math/Business/Core/pointid.h"
+#include "Math/Business/Core/intfloat.h"
 #include <cstdlib>
 #include <sstream>
 
@@ -71,12 +70,6 @@ void PointID::init(const std::string& s)
 
   iid = tmp;      // numeric ID
 }
-
-std::size_t PointID::lengthUtf8() const
-{
-  return GNU_gama::Utf8::length(sid);
-}
-
 
 bool PointID::operator==(const PointID& p) const
 {

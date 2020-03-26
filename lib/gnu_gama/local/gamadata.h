@@ -22,7 +22,7 @@
 #ifndef gama_local_ObservationData_and_other_data_objects_h_
 #define gama_local_ObservationData_and_other_data_objects_h_
 
-#include <gnu_gama/local/pointid.h>
+#include <Math/Business/Core/pointid.h>
 #include <Math/Business/Core/lpoint.h>
 #include <gnu_gama/local/observation.h>
 #include <gnu_gama/local/cluster.h>

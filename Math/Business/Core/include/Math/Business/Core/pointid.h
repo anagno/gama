@@ -44,7 +44,6 @@ namespace GNU_gama { namespace local
       bool operator< (const PointID& p) const;
 
       std::string str() const { return sid; }
-      std::size_t lengthUtf8() const;
 
     private:
 
