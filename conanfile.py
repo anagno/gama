@@ -18,18 +18,20 @@ class GaMa(ConanFile):
    name = "GaMa"
    version = "2.7"
    settings = "os", "compiler", "build_type", "arch",
-   generators = ["cmake_find_package", "cmake_paths", "virtualenv"]
+   generators = ["cmake_find_package", "virtualenv"]
 
    options = {
        "sqlite3": [True, False],
        "libxml2": [True, False],
        "shared": [True, False],
+       "native_compiler": "ANY",
        }
 
    default_options = {
        "sqlite3": False,
        "libxml2": False,
        "shared": False,
+       "native_compiler": None,
        }
 
    def requirements(self):
@@ -41,23 +43,26 @@ class GaMa(ConanFile):
        if self.options.libxml2:
            self.requires("libxml2/2.9.9@bincrafters/stable")
 
+   def imports(self):
+      self.copy("*.dll", "bin", "bin")
+
    def _configure_cmake(self):
       cmake = CMake(self)
 
       if self.settings.os == "Emscripten":
-         if platform.system() == "Windows":
-            cmake.definitions["BUILD_TOOS_CMAKE_CXX_COMPILER"] = "Visual Studio"
-         if platform.system() == "Linux":
-            cmake.definitions["BUILD_TOOS_CMAKE_CXX_COMPILER"] = "g++"
+         if self.options.native_compiler:
+            cmake.definitions["BUILD_TOOS_CMAKE_CXX_COMPILER"] = self.options.native_compiler
+         else:
+            raise ConanInvalidConfiguration("A native compiler was not specified")
 
       cmake.definitions["CONAN_EXPORTED"] = True
-      cmake.definitions["BUILD_TESTING"] = "ON"
 
       if self.options.sqlite3:
          cmake.definitions["USE_SQLITE3"] = "ON"
 
       if self.options.libxml2:
          cmake.definitions["USE_LIBXML2"] = "ON"
+         cmake.definitions["BUILD_TESTING"] = "ON"
 
       #cmake.verbose = True
       cmake.configure()

@@ -6,15 +6,13 @@ matrix:
       dist: bionic
       compiler: gcc
       env:
-        - CONAN_PROFILE=.travis/native
+        - CONAN_PROFILE=.travis/linux
 
     - os: linux
       language: python
       python: "3.7"
       dist: bionic
-      compiler:
-          - gcc
-          - clang 
+      compiler: clang
       env:
         - CONAN_PROFILE=.travis/wasm
 
@@ -25,7 +23,7 @@ matrix:
         - choco install python3 --version 3.7
         - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
       env:
-        - CONAN_PROFILE=.travis/native
+        - CONAN_PROFILE=.travis/windows
 
 
 install:
@@ -33,16 +31,16 @@ install:
   - conan user
 
 before_script:
-  # not nice. Improve in general the build for both native and wasm
+  # For compiling wasm we have to already have Expat as a native library
   - if [[ "${CONAN_PROFILE}" == '.travis/wasm' ]]; then
-    conan install Parsing/ --build=missing ;
+    conan install Expat/2.2.9@pix4d/stable --build=missing;
     fi
   - conan install . -pr ${CONAN_PROFILE} --build=missing
 
 script:
   - conan build .
   - source activate.sh
-  # Do not execute for the moment the test in wasm
-  - if [[ "${CONAN_PROFILE}" != '.travis/wasm' ]]; then
+  # Execute for the moment the UT only in Linux
+  - if [[ "${CONAN_PROFILE}" == '.travis/linux' ]]; then
     ctest . ;
     fi

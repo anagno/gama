@@ -6,4 +6,6 @@ add_executable(ellipsoids_xml ellipsoids_xml.cpp)
 
 target_link_libraries(ellipsoids_xml PRIVATE GaMa::Service_Parsing)
 
-install(TARGETS ellipsoids_xml slovnikar DESTINATION bin)
+install(
+    TARGETS ellipsoids_xml slovnikar 
+    DESTINATION ${CMAKE_INSTALL_LIBEXECDIR})

@@ -18,6 +18,7 @@
     along with this library; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#include "ParsingDLL.h"
 
 #include <iostream>
 #include <string>
@@ -29,7 +30,7 @@
 
 namespace GNU_gama {
 
-  class OutStream {
+  class ParsingAPI OutStream {
   public:
 
     enum { utf_8, iso_8859_2, iso_8859_2_flat, cp_1250, cp_1251 };

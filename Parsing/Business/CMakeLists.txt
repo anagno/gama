@@ -20,7 +20,6 @@ target_include_directories(
 target_link_libraries(Business_Parsing 
   PUBLIC GaMa::Service_Parsing)
 
-include(GenerateExportHeader)
 generate_export_header(Business_Parsing
                        EXPORT_FILE_NAME
                        ParsingDLL.h

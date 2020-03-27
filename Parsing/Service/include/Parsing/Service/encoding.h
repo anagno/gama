@@ -19,6 +19,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "ParsingServiceDLL.h"
 #include "xml_expat.h"
 
 #ifndef gama_local_GKF_XML_encoding_h_
@@ -29,16 +30,16 @@
 namespace GNU_gama {
 #endif
 
-int   cp1250_unicode(int* tab);
-int   cp1251_unicode(int* tab);
-int   iso_8859_2_unicode(int* tab);
-int   ascii(int* tab);
-char* utf8_cp1250(char *buf);
-char* utf8_cp1251(char *buf);
-char* utf8_iso_8859_2(char *buf);
-char* utf8_ascii(char *buf);
-int   Utf8Decode(int& u, unsigned char *buf);
-int   UnknownEncodingHandler(void *userData, const char *name,
+ParsingServiceAPI int   cp1250_unicode(int* tab);
+ParsingServiceAPI int   cp1251_unicode(int* tab);
+ParsingServiceAPI int   iso_8859_2_unicode(int* tab);
+ParsingServiceAPI int   ascii(int* tab);
+ParsingServiceAPI char* utf8_cp1250(char *buf);
+ParsingServiceAPI char* utf8_cp1251(char *buf);
+ParsingServiceAPI char* utf8_iso_8859_2(char *buf);
+ParsingServiceAPI char* utf8_ascii(char *buf);
+ParsingServiceAPI int   Utf8Decode(int& u, unsigned char *buf);
+ParsingServiceAPI int   UnknownEncodingHandler(void *userData, const char *name,
                            XML_Encoding *info);
 
 #ifdef __cplusplus

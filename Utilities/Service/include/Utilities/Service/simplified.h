@@ -21,6 +21,7 @@
 #ifndef GNU_gama_simplified_string_h
 #define GNU_gama_simplified_string_h
 
+#include "UtilitiesDLL.h"
 #include <string>
 
 // Returns a string that has whitespace removed from the start and the
@@ -29,7 +30,7 @@
 
 namespace GNU_gama
 {
-  std::string simplified(std::string s);
+  UtilitiesAPI std::string simplified(std::string s);
 }
 
 #endif

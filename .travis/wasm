@@ -1,4 +1,4 @@
-include(native)
+include(linux)
 
 [settings]
 os=Emscripten
@@ -9,6 +9,9 @@ build_type=Release
 compiler=clang
 compiler.version=10
 compiler.libcxx=libc++
+
+[options]
+native_compiler=g++
 
 [build_requires]
 emsdk_installer/1.39.6@bincrafters/stable

@@ -13,5 +13,13 @@ set_target_properties(Service_Utilities
 target_include_directories(
   Service_Utilities
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
          $<INSTALL_INTERFACE:GaMa/${PROJECT_NAME}>
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+include(GenerateExportHeader)
+generate_export_header(Service_Utilities
+                       EXPORT_FILE_NAME
+                       UtilitiesDLL.h
+                       EXPORT_MACRO_NAME
+                       UtilitiesAPI)

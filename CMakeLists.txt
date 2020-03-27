@@ -66,15 +66,14 @@ if(NOT CONAN_EXPORTED)
 
 endif()
 
-include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
-
 if(USE_SQLITE3)
   find_package(sqlite3 3.20 REQUIRED)
 endif()
 
 if(BUILD_TESTING)
   if(USE_LIBXML2)
-    find_package(LibXml2 2.9 REQUIRED)
+    find_package(libxml2 2.9 REQUIRED)
+    find_program(LIBXML2_XMLLINT_EXECUTABLE xmllint)
   endif()
   
 
@@ -87,10 +86,6 @@ endif()
 if(SQLITE3_FOUND)
   add_definitions(-DGNU_GAMA_LOCAL_SQLITE_READER)
 endif()
-
-add_subdirectory(Math)
-add_subdirectory(Utilities)
-add_subdirectory(Parsing)
 
 # The programs located under Parsing/Application are only needed during the build 
 # of the library. These programs generate some source code, which is necessary 
@@ -106,38 +101,53 @@ add_subdirectory(Parsing)
 # * https://cmake.org/pipermail/cmake/2010-January/034857.html
 
 if(NOT CMAKE_CROSSCOMPILING) 
-  set(BuildTools_ellipsoids_xml ${PROJECT_BINARY_DIR}/Parsing/Application/ellipsoids_xml)
-  set(BuildTools_slovnikar ${PROJECT_BINARY_DIR}/Parsing/Application/slovnikar)
-  add_custom_target(BuildTools DEPENDS ellipsoids_xml slovnikar)
+  set(BUILD_TOOS_CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
+  set(BUILD_TOOS_CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 else()
-
   if(NOT DEFINED BUILD_TOOS_CMAKE_CXX_COMPILER)
     message(FATAL_ERROR 
       " BUILD_TOOS_CMAKE_CXX_COMPILER is not defined.  You must tell CMake which compiler to use."
       "We also need a native compiler for compiling some build tools for generating headers.") 
   endif()
-
+  set(BUILD_TOOS_CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/BuildTools)
   set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/Parsing --install-folder ${CMAKE_CURRENT_BINARY_DIR}/BuildTools/)
-
-  include(ExternalProject)
-  ExternalProject_Add(BuildTools
-    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Parsing
-    BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/BuildTools
-    EXCLUDE_FROM_ALL
-    # I am overloading the functionality of the UPDATE_COMMAND to execute conan
-    UPDATE_COMMAND ${conan_configure_command}
-    CMAKE_ARGS
-      -DCMAKE_BUILD_TYPE=Release
-      -DCMAKE_CXX_COMPILER=${BUILD_TOOS_CMAKE_CXX_COMPILER}
-      -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
-      -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
-      -DCMAKE_CXX_STANDARD_REQUIRED=${CMAKE_CXX_STANDARD_REQUIRED}
-    INSTALL_COMMAND "")
-
-  ExternalProject_Get_property(BuildTools BINARY_DIR)
-  set(BuildTools_ellipsoids_xml ${BINARY_DIR}/Application/ellipsoids_xml)
-  set(BuildTools_slovnikar ${BINARY_DIR}/Application/slovnikar)
 endif()
+
+
+include(ExternalProject)
+ExternalProject_Add(BuildTools
+  PREFIX ${CMAKE_BINARY_DIR}/BuildTools
+  SOURCE_DIR ${CMAKE_SOURCE_DIR}/Parsing
+  BINARY_DIR ${CMAKE_BINARY_DIR}/BuildTools
+  INSTALL_DIR ${CMAKE_BINARY_DIR}/BuildTools
+  # I am overloading the functionality of the UPDATE_COMMAND to execute conan
+  DOWNLOAD_COMMAND ${conan_configure_command}
+  CMAKE_ARGS
+    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_CXX_COMPILER=${BUILD_TOOS_CMAKE_CXX_COMPILER}
+    -DCMAKE_MODULE_PATH=${BUILD_TOOS_CMAKE_MODULE_PATH}
+    -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+)
+
+ExternalProject_Get_property(BuildTools BINARY_DIR)
+if(WIN32)
+  if(NOT CMAKE_CROSSCOMPILING) 
+    add_custom_command(TARGET BuildTools POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_BINARY_DIR}/bin/libexpat.dll
+        ${BINARY_DIR}/libexec/libexpat.dll)
+  endif()
+  set(BuildTools_ellipsoids_xml ${BINARY_DIR}/libexec/ellipsoids_xml.exe)
+  set(BuildTools_slovnikar ${BINARY_DIR}/libexec/slovnikar.exe)
+else()
+  set(BuildTools_ellipsoids_xml ${BINARY_DIR}/libexec/ellipsoids_xml)
+  set(BuildTools_slovnikar ${BINARY_DIR}/libexec/slovnikar)
+endif()
+
+
+add_subdirectory(Math)
+add_subdirectory(Utilities)
+add_subdirectory(Parsing)
 
 add_subdirectory(lib)
 add_subdirectory(bin)

@@ -21,21 +21,22 @@
 #ifndef gama_local_Bod_Mer_BMFCE_H
 #define gama_local_Bod_Mer_BMFCE_H
 
+#include "MathDLL.h"
 #include <cmath>
 
 namespace GNU_gama { namespace local {
 
 class LocalPoint;
 
-void bearing_distance(const LocalPoint& a, const LocalPoint& b,
+MathAPI void bearing_distance(const LocalPoint& a, const LocalPoint& b,
                       double& br, double& d);
-void bearing_distance(double ya, double xa, double yb, double xb,
+MathAPI void bearing_distance(double ya, double xa, double yb, double xb,
                       double& br, double& d);
 
-double bearing (const LocalPoint& a,  const LocalPoint& b);
-double bearing (double ya, double xa, double yb, double xb);
+MathAPI double bearing (const LocalPoint& a,  const LocalPoint& b);
+MathAPI double bearing (double ya, double xa, double yb, double xb);
 
-double distance(const LocalPoint& a, const LocalPoint& b);
+MathAPI double distance(const LocalPoint& a, const LocalPoint& b);
 
 }}   // namespace GNU_gama::local
 

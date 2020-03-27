@@ -21,6 +21,7 @@
 #ifndef GNU_gama_size_to_h
 #define GNU_gama_size_to_h
 
+#include "UtilitiesDLL.h"
 #include <cstddef>
 
 /** size_to() \brief The template function size_to() returns a) its
@@ -35,7 +36,8 @@ namespace GNU_gama
   template <typename To, typename From>
   To size_to(From f) { return f; }
 
-  template<> int size_to<int, size_t>(std::size_t f);
+  template<> 
+  UtilitiesAPI int size_to<int, size_t>(std::size_t f);
 }
 
 #endif

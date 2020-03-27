@@ -13,7 +13,14 @@ set_target_properties(Service_Parsing
 target_include_directories(
   Service_Parsing
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
          $<INSTALL_INTERFACE:GaMa/${PROJECT_NAME}>
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 target_link_libraries(Service_Parsing PUBLIC Expat::Expat)
+
+generate_export_header(Service_Parsing
+                       EXPORT_FILE_NAME
+                       ParsingServiceDLL.h
+                       EXPORT_MACRO_NAME
+                       ParsingServiceAPI)

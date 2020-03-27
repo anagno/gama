@@ -248,7 +248,7 @@ foreach(test ${INPUT_FILES})
   endforeach(algo)
 endforeach(test)
 
-if(LIBXML2_FOUND)
+if(libxml2_FOUND)
 
   set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
@@ -347,7 +347,7 @@ set_tests_properties(gama_local_nop_xml2txt
   PROPERTIES DEPENDS gama_local_nop)
 
 
-if(LIBXML2_FOUND)
+if(libxml2_FOUND)
 
   set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
@@ -431,7 +431,7 @@ foreach(test ${INPUT_FILES_LOCAL_UPDATED})
     PROPERTIES DEPENDS gama_local_updated_xml_2_${test})
 
 
-  if(LIBXML2_FOUND)
+  if(libxml2_FOUND)
 
     add_test(NAME xmllint_gama_local_update_xml_${test}
       COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
