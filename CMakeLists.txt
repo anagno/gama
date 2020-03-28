@@ -64,6 +64,8 @@ if(NOT CONAN_EXPORTED)
                   missing
                   ${OPTIONAL_CONAN_PARAMETERS})
 
+  include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+
 endif()
 
 if(USE_SQLITE3)

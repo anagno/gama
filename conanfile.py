@@ -18,7 +18,7 @@ class GaMa(ConanFile):
    name = "GaMa"
    version = "2.7"
    settings = "os", "compiler", "build_type", "arch",
-   generators = ["cmake_find_package", "virtualenv"]
+   generators = ["cmake_find_package", "cmake_paths", "virtualenv"]
 
    options = {
        "sqlite3": [True, False],

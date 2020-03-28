@@ -5,6 +5,23 @@ matrix:
       python: "3.7"
       dist: bionic
       compiler: gcc
+      addons:
+        apt:
+          sources:
+          # Official Kitware APT repository.
+          # More information at: https://apt.kitware.com
+          - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic main'
+            key_url: 'https://apt.kitware.com/keys/kitware-archive-latest.asc'
+          packages:
+          - cmake
+      env:
+        - CONAN_PROFILE=
+
+    - os: linux
+      language: python
+      python: "3.7"
+      dist: bionic
+      compiler: gcc
       env:
         - CONAN_PROFILE=.travis/linux
 
@@ -35,12 +52,31 @@ before_script:
   - if [[ "${CONAN_PROFILE}" == '.travis/wasm' ]]; then
     conan install Expat/2.2.9@pix4d/stable --build=missing;
     fi
-  - conan install . -pr ${CONAN_PROFILE} --build=missing
+  - if [ -n "${CONAN_PROFILE}" ]; then
+    conan install . -pr ${CONAN_PROFILE} --build=missing;
+    fi
 
 script:
-  - conan build .
-  - source activate.sh
+  # Building using conan
+  - if [ -n "${CONAN_PROFILE}" ]; then
+    conan build .;
+    fi
+  - if [ -n "${CONAN_PROFILE}" ]; then
+    source activate.sh;
+    fi
   # Execute for the moment the UT only in Linux
   - if [[ "${CONAN_PROFILE}" == '.travis/linux' ]]; then
+    ctest . ;
+    fi
+  # Building by calling conan via the Cmake. These are 2 differents builds. 
+  # If no conan profile is provided then we use this method
+  # Not the best, but for the moment it will have to be sufficient
+  - if [ -z "${CONAN_PROFILE}" ]; then
+    /usr/bin/cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=TRUE -DUSE_SQLITE3=TRUE -D-DUSE_LIBXML2=TRUE;
+    fi
+  - if [ -z "${CONAN_PROFILE}" ]; then
+    make;
+    fi
+  - if [ -z "${CONAN_PROFILE}" ]; then
     ctest . ;
     fi
