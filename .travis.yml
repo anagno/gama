@@ -5,6 +5,10 @@ matrix:
       python: "3.7"
       dist: bionic
       compiler: gcc
+      cache:
+        pip: true
+        directories:
+          - $HOME/.conan
       addons:
         apt:
           sources:
@@ -22,6 +26,10 @@ matrix:
       python: "3.7"
       dist: bionic
       compiler: gcc
+      cache:
+        pip: true
+        directories:
+          - $HOME/.conan
       env:
         - CONAN_PROFILE=.travis/linux
 
@@ -29,13 +37,23 @@ matrix:
       language: python
       python: "3.7"
       dist: bionic
-      compiler: clang
+      compiler: 
+        - clang
+        - gcc
+      cache:
+        pip: true
+        directories:
+          - $HOME/.conan
       env:
         - CONAN_PROFILE=.travis/wasm
 
     - os: windows
       language: sh
       python: "3.7"
+      cache:
+        directories:
+          - $HOME/AppData/Local/Temp/chocolatey
+          - $HOME/.conan
       before_install:
         - choco install python3 --version 3.7
         - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
