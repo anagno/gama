@@ -35,13 +35,13 @@ class GaMa(ConanFile):
        }
 
    def requirements(self):
-       self.requires("Expat/2.2.9@pix4d/stable")
+       self.requires("expat/2.2.9")
 
        if self.options.sqlite3:
-           self.requires("sqlite3/3.29.0@bincrafters/stable")
+           self.requires("sqlite3/3.29.0")
 
        if self.options.libxml2:
-           self.requires("libxml2/2.9.9@bincrafters/stable")
+           self.requires("libxml2/2.9.9")
 
    def imports(self):
       self.copy("*.dll", "bin", "bin")

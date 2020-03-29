@@ -74,7 +74,7 @@ endif()
 
 if(BUILD_TESTING)
   if(USE_LIBXML2)
-    find_package(libxml2 2.9 REQUIRED)
+    find_package(LibXml2 2.9 REQUIRED)
     find_program(LIBXML2_XMLLINT_EXECUTABLE xmllint)
   endif()
   
@@ -133,12 +133,6 @@ ExternalProject_Add(BuildTools
 
 ExternalProject_Get_property(BuildTools BINARY_DIR)
 if(WIN32)
-  if(NOT CMAKE_CROSSCOMPILING) 
-    add_custom_command(TARGET BuildTools POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy
-        ${CMAKE_BINARY_DIR}/bin/libexpat.dll
-        ${BINARY_DIR}/libexec/libexpat.dll)
-  endif()
   set(BuildTools_ellipsoids_xml ${BINARY_DIR}/libexec/ellipsoids_xml.exe)
   set(BuildTools_slovnikar ${BINARY_DIR}/libexec/slovnikar.exe)
 else()

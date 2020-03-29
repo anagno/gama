@@ -72,7 +72,7 @@ script:
   # If no conan profile is provided then we use this method
   # Not the best, but for the moment it will have to be sufficient
   - if [ -z "${CONAN_PROFILE}" ]; then
-    /usr/bin/cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=TRUE -DUSE_SQLITE3=TRUE -D-DUSE_LIBXML2=TRUE;
+    /usr/bin/cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=TRUE -DUSE_SQLITE3=TRUE -DUSE_LIBXML2=TRUE;
     fi
   - if [ -z "${CONAN_PROFILE}" ]; then
     make;

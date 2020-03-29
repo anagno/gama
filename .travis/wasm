@@ -1,4 +1,4 @@
-include(linux)
+include(default)
 
 [settings]
 os=Emscripten
@@ -12,7 +12,10 @@ compiler.libcxx=libc++
 
 [options]
 native_compiler=g++
+# De-activate (for the moment) sqlite3 because there is a compilation error
+sqlite3=False
+libxml2=True
 
 [build_requires]
+cmake_installer/3.16.3@conan/stable
 emsdk_installer/1.39.6@bincrafters/stable
-

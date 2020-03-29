@@ -71,7 +71,7 @@ foreach(test ${SJTSK05_FILES})
                        PROPERTIES DEPENDS gama_g3_adjustement_${test})
 endforeach(test)
 
-if(libxml2_FOUND)
+if(LibXml2_FOUND)
 
   set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 

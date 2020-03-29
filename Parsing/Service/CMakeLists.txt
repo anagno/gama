@@ -17,7 +17,7 @@ target_include_directories(
          $<INSTALL_INTERFACE:GaMa/${PROJECT_NAME}>
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-target_link_libraries(Service_Parsing PUBLIC Expat::Expat)
+target_link_libraries(Service_Parsing PUBLIC EXPAT::EXPAT)
 
 generate_export_header(Service_Parsing
                        EXPORT_FILE_NAME
