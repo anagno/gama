@@ -1,9 +1,13 @@
 include(default)
 
-[options]
-# De-activate (for the moment) sqlite3 because there is a compilation error
-sqlite3=False
-libxml2=True
+[settings]
+build_type=Release
 
 [build_requires]
-cmake_installer/3.16.3@conan/stable
+cmake/3.17.1
+
+[options]
+
+# De-activate (for the moment) sqlite3 because there is a compilation error
+GaMa:sqlite3=False
+GaMa:libxml2=True

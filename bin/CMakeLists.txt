@@ -1,7 +1,11 @@
+find_package(Boost 1.72.0 COMPONENTS program_options REQUIRED)
+
+
 # Binaries
 add_executable(gama-local gama-local.cpp)
 
-target_link_libraries(gama-local libgama)
+target_link_libraries(gama-local 
+  PRIVATE libgama Boost::Boost)
 
 if(EMSCRIPTEN)
   #set_target_properties(gama-local PROPERTIES

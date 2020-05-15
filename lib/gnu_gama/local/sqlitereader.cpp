@@ -460,7 +460,12 @@ int sqlite_db_readConfigurationInfo(void* data, int argc, char** argv, char**)
         d->configurationId = argv[0];
 
         if (argv[1])
-          d->lnet->set_algorithm(argv[1]);
+        {
+            if(argv[1] == "gso") d->lnet->set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::gso);
+            else if (argv[1] == "svd") d->lnet->set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::svd);
+            else if (argv[1] == "cholesky") d->lnet->set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::cholesky);
+            else if (argv[1] == "envelope") d->lnet->set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::envelope);
+        }
 
         using namespace GNU_gama::local;
 

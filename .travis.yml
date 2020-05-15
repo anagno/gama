@@ -80,7 +80,7 @@ script:
     conan build .;
     fi
   - if [ -n "${CONAN_PROFILE}" ]; then
-    source activate.sh;
+    source activate_run.sh;
     fi
   # Execute for the moment the UT only in Linux
   - if [[ "${CONAN_PROFILE}" == '.travis/linux' ]]; then

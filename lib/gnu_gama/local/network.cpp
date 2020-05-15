@@ -266,7 +266,7 @@ bool LocalNetwork::has_algorithm() const
 }
 
 
-void LocalNetwork::set_algorithm(std::string alg)
+void LocalNetwork::set_algorithm(LocalNetwork::Algorithm alg)
 {
   typedef GNU_gama::local::MatVecException   MVE;
   typedef GNU_gama::AdjEnvelope<double, int, MVE> OLS_env;
@@ -275,16 +275,29 @@ void LocalNetwork::set_algorithm(std::string alg)
   typedef GNU_gama::AdjCholDec <double, int, MVE> OLS_chol;
 
   AdjBase* adjb;
-  if      (alg == "gso" )     adjb = new OLS_gso;
-  else if (alg == "svd" )     adjb = new OLS_svd;
-  else if (alg == "cholesky") adjb = new OLS_chol;
-  else if (alg == "envelope") adjb = new OLS_env;
-  else
-    {
-      alg  = "envelope";
+
+  switch(alg)
+  {
+    case Algorithm::gso:
+      algorithm_ = "gso";
+      adjb = new OLS_gso;
+      break;
+    case Algorithm::svd:
+      algorithm_ = "svd";
+      adjb = new OLS_svd;
+      break;
+    case Algorithm::cholesky:
+      algorithm_ = "cholesky";
+      adjb = new OLS_chol;
+      break;
+    case Algorithm::envelope:
+      [[fallthrough]];
+    default:
+      algorithm_ = "envelope";
       adjb = new OLS_env;
-    }
-  algorithm_ = alg;
+      break;
+  }
+
   has_algorithm_ = true;
 
   delete least_squares;

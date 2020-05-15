@@ -53,6 +53,8 @@ namespace GNU_gama { namespace local
 
   public:
 
+    enum class Algorithm {gso, svd, cholesky, envelope};
+
     LocalNetwork();
     virtual ~LocalNetwork();
 
@@ -277,7 +279,7 @@ namespace GNU_gama { namespace local
 
     std::string algorithm() const;
     bool        has_algorithm() const;
-    void        set_algorithm(std::string alg = std::string());
+    void        set_algorithm(Algorithm alg = Algorithm::envelope);
     int         adj_covband() const;
     void        set_adj_covband(int value=-1);
     double      epoch() const;

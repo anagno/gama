@@ -456,7 +456,7 @@ if(SQLITE3_FOUND)
 
   add_executable(sqlite_init_db  scripts/sqlite_init_db.cpp)
 
-  target_link_libraries(sqlite_init_db libgama sqlite3::sqlite3)
+  target_link_libraries(sqlite_init_db libgama SQLite3::SQLite3)
 
   add_executable(check_xml_coordinates  scripts/check_xml_coordinates.cpp)
 
@@ -549,7 +549,7 @@ if(SQLITE3_FOUND)
 
     add_test(NAME gama_local_adjustement_sql_${test}
       COMMAND gama-local 
-      --sqlitedb ${RESULT_DIR}/gama-local-sqlite-reader/${test}.db
+      --sqlitedb ${RESULT_DIR}/gama-local-sqlite-reader/demo.db
       --readonly-configuration ${test}
       --xml ${RESULT_DIR}/gama-local-sqlite-reader/${test}.xml
       )

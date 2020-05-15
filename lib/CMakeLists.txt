@@ -198,6 +198,6 @@ generate_export_header(libgama
 
 if(SQLITE3_FOUND)
   if(USE_SQLITE3)
-    target_link_libraries(libgama PRIVATE sqlite3::sqlite3)
+    target_link_libraries(libgama PRIVATE SQLite3::SQLite3)
   endif()
 endif()

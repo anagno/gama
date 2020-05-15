@@ -1,21 +1,52 @@
 include(default)
 
 [settings]
+build_type=Release
 os=Emscripten
 arch=x86
-os_build=Linux
-arch_build=x86_64
-build_type=Release
 compiler=clang
-compiler.version=10
+compiler.version=11
 compiler.libcxx=libc++
 
-[options]
-native_compiler=g++
-# De-activate (for the moment) sqlite3 because there is a compilation error
-sqlite3=False
-libxml2=True
-
 [build_requires]
-cmake_installer/3.16.3@conan/stable
-emsdk_installer/1.39.6@bincrafters/stable
+cmake/3.17.1
+emsdk_installer/1.39.13@bincrafters/stable
+
+[env]
+#EMCC_DEBUG=1
+
+# If a single dll is using that all, all of them has to.
+# So if we use boost in some parts, then we have to use it 
+# everywhere
+#CXXFLAGS=-s USE_PTHREADS=1
+
+[options]
+boost:without_graph=True
+boost:without_log=True
+boost:without_python=True
+boost:without_regex=True
+boost:without_stacktrace=True
+boost:without_test=True
+boost:zlib=False
+boost:bzip2=False
+boost:lzma=False
+boost:zstd=False
+# I think this is necessary because of https://github.com/emscripten-core/emscripten/issues/9726 
+boost:without_fiber=True 
+# to reduce the amount of warning, but it is not necessary
+boost:fPIC=False 
+
+boost:without_locale=True
+boost:without_coroutine=True
+boost:multithreading=False
+boost:without_thread=True
+boost:without_wave=True
+boost:without_type_erasure=True
+boost:without_atomic=True
+boost:without_context=True
+
+# https://github.com/conan-io/conan-center-index/pull/1629
+boost:debug_level=1
+
+GaMa:native_compiler=g++
+GaMa:libxml2=False

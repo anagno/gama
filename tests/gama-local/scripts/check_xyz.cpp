@@ -88,16 +88,16 @@ GNU_gama::local::LocalNetwork* getNet(int alg, const char* file)
   switch (alg)
     {
     case 0:
-      lnet->set_algorithm("svd");
+      lnet->set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::svd);
       break;
     case 1:
-      lnet->set_algorithm("gso");
+      lnet->set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::gso);
       break;
     case 2:
-      lnet->set_algorithm("cholesky");
+      lnet->set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::cholesky);
       break;
     case 3:
-      lnet->set_algorithm("envelope");
+      lnet->set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::envelope);
       break;
     }
 

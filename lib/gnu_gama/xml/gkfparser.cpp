@@ -519,7 +519,10 @@ namespace GNU_gama { namespace local {
           }
         else if (jmeno == "algorithm")
           {
-            lnet.set_algorithm(hodnota);
+            if(hodnota == "gso") lnet.set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::gso);
+            else if (hodnota == "svd") lnet.set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::svd);
+            else if (hodnota == "cholesky") lnet.set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::cholesky);
+            else if (hodnota == "envelope") lnet.set_algorithm(GNU_gama::local::LocalNetwork::Algorithm::envelope);
           }
         else if (jmeno == "cov-band")
           {

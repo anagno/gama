@@ -1,8 +1,12 @@
 include(default)
 
-[options]
-sqlite3=True
-libxml2=True
+[settings]
+build_type=Release
 
 [build_requires]
-cmake_installer/3.16.3@conan/stable
+cmake/3.17.1
+
+[options]
+
+GaMa:sqlite3=True
+GaMa:libxml2=True

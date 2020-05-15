@@ -33,7 +33,7 @@ namespace GNU_gama {
   class ParsingAPI OutStream {
   public:
 
-    enum { utf_8, iso_8859_2, iso_8859_2_flat, cp_1250, cp_1251 };
+    enum Encoding { utf_8, iso_8859_2, iso_8859_2_flat, cp_1250, cp_1251 };
 
     OutStream(std::ostream* str);
 

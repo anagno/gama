@@ -64,12 +64,12 @@ if(NOT CONAN_EXPORTED)
                   missing
                   ${OPTIONAL_CONAN_PARAMETERS})
 
-  include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+  list(APPEND CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}")
 
 endif()
 
 if(USE_SQLITE3)
-  find_package(sqlite3 3.20 REQUIRED)
+  find_package(SQLite3 3.20 REQUIRED)
 endif()
 
 if(BUILD_TESTING)
@@ -127,6 +127,7 @@ ExternalProject_Add(BuildTools
   CMAKE_ARGS
     -DCMAKE_BUILD_TYPE=Release
     -DCMAKE_CXX_COMPILER=${BUILD_TOOS_CMAKE_CXX_COMPILER}
+    -DCMAKE_CXX_FLAGS=
     -DCMAKE_MODULE_PATH=${BUILD_TOOS_CMAKE_MODULE_PATH}
     -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 )

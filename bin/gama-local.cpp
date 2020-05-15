@@ -54,245 +54,239 @@
 #include <gnu_gama/local/test_linearization_visitor.h>
 #include <gnu_gama/local/xmlerror.h>
 
-namespace {
-int help()
-{
-  using namespace std;
-  using namespace GNU_gama::local;
+#include <boost/program_options.hpp>
 
-  cout << "\n"
-       << "Adjustment of local geodetic network"
-       << "        version: "<< GNU_gama::GNU_gama_version()
-       << " / " << GNU_gama::GNU_gama_compiler() << "\n"
-       << "************************************\n"
-       << "https://www.gnu.org/software/gama/\n\n";
 
-  cout <<
-    "Usage: gama-local  input.xml  [options]\n"
+namespace GNU_gama{
+namespace local{
 
-#ifdef   GNU_GAMA_LOCAL_SQLITE_READER
-    "       gama-local  input.xml  --sqlitedb sqlite.db"
-            "  --configuration name  [options]\n"
-    "       gama-local  --sqlitedb sqlite.db  --configuration name  [options]\n"
-    "       gama-local  --sqlitedb sqlite.db"
-            "  --readonly-configuration name  [options]\n"
-#endif
+std::istream& operator >>(std::istream& in, GNU_gama::local::LocalNetwork::Algorithm& algorithm);
+std::istream& operator >>(std::istream& in, GNU_gama::local::gama_language& language);
+} // namespace local
 
-    "\nOptions:\n\n"
+std::istream& operator >>(std::istream& in, GNU_gama::OutStream::Encoding& encoding);
+} // namespace GNU_gama
 
-    "--algorithm  gso | svd | cholesky | envelope\n"
-    "--language   en | ca | cz | du | es | fi | fr | hu | ru | ua | zh\n"
-    "--encoding   utf-8 | iso-8859-2 | iso-8859-2-flat | cp-1250 | cp-1251\n"
-    "--angles     400 | 360\n"
-    "--latitude   <latitude>\n"
-    "--ellipsoid  <ellipsoid name>\n"
-    "--text       adjustment_results.txt\n"
-    "--html       adjustment_results.html\n"
-    "--xml        adjustment_results.xml\n"
-    "--octave     adjustment_results.m\n"
-    "--svg        network_configuration.svg\n"
-    "--cov-band   covariance matrix of adjusted parameters in XML output\n"
-    "             n  = -1  for full covariance matrix (implicit value)\n"
-    "             n >=  0  covariances are computed only for bandwidth n\n"
-    "--iterations maximum number of iterations allowed in the linearized\n"
-    "             least squares algorithm (implicit value is 5)\n"
-//  "--updated-xml input data with free coordinates updated after adjustment\n"
-//  "             and rejected observations removed\n"
-    "--version\n"
-    "--help\n\n";
-
-//  "--obs        observation_equations.txt (obsolete format)\n"
-
-  cout <<
-    "Report bugs to: <bug-gama@gnu.org>\n"
-    "GNU gama home page: <https://www.gnu.org/software/gama/>\n"
-    "General help using GNU software: <https://www.gnu.org/gethelp/>\n\n";
-
-  return 0;
-}
-
+enum class Angle {Gon, Degree};
+std::istream& operator >>(std::istream& in, Angle& angles);
 GNU_gama::local::XMLerror xmlerr;
 
-}  // unnamed namespace
 
-
-
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
   try {
 
-    if (argc == 1) return help();
+    auto argv_algo = GNU_gama::local::LocalNetwork::Algorithm::envelope;
+    auto argv_lang = GNU_gama::local::en;
+    auto argv_enc  = GNU_gama::OutStream::utf_8;
+    auto argv_angles = Angle::Gon;
+    auto argv_iterations = int{5};
 
-    using namespace std;
-    using namespace GNU_gama::local;
-
-    const char* c;
-    const char* argv_1 = nullptr;           // xml input or sqlite db name
-    const char* argv_algo = nullptr;
-    const char* argv_lang = nullptr;
-    const char* argv_enc  = nullptr;
-    const char* argv_angles = nullptr;
-    const char* argv_ellipsoid = nullptr;
-    const char* argv_latitude = nullptr;
-    const char* argv_txtout = nullptr;
-    const char* argv_htmlout = nullptr;
-    const char* argv_xmlout = nullptr;
-    const char* argv_octaveout = nullptr;
-    const char* argv_svgout = nullptr;
-    const char* argv_obsout = nullptr;
-    const char* argv_covband = nullptr;
-    const char* argv_iterations = nullptr;
-    const char* argv_updated_xml = nullptr;
-
+    auto option_description = boost::program_options::options_description( "\n"
+      "Adjustment of local geodetic network version: " + GNU_gama::GNU_gama_version() +
+      " / " + GNU_gama::GNU_gama_compiler() + "\n"
+      "************************************\n"
+      "https://www.gnu.org/software/gama/\n\n"
+      "Usage: \n"
+      "gama-local  input.xml  [options]\n"
 #ifdef GNU_GAMA_LOCAL_SQLITE_READER
-    const char* argv_confname = nullptr;
-    const char* argv_readonly = nullptr;
-    const char* argv_sqlitedb = nullptr;
+      "gama-local  input.xml  --sqlitedb sqlite.db"
+       "  --configuration name  [options]\n"
+       "gama-local  --sqlitedb sqlite.db  --configuration name  [options]\n"
+       "gama-local  --sqlitedb sqlite.db"
+       "  --readonly-configuration name  [options]\n"
 #endif
+      "\nOptions");
 
-
-    for (int i=1; i<argc; i++)
-      {
-        c = argv[i];
-        if (*c != '-')    // **** one or two parameters (file names) ****
-          {
-            if (!argv_1) {
-              argv_1 = c;
-              continue;
-            }
-            return help();
-          }
-
-        // ****  options  ****
-
-        if(*c == '-') c++;
-        if(*c == '-') c++;
-        string name = string(c);
-        c = argv[++i];
-
-        if      (name == "help"      ) return help();
-        else if (name == "version"   )
-                return GNU_gama::version("gama-local", "Ales Cepek et al.");
-        else if ( i   ==  argc       ) return help();
-        else if (name == "algorithm" ) argv_algo = c;
-        else if (name == "language"  ) argv_lang = c;
-        else if (name == "encoding"  ) argv_enc  = c;
-        else if (name == "angles"    ) argv_angles = c;
-        else if (name == "ellipsoid" ) argv_ellipsoid = c;
-        else if (name == "latitude"  ) argv_latitude = c;
-        else if (name == "text"      ) argv_txtout = c;
-        else if (name == "html"      ) argv_htmlout = c;
-        else if (name == "xml"       ) argv_xmlout = c;
-        else if (name == "octave"    ) argv_octaveout = c;
-        else if (name == "svg"       ) argv_svgout = c;
-        else if (name == "obs"       ) argv_obsout = c;
-        else if (name == "cov-band"  ) argv_covband = c;
-        else if (name == "iterations") argv_iterations = c;
-        else if (name == "updated-xml") argv_updated_xml = c;
+    option_description.add_options()
+      ("help,h", "Display this help message")
+      ("version,v", "Display the version number")
+      ("input-file", boost::program_options::value<std::string>(), "The input xml that will be parsed")
+      (
+        "algorithm", 
+        boost::program_options::value<GNU_gama::local::LocalNetwork::Algorithm>(&argv_algo), 
+        "gso | svd | cholesky | envelope"
+      )
+      (
+        "language", 
+        boost::program_options::value<GNU_gama::local::gama_language>(&argv_lang), 
+        "en | ca | cz | du | es | fi | fr | hu | ru | ua | zh"
+      )
+      (
+        "encoding", 
+        boost::program_options::value<GNU_gama::OutStream::Encoding>(&argv_enc), 
+        "utf-8 | iso-8859-2 | iso-8859-2-flat | cp-1250 | cp-1251"
+      )
+      (
+        "angles", 
+        boost::program_options::value<Angle>(&argv_angles),
+        "400 | 360"
+      )
+      (
+        "ellipsoid", 
+        boost::program_options::value<std::string>(), 
+        "<ellipsoid name>"
+      )
+      (
+        "latitude", 
+        boost::program_options::value<std::string>(), 
+        "<latitude>"
+      )
+      (
+        "text", 
+        boost::program_options::value<std::string>(), 
+        "adjustment_results.txt"
+      )
+      (
+        "html", 
+        boost::program_options::value<std::string>(), 
+        "adjustment_results.html"
+      )
+      (
+        "xml", 
+        boost::program_options::value<std::string>(), 
+        "adjustment_results.xml"
+      )
+      (
+        "octave", 
+        boost::program_options::value<std::string>(), 
+        "adjustment_results.m"
+      )
+      (
+        "svg", 
+        boost::program_options::value<std::string>(), 
+        "network_configuration.svg"
+      )
+      (
+        "obs", 
+        boost::program_options::value<std::string>(), 
+        // TODO
+        "UNDOCUMENTED"
+      )
+      (
+        "cov-band", 
+        boost::program_options::value<int>(), 
+        "covariance matrix of adjusted parameters in XML output\n"
+        "n  = -1 \tfor full covariance matrix (implicit value)\n"
+        "n >=  0 \tcovariances are computed only for bandwidth n\n"
+      )
+      (
+        "iterations", 
+        boost::program_options::value<int>(&argv_iterations),
+        "maximum number of iterations allowed in the linearized least squares algorithm (implicit value is 5)"
+      )
+      (
+        "updated-xml", 
+        boost::program_options::value<std::string>(), 
+        // TODO
+        "UNDOCUMENTED"
+      )
 #ifdef GNU_GAMA_LOCAL_SQLITE_READER
-        else if (name == "sqlitedb")               argv_sqlitedb = c;
-        else if (name == "configuration")          argv_confname = c;
-        else if (name == "readonly-configuration") argv_readonly = c;
+      (
+        "sqlitedb", 
+        boost::program_options::value<std::string>(), 
+        "sqlitedb sqlite.db"
+      )
+      (
+        "configuration", 
+        boost::program_options::value<std::string>(), 
+        "name"
+      )
+      (
+        "readonly-configuration", 
+        boost::program_options::value<std::string>(), 
+        "name"
+      )
 #endif
-        else
-          return help();
-      }
+    ;
+
+    auto positional_options = boost::program_options::positional_options_description{};
+    positional_options.add("input-file", 1);
+
+    auto option_variables = boost::program_options::variables_map{};
+
+    boost::program_options::store(
+        boost::program_options::command_line_parser(argc, argv)
+            .options(option_description)
+            .positional(positional_options)
+            .run(),
+        option_variables);
+
+
+    if (option_variables.count("help"))
+    {
+      std::cout << option_description << std::endl;
+      std::cout << "Report bugs to: https://github.com/anagno/gama\n";
+      return EXIT_SUCCESS;
+    }
+
+    if (option_variables.count("version"))
+    {
+      return GNU_gama::version("gama-local", "Ales Cepek et al.");
+    }
+
+    set_gama_language(argv_lang);
 
     // implicit output
-    if (!argv_txtout && !argv_htmlout && !argv_xmlout) argv_xmlout = "-";
+    std::ostream* output = nullptr;
 
-    if (argv_xmlout) xmlerr.setXmlOutput(argv_xmlout);
+    if (!option_variables.count("text") && 
+        !option_variables.count("html") &&
+        !option_variables.count("xml"))
+    {
+        output = &std::cout;
+    } 
+    std::ofstream fcout;
+    if (option_variables.count("text"))
+    {
+        auto argv_txtout = option_variables["text"].as<std::string>();
+        fcout.open(argv_txtout);
+        output = &fcout;
+    }
 
 #ifdef GNU_GAMA_LOCAL_SQLITE_READER
-    if (argv_confname && argv_readonly) return help();
-    if (!argv_1 && !argv_sqlitedb) return help();
+    if (option_variables.count("configuration") && option_variables.count("readonly-configuration"))
+    {
+      std::cout << option_description << std::endl;
+      return EXIT_SUCCESS;
+    } 
+    
+    if (!option_variables.count("input-file") && !option_variables.count("sqlitedb"))
+    {
+      std::cout << option_description << std::endl;
+      return EXIT_SUCCESS;
+    }
 #endif
 
-    if (!argv_lang)
-      set_gama_language(en);
-    else
-      {
-        if      (!strcmp("en", argv_lang)) set_gama_language(en);
-        else if (!strcmp("ca", argv_lang)) set_gama_language(ca);
-        else if (!strcmp("cs", argv_lang)) set_gama_language(cz);
-        else if (!strcmp("cz", argv_lang)) set_gama_language(cz);
-        else if (!strcmp("du", argv_lang)) set_gama_language(du);
-        else if (!strcmp("du", argv_lang)) set_gama_language(du);
-        else if (!strcmp("es", argv_lang)) set_gama_language(es);
-        else if (!strcmp("fr", argv_lang)) set_gama_language(fr);
-        else if (!strcmp("fi", argv_lang)) set_gama_language(fi);
-        else if (!strcmp("hu", argv_lang)) set_gama_language(hu);
-        else if (!strcmp("ru", argv_lang)) set_gama_language(ru);
-        else if (!strcmp("ua", argv_lang)) set_gama_language(ua);
-        else if (!strcmp("zh", argv_lang)) set_gama_language(zh);
-        else return help();
-      }
-
-    ostream* output = nullptr;
-
-    ofstream fcout;
-    if (argv_txtout)
-      {
-        if (!strcmp(argv_txtout, "-"))
-          {
-            output = &std::cout;
-          }
-        else
-          {
-            fcout.open(argv_txtout);
-            output = &fcout;
-          }
-      }
-
     GNU_gama::OutStream cout(output);
+    cout.set_encoding(argv_enc);
 
-    if (argv_enc)
-      {
-        using namespace GNU_gama;
-
-        if (!strcmp("utf-8", argv_enc))
-          cout.set_encoding(OutStream::utf_8);
-        else if (!strcmp("iso-8859-2", argv_enc))
-          cout.set_encoding(OutStream::iso_8859_2);
-        else if (!strcmp("iso-8859-2-flat", argv_enc))
-          cout.set_encoding(OutStream::iso_8859_2_flat);
-        else if (!strcmp("cp-1250", argv_enc))
-          cout.set_encoding(OutStream::cp_1250);
-        else if (!strcmp("cp-1251", argv_enc))
-          cout.set_encoding(OutStream::cp_1251);
-        else
-          return help();
-      }
-
-    if (argv_algo)
-      {
-        const std::string algorithm = argv_algo;
-        if (algorithm != "gso"      &&
-            algorithm != "svd"      &&
-            algorithm != "cholesky" &&
-            algorithm != "envelope" ) return help();
-      }
-
-    LocalNetwork* IS = new LocalNetwork;
+    GNU_gama::local::LocalNetwork* IS = new GNU_gama::local::LocalNetwork;
 
 #ifdef GNU_GAMA_LOCAL_SQLITE_READER
-    if (argv_sqlitedb)
+    if (option_variables.count("sqlitedb"))
       {
+        auto argv_sqlitedb = option_variables["sqlitedb"].as<std::string>();
         GNU_gama::local::sqlite_db::SqliteReader reader(argv_sqlitedb);
 
-        const char* conf = argv_confname;
-        if (argv_readonly) conf = argv_readonly;
+        auto conf = std::string{};
+        if (option_variables.count("configuration")) 
+          conf = option_variables["configuration"].as<std::string>();
+        if (option_variables.count("readonly-configuration")) 
+          conf = option_variables["readonly-configuration"].as<std::string>();;
+
         reader.retrieve(IS, conf);
       }
     else
 #endif
       {
-        ifstream soubor(argv_1);
-        GKFparser gkf(*IS);
+        auto argv_1 = option_variables["input-file"].as<std::string>();
+        std::ifstream soubor(argv_1);
+        GNU_gama::local::GKFparser gkf(*IS);
         try
           {
             char c;
             int  n, konec = 0;
-            string radek;
+            std::string radek;
             do
               {
                 radek = "";
@@ -312,7 +306,7 @@ int main(int argc, char **argv)
         catch (const GNU_gama::local::ParserException& v) {
           if (xmlerr.isValid())
             {
-              xmlerr.setDescription(T_GaMa_exception_2a);
+              xmlerr.setDescription(GNU_gama::local::T_GaMa_exception_2a);
               std::string t, s = v.what();
               for (std::string::iterator i=s.begin(), e=s.end(); i!=e; ++i)
                 {
@@ -326,108 +320,108 @@ int main(int argc, char **argv)
               return xmlerr.write_xml("gamaLocalParserError");
             }
 
-          cerr << "\n" << T_GaMa_exception_2a << "\n\n"
-               << T_GaMa_exception_2b << v.line << " : " << v.what() << endl;
+          std::cerr << "\n" << GNU_gama::local::T_GaMa_exception_2a << "\n\n"
+               << GNU_gama::local::T_GaMa_exception_2b << v.line << " : " << v.what() << std::endl;
           return 3;
         }
         catch (const GNU_gama::local::Exception& v) {
           if (xmlerr.isValid())
             {
-              xmlerr.setDescription(T_GaMa_exception_2a);
+              xmlerr.setDescription(GNU_gama::local::T_GaMa_exception_2a);
               xmlerr.setDescription(v.what());
               return xmlerr.write_xml("gamaLocalException");
             }
 
-          cerr << "\n" <<T_GaMa_exception_2a << "\n"
+          std::cerr << "\n" <<GNU_gama::local::T_GaMa_exception_2a << "\n"
                << "\n***** " << v.what() << "\n\n";
           return 2;
         }
         catch (...)
           {
-            cerr << "\n" << T_GaMa_exception_2a << "\n\n";
+            std::cerr << "\n" << GNU_gama::local::T_GaMa_exception_2a << "\n\n";
             throw;
           }
       }
 
-    if (argv_algo)
-      {
-        IS->set_algorithm(argv_algo);
-      }
+    IS->set_algorithm(argv_algo);
 
-    if (!IS->has_algorithm()) IS->set_algorithm();
+    switch (argv_angles)
+    {
+    case ::Angle::Gon:
+      IS->set_gons();
+      break;
+    case ::Angle::Degree:
+      IS->set_degrees();
+      break;  
+    }
 
-    if (argv_angles)
+    if (option_variables.count("cov-band"))
       {
-        if (!strcmp("400", argv_angles))
-          IS->set_gons();
-        else if (!strcmp("360", argv_angles))
-          IS->set_degrees();
-        else
-          return help();
-      }
+        int band = option_variables["cov-band"].as<int>();
 
-    if (argv_covband)
-      {
-        std::istringstream istr(argv_covband);
-        int band = -1;
-        if (!(istr >> band) || band < -1) return help();
-        char c;
-        if (istr >> c) return help();
+        if (band < -1)
+        {
+            std::cout << "band variable is invalid";
+            return EXIT_SUCCESS;
+        }
 
         IS->set_adj_covband(band);
       }
 
-    if (argv_iterations)
-      {
-        std::istringstream istr(argv_iterations);
-        int iter = IS->max_linearization_iterations();
-        if (!(istr >> iter) || iter < 0) return help();
-        char c;
-        if (istr >> c) return help();
+    if (argv_iterations < 0)
+    {
+        std::cout << "The number of iterations must be a positive number";
+        return EXIT_SUCCESS;
+    }
 
-        IS->set_max_linearization_iterations(iter);
-      }
+    IS->set_max_linearization_iterations(argv_iterations);  
 
-    if (argv_latitude)
+    if (option_variables.count("latitude"))
       {
+        auto argv_latitude = option_variables["latitude"].as<std::string>();
         double latitude;
         if (!GNU_gama::deg2gon(argv_latitude, latitude))
           {
-            if (!GNU_gama::IsFloat(string(argv_latitude)))
-              return help();
+            if (!GNU_gama::IsFloat(argv_latitude))
+            {
+                std::cout << "The latitude was not valid";
+                return EXIT_SUCCESS;
+            }
 
-            latitude = atof(argv_latitude);
+            latitude = atof(argv_latitude.c_str());
           }
 
         IS->set_latitude(latitude * GNU_gama::PI/200);
       }
 
-
-    if (argv_ellipsoid)
+    if (option_variables.count("ellipsoid"))
       {
-        using namespace GNU_gama;
+        auto argv_ellipsoid = option_variables["ellipsoid"].as<std::string>();
 
-        gama_ellipsoid gama_el = ellipsoid(argv_ellipsoid);
-        if  (gama_el == ellipsoid_unknown) return help();
-
+        GNU_gama::gama_ellipsoid gama_el = GNU_gama::ellipsoid(argv_ellipsoid.c_str());
+        if  (gama_el == GNU_gama::ellipsoid_unknown)
+        {
+            std::cout << "The defined ellipsoid is unknown.";
+            return EXIT_SUCCESS;
+        } 
         IS->set_ellipsoid(argv_ellipsoid);
       }
 
 
     {
-      cout << T_GaMa_Adjustment_of_geodetic_network << "        "
-           << T_GaMa_version << GNU_gama::GNU_gama_version()
+      cout << GNU_gama::local::T_GaMa_Adjustment_of_geodetic_network << "        "
+           << GNU_gama::local::T_GaMa_version << GNU_gama::GNU_gama_version()
            << "-" << IS->algorithm()
            << " / " << GNU_gama::GNU_gama_compiler() << "\n"
-           << underline(T_GaMa_Adjustment_of_geodetic_network, '*') << "\n"
+           << GNU_gama::local::underline(GNU_gama::local::T_GaMa_Adjustment_of_geodetic_network, '*') << "\n"
            << "http://www.gnu.org/software/gama/\n\n\n";
     }
 
     if (IS->PD.empty())
-      throw GNU_gama::local::Exception(T_GaMa_No_points_available);
+      throw GNU_gama::local::Exception(GNU_gama::local::T_GaMa_No_points_available);
 
     if (IS->OD.clusters.empty())
-      throw GNU_gama::local::Exception(T_GaMa_No_observations_available);
+      throw GNU_gama::local::Exception(GNU_gama::local::T_GaMa_No_observations_available);
 
     try
       {
@@ -437,7 +431,7 @@ int main(int argc, char **argv)
         //   }
         IS->remove_inconsistency();
 
-        AcordStatistics stats(IS->PD, IS->OD);
+        GNU_gama::local::AcordStatistics stats(IS->PD, IS->OD);
 
         /* Acord2 class for computing approximate values of unknown paramaters
          * (needed for linearization of project equations) superseded previous
@@ -451,22 +445,21 @@ int main(int argc, char **argv)
          * Class Acord2 was introduced for better handling of traverses.
          */
 
-        Acord2 acord2(IS->PD, IS->OD);
+        GNU_gama::local::Acord2 acord2(IS->PD, IS->OD);
         acord2.execute();
 
         if (IS->correction_to_ellipsoid())
           {
-            using namespace GNU_gama;
-            gama_ellipsoid elnum = ellipsoid(IS->ellipsoid().c_str());
-            Ellipsoid el {};
+            GNU_gama::gama_ellipsoid elnum = GNU_gama::ellipsoid(IS->ellipsoid().c_str());
+            GNU_gama::Ellipsoid el {};
             GNU_gama::set(&el, elnum);
-            ReduceToEllipsoid reduce_to_el(IS->PD, IS->OD, el, IS->latitude());
+            GNU_gama::local::ReduceToEllipsoid reduce_to_el(IS->PD, IS->OD, el, IS->latitude());
             reduce_to_el.execute();
-            ReducedObservationsToEllipsoidText(IS, reduce_to_el.getMap(), cout);
+            GNU_gama::local::ReducedObservationsToEllipsoidText(IS, reduce_to_el.getMap(), cout);
           }
 
         stats.execute();
-        ApproximateCoordinates(&stats, cout);
+        GNU_gama::local::ApproximateCoordinates(&stats, cout);
 
 
       }
@@ -478,7 +471,7 @@ int main(int argc, char **argv)
             return xmlerr.write_xml("gamaLocalException");
           }
 
-        cerr << e.what() << endl;
+        std::cerr << e.what() << std::endl;
         return 1;
       }
     catch(...)
@@ -490,14 +483,14 @@ int main(int argc, char **argv)
             return xmlerr.write_xml("gamaLocalApproximateCoordinates");
           }
 
-        cerr << "Gama / Acord: approximate coordinates failed\n\n";
+        std::cerr << "Gama / Acord: approximate coordinates failed\n\n";
         return 1;
       }
 
 
     if (IS->sum_points() == 0 || IS->sum_unknowns() == 0)
       {
-        throw GNU_gama::local::Exception(T_GaMa_No_network_points_defined);
+        throw GNU_gama::local::Exception(GNU_gama::local::T_GaMa_No_network_points_defined);
       }
 
     //else ... do not use else after throw
@@ -506,19 +499,19 @@ int main(int argc, char **argv)
           {
             OutlyingAbsoluteTerms(IS, cout);
             IS->remove_huge_abs_terms();
-            cout << T_GaMa_Observatios_with_outlying_absolute_terms_removed
+            cout << GNU_gama::local::T_GaMa_Observatios_with_outlying_absolute_terms_removed
                  << "\n\n\n";
           }
 
         if (!IS->connected_network())
-          cout  << T_GaMa_network_not_connected << "\n\n\n";
+          cout  << GNU_gama::local::T_GaMa_network_not_connected << "\n\n\n";
 
         bool network_can_be_adjusted;
         {
           std::ostringstream tmp_out;
           if (!(network_can_be_adjusted = GeneralParameters(IS, tmp_out)))
             {
-              NetworkDescription(IS->description, cout);
+              GNU_gama::local::NetworkDescription(IS->description, cout);
               cout << tmp_out.str();
             }
         }
@@ -535,107 +528,82 @@ int main(int argc, char **argv)
 
             if (IS->linearization_iterations() > 0)
               {
-                cout << T_GaMa_Approximate_coordinates_replaced << "\n"
-                     << underline(T_GaMa_Approximate_coordinates_replaced,'*')
+                cout << GNU_gama::local::T_GaMa_Approximate_coordinates_replaced << "\n"
+                     << GNU_gama::local::underline(GNU_gama::local::T_GaMa_Approximate_coordinates_replaced,'*')
                      << "\n\n"
-                     << T_GaMa_Number_of_linearization_iterations
+                     << GNU_gama::local::T_GaMa_Number_of_linearization_iterations
                      << IS->linearization_iterations() << "\n\n";
               }
 
             if (!TestLinearization(IS, cout)) cout << "\n";
 
-            NetworkDescription   (IS->description, cout);
-            GeneralParameters    (IS, cout);
-            FixedPoints          (IS, cout);
-            AdjustedUnknowns     (IS, cout);
-            ErrorEllipses        (IS, cout);
-            AdjustedObservations (IS, cout);
-            ResidualsObservations(IS, cout);
+            GNU_gama::local::NetworkDescription   (IS->description, cout);
+            GNU_gama::local::GeneralParameters    (IS, cout);
+            GNU_gama::local::FixedPoints          (IS, cout);
+            GNU_gama::local::AdjustedUnknowns     (IS, cout);
+            GNU_gama::local::ErrorEllipses        (IS, cout);
+            GNU_gama::local::AdjustedObservations (IS, cout);
+            GNU_gama::local::ResidualsObservations(IS, cout);
           }
 
-        if (argv_svgout)
+        if (option_variables.count("svg"))
           {
-            GamaLocalSVG svg(IS);
-            if (!strcmp(argv_svgout, "-"))
-              {
-                svg.draw(std::cout);
-              }
-            else
-              {
-                ofstream file(argv_svgout);
-                svg.draw(file);
-              }
+            GNU_gama::local::GamaLocalSVG svg(IS);
+            auto argv_svgout = option_variables["svg"].as<std::string>();
+            std::ofstream file(argv_svgout);
+            svg.draw(file);
           }
 
-        if (argv_obsout)
+        if (option_variables.count("obs"))
           {
-            ofstream opr(argv_obsout);
+            auto argv_obsout = option_variables["obs"].as<std::string>();
+            std::ofstream opr(argv_obsout);
             IS->project_equations(opr);
           }
 
-        if (argv_htmlout)
+        if (option_variables.count("html"))
           {
             GNU_gama::local::GamaLocalHTML html(IS);
             html.exec();
 
-            if (!strcmp(argv_htmlout, "-"))
-              {
-                html.html(std::cout);
-              }
-            else
-              {
-                ofstream file(argv_htmlout);
-                html.html(file);
-              }
+            auto argv_htmlout = option_variables["html"].as<std::string>();
+            std::ofstream file(argv_htmlout);
+            html.html(file);
           }
 
-        if (argv_xmlout)
+        if (option_variables.count("xml"))
           {
+            auto argv_xmlout = option_variables["xml"].as<std::string>();
+            xmlerr.setXmlOutput(argv_xmlout);
+
+            // TODO: why do we override the choice from the user?
             IS->set_gons();
 
             GNU_gama::LocalNetworkXML xml(IS);
 
-            if (!strcmp(argv_xmlout, "-"))
-              {
-                xml.write(std::cout);
-              }
-            else
-              {
-                ofstream file(argv_xmlout);
-                xml.write(file);
-              }
+            std::ofstream file(argv_xmlout);
+            xml.write(file);
           }
 
-        if (argv_octaveout)
+        if (option_variables.count("octave"))
           {
+
+            auto argv_octaveout = option_variables["octave"].as<std::string>();
+            // TODO: why do we override the choice from the user?
             IS->set_gons();
 
             GNU_gama::LocalNetworkOctave octave(IS);
 
-            if (!strcmp(argv_octaveout, "-"))
-              {
-                octave.write(std::cout);
-              }
-            else
-              {
-                ofstream file(argv_octaveout);
-                octave.write(file);
-              }
+            std::ofstream file(argv_octaveout);
+            octave.write(file);
           }
 
-        if (network_can_be_adjusted && argv_updated_xml)
+        if (network_can_be_adjusted && option_variables.count("updated-xml"))
           {
+            auto argv_updated_xml = option_variables["updated-xml"].as<std::string>();
             std::string xml = IS->updated_xml();
-
-            if (!strcmp(argv_updated_xml, "-"))
-              {
-                std::cout << xml;
-              }
-            else
-              {
-                ofstream file(argv_updated_xml);
-                file << xml;
-              }
+            std::ofstream file(argv_updated_xml);
+            file << xml;
           }
       }
 
@@ -658,31 +626,27 @@ int main(int argc, char **argv)
 #endif
   catch(const GNU_gama::Exception::adjustment& choldec)
     {
-      using namespace GNU_gama::local;
-
       if (xmlerr.isValid())
         {
-          xmlerr.setDescription(T_GaMa_solution_ended_with_error);
+          xmlerr.setDescription(GNU_gama::local::T_GaMa_solution_ended_with_error);
           xmlerr.setDescription(choldec.str);
           return xmlerr.write_xml("gamaLocalAdjustment");
         }
 
-      std::cout << "\n" << T_GaMa_solution_ended_with_error << "\n\n"
+      std::cout << "\n" << GNU_gama::local::T_GaMa_solution_ended_with_error << "\n\n"
                 << "****** " << choldec.str << "\n\n";
       return 1;
     }
   catch (const GNU_gama::local::Exception& V)
     {
-      using namespace GNU_gama::local;
-
       if (xmlerr.isValid())
         {
-          xmlerr.setDescription(T_GaMa_solution_ended_with_error);
+          xmlerr.setDescription(GNU_gama::local::T_GaMa_solution_ended_with_error);
           xmlerr.setDescription(V.what());
           return xmlerr.write_xml("gamaLocalException");
         }
 
-      std::cout << "\n" << T_GaMa_solution_ended_with_error << "\n\n"
+      std::cout << "\n" << GNU_gama::local::T_GaMa_solution_ended_with_error << "\n\n"
                 << "****** " << V.what() << "\n\n";
       return 1;
     }
@@ -696,13 +660,75 @@ int main(int argc, char **argv)
     std::cout << "\n" << stde.what() << "\n\n";
   }
   catch(...) {
-    using namespace GNU_gama::local;
 
     if (xmlerr.isValid())
       {
         return xmlerr.write_xml("gamaLocalUnknownException");
       }
 
-    std::cout << "\n" << T_GaMa_internal_program_error << "\n\n";
+    std::cout << "\n" << GNU_gama::local::T_GaMa_internal_program_error << "\n\n";
     return 1;
-  }
+}
+
+std::istream& GNU_gama::local::operator >>(std::istream& in, GNU_gama::local::LocalNetwork::Algorithm& algorithm)
+{
+  std::string token;
+  in >> token;
+
+  if(token == "gso") algorithm = GNU_gama::local::LocalNetwork::Algorithm::gso;
+  else if(token == "svd") algorithm = GNU_gama::local::LocalNetwork::Algorithm::svd;
+  else if(token == "cholesky") algorithm = GNU_gama::local::LocalNetwork::Algorithm::cholesky;
+  else if(token == "envelope") algorithm = GNU_gama::local::LocalNetwork::Algorithm::envelope;
+  else in.setstate(std::ios_base::failbit);
+
+  return in;
+}
+
+std::istream& GNU_gama::local::operator >>(std::istream& in, GNU_gama::local::gama_language& language)
+{
+  std::string token;
+  in >> token;
+
+  if(token == "en") language = GNU_gama::local::en;
+  else if(token == "ca") language = GNU_gama::local::ca;
+  else if(token == "cs") language = GNU_gama::local::cz;
+  else if(token == "cz") language = GNU_gama::local::cz;
+  else if(token == "du") language = GNU_gama::local::du;
+  else if(token == "es") language = GNU_gama::local::es;
+  else if(token == "fr") language = GNU_gama::local::fr;
+  else if(token == "fi") language = GNU_gama::local::fi;
+  else if(token == "hu") language = GNU_gama::local::hu;
+  else if(token == "ru") language = GNU_gama::local::ru;
+  else if(token == "ua") language = GNU_gama::local::ua;
+  else if(token == "zh") language = GNU_gama::local::zh;
+  else in.setstate(std::ios_base::failbit);
+
+  return in;
+}
+
+std::istream& GNU_gama::operator >>(std::istream& in, GNU_gama::OutStream::Encoding& encoding)
+{
+  std::string token;
+  in >> token;
+
+  if(token == "utf-8") encoding = GNU_gama::OutStream::utf_8;
+  else if(token == "iso-8859-2") encoding = GNU_gama::OutStream::iso_8859_2;
+  else if(token == "iso-8859-2-flat") encoding = GNU_gama::OutStream::iso_8859_2_flat;
+  else if(token == "cp-1250") encoding = GNU_gama::OutStream::cp_1250;
+  else if(token == "cp-1251") encoding = GNU_gama::OutStream::cp_1251;
+  else in.setstate(std::ios_base::failbit);
+
+  return in;
+}
+
+std::istream& operator >>(std::istream& in, Angle& angles)
+{
+  std::string token;
+  in >> token;
+
+  if (token == "400") angles = ::Angle::Gon;
+  else if (token == "360") angles = ::Angle::Degree;
+  else in.setstate(std::ios_base::failbit);
+
+  return in;
+}

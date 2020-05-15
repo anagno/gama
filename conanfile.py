@@ -7,10 +7,11 @@ import platform
 # message (STATUS "language_files == ${language_files}")
 # message (FATAL_ERROR "DEBUG: stopping CMake")
 
-# conan install /home/anagno/Documents/projects/gama -pr wasm.profile
+# conan install /home/anagno/Documents/projects/gama -pr /home/anagno/Documents/projects/gama/.travis/wasm
 # conan build /home/anagno/Documents/projects/gama --source-folder=/home/anagno/Documents/projects/gama --build-folder=.
 # cmake . -LAH
-# nodejs gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
+# node --experimental-modules --experimental-wasm-modules --experimental-wasm-threads --experimental-wasm-bulk-memory bin/gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
+# nodejs bin/gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
 
 #https://stackoverflow.com/questions/55635294/how-to-create-packages-with-cmake
 
@@ -18,7 +19,7 @@ class GaMa(ConanFile):
    name = "GaMa"
    version = "2.7"
    settings = "os", "compiler", "build_type", "arch",
-   generators = ["cmake_find_package", "cmake_paths", "virtualenv"]
+   generators = ["cmake_find_package", "virtualrunenv"]
 
    options = {
        "sqlite3": [True, False],
@@ -36,6 +37,7 @@ class GaMa(ConanFile):
 
    def requirements(self):
        self.requires("expat/2.2.9")
+       self.requires("boost/1.73.0")
 
        if self.options.sqlite3:
            self.requires("sqlite3/3.29.0")

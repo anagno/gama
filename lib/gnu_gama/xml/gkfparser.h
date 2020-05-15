@@ -58,6 +58,8 @@ namespace GNU_gama { namespace local {
       GKFparser(GNU_gama::local::LocalNetwork& locnet);
       ~GKFparser();
 
+    private:
+
       int characterDataHandler(const char* s, int len);
       int startElement(const char *cname, const char **atts);
       int endElement(const char * name);

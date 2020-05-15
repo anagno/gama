@@ -81,7 +81,7 @@ void a2_diff (string input_file, double& max_diff)
   using LocalNetwork = GNU_gama::local::LocalNetwork;
 
   std::unique_ptr<LocalNetwork> lnet (new LocalNetwork);
-  lnet->set_algorithm("gso");
+  lnet->set_algorithm(LocalNetwork::Algorithm::gso);
 
   std::ifstream soubor(input_dir + input_file);
   GNU_gama::local::GKFparser gkf(*lnet);
