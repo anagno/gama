@@ -1,0 +1,80 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Conan install",
+            "type": "shell",
+            "command": "conan",
+            "args": [
+                "install",
+                "${workspaceFolder}",
+                "--profile:build=linux_build",
+                "--profile:host=${input:profile}_host", 
+                "--install-folder",
+                "${env:HOME}/bin/gama/${input:profile}",
+                "-s",
+                "build_type=${input:build_type}",
+                "--build=missing"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Conan build",
+            "type": "shell",
+            "command": "conan",
+            "args": [
+                "build",
+                "${workspaceFolder}",
+                "--source-folder=${workspaceFolder}",
+                "--build-folder=${env:HOME}/bin/gama/${input:profile}"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Conan",
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Conan install",
+                "Conan build"
+            ],
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "profile",
+            "type": "pickString",
+            "description": "profile used during the Conan build",
+            "options": [
+                "wasm",
+                "linux",
+            ],
+            "default": "linux"
+        },
+        {
+            "id": "build_type",
+            "type": "pickString",
+            "description": "The build type of the Conan build",
+            "options": [
+                "Release",
+                "Debug",
+            ],
+            "default": "Release"
+        },
+
+    ]
+}

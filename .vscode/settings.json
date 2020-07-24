@@ -1,30 +1,11 @@
 {
-    "C_Cpp.clang_format_fallbackStyle": "none",
-    "C_Cpp.clang_format_style": "file",
-
-    "clang-format.executable": "/usr/bin/clang-format-7",
-    "C_Cpp.loggingLevel": "Debug",
-    "files.associations": {
-        "iostream": "cpp",
-        "ostream": "cpp",
-        "fstream": "cpp",
-        "iosfwd": "cpp"
+    "cmake.configureSettings": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true
     },
-    "editor.formatOnType": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.linting.ignorePatterns": [
-        ".vscode/*.py",
-        "**/site-packages/**/*.py"
-    ],
-    "python.pythonPath": "/usr/bin/python3",
-
-    //"conan.installCommand": "conan install emsdk_installer/1.38.29@bincrafters/stable -g=virtualenv",
-    "conan.installCommand": "conan install .. -pr ../.vscode/emscripten.profile",
-    //"conan.installCommand": "conan install .. -pr wasm.profile",
-    // conan build .. --source-folder=.. --build-folder=.
-    // cmake . -LAH
-    // nodejs gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
-    
-    "cmake.buildDirectory": "${workspaceRoot}/build"
+    "cmake.buildDirectory": "${userHome}/bin/gama/${buildType}",
+    "cmake.parallelJobs ": "8",
+    // sudo apt-get install clang-format
+    "C_Cpp.clang_format_path": "${workspaceFolder}/.vscode/.clang-format",
+    "C_Cpp.enhancedColorization": "Enabled",
+    "python.pythonPath": "/usr/bin/python"
 }

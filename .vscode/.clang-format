@@ -1,0 +1,91 @@
+---
+BasedOnStyle: Google
+
+IndentWidth: '4'
+TabWidth: '4'
+UseTab: Never
+ConstructorInitializerIndentWidth: '4'
+ContinuationIndentWidth: '4'
+MaxEmptyLinesToKeep: '10'
+KeepEmptyLinesAtTheStartOfBlocks: true
+
+ColumnLimit: '100'
+PenaltyBreakAssignment: '50'
+PenaltyBreakBeforeFirstCallParameter: '100'
+PenaltyBreakComment: '20'
+PenaltyBreakFirstLessLess: '50'
+PenaltyBreakString: '50'
+PenaltyBreakTemplateDeclaration: '50'
+PenaltyExcessCharacter: '2'
+PenaltyReturnTypeOnItsOwnLine: '50'
+PenaltyBreakString: '50'
+
+AccessModifierOffset: -4
+AlignAfterOpenBracket: AlwaysBreak
+AlignEscapedNewlines: DontAlign
+BinPackParameters: false
+BinPackArguments: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AlwaysBreakTemplateDeclarations: true
+AlwaysBreakBeforeMultilineStrings: true
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Custom
+BraceWrapping:
+  #AfterCaseLabel: true
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: true
+  BeforeCatch: true
+  BeforeElse: true
+  SplitEmptyFunction: true
+
+#AllowAllArgumentsOnNextLine: true
+AllowShortFunctionsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: true
+AllowShortBlocksOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+
+
+
+
+BreakBeforeInheritanceComma: true
+BreakBeforeTernaryOperators: true
+BreakStringLiterals: true
+
+Language: Cpp
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ConstructorInitializerIndentWidth: '4'
+BreakConstructorInitializers: BeforeComma
+#BreakInheritanceList: BeforeComma
+Cpp11BracedListStyle: true
+FixNamespaceComments: true
+IndentCaseLabels: false
+IndentWrappedFunctionNames: false
+NamespaceIndentation: None
+CompactNamespaces: false
+
+
+SpaceAfterCStyleCast: true
+SpaceBeforeAssignmentOperators: true
+#SpaceBeforeCpp11BracedList: false
+SpaceBeforeParens: false
+#SpaceBeforeRangeBasedForLoopColon: false
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+# Necessary for the license footer
+#ReflowComments: false
+
+---
+

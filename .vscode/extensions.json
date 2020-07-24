@@ -1,11 +1,8 @@
 {
     "recommendations": [
         "ms-vscode.cpptools",
-        "twxs.cmake",
-        "vector-of-bool.cmake-tools",
-        "cheshirekow.cmake-format",
-        "ms-python.python",
-        "FireBlackHat.conan-tools"
+        "ms-vscode.cmake-tools",
+        "ms-python.python"
     ],
 
     "unwantedRecommendations": []

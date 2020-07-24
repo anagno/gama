@@ -1,14 +1,11 @@
 from conans import ConanFile, CMake
 import platform
 
-# conan install /home/anagno/Documents/projects/gama -pr cmake -o sqlite3=True
 # cmake /home/anagno/Documents/projects/gama -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=TRUE -DUSE_SQLITE3=TRUE -DCONAN_EXPORTED=TRUE
 # ctest
 # message (STATUS "language_files == ${language_files}")
 # message (FATAL_ERROR "DEBUG: stopping CMake")
 
-# conan install /home/anagno/Documents/projects/gama -pr /home/anagno/Documents/projects/gama/.travis/wasm
-# conan build /home/anagno/Documents/projects/gama --source-folder=/home/anagno/Documents/projects/gama --build-folder=.
 # cmake . -LAH
 # node --experimental-modules --experimental-wasm-modules --experimental-wasm-threads --experimental-wasm-bulk-memory bin/gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
 # nodejs bin/gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360

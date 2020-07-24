@@ -10,24 +10,70 @@ buildType:
       long: Optimize generated code
       buildType: Release
 
-conan:
-  default: ON
+linkage:
+  default: static
   choices:
-    ON:
-      short: USE_CONAN
-      long: Use conan for downloading dependencies
+    static:
+      short: Static
+      long: Create static libraries
+      linkage: static
+    shared:
+      short: Shared
+      long: Create shared libraries/DLLs
+      linkage: shared
+
+use_libxml2:
+  default: 'yes'
+  choices:
+    'yes':
+      short: LibXml2
+      long: Use the lixml2 lib
       settings:
-        USE_CONAN: ON
-        CONAN_EXPORTED: False
-    OFF:
-      short: USE_SYSTEM_LIBRARIES
-      long: Use the libraries provided from the os
+        USE_LIBXML2: TRUE
+    'no':
+      short: No LibXml2
+      long: Do not use the lixml2 lib
       settings:
-        USE_CONAN: OFF
-        CONAN_EXPORTED: False
-    EXPORT:
-      short: CONAN_EXPORTED
-      long: Use conan to export the package
-      setting:
-        CONAN_EXPORTED: True
-        USE_CONAN: OFF
+        USE_LIBXML2: FALSE
+
+use_sqlite3:
+  default: 'yes'
+  choices:
+    'yes':
+      short: SQLlite3
+      long: Use the SQLlite3 lib
+      settings:
+        USE_SQLITE3: TRUE
+    'no':
+      short: No SQLlite3
+      long: Do not use the SQLlite3 lib
+      settings:
+        USE_SQLITE3: FALSE
+
+use_octave:
+  default: 'no'
+  choices:
+    'yes':
+      short: Octave lib
+      long: Use the Octave lib
+      settings:
+        USE_OCTAVE: TRUE
+    'no':
+      short: No Octave lib
+      long: Do not use the Octave lib
+      settings:
+        USE_OCTAVE: FALSE
+
+enable_testing:
+  default: 'yes'
+  choices:
+    'yes':
+      short: UT
+      long: Enable the UT
+      settings:
+        BUILD_TESTING: TRUE
+    'no':
+      short: No UT
+      long: Disable the UT
+      settings:
+        BUILD_TESTING: FALSE
