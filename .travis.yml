@@ -1,6 +1,10 @@
+# https://github.com/conan-io/conan-package-tools
+# Maybe to use in the future
+
 matrix:
   include:
-    - os: linux
+    - name: "Linux build with pre-install Cmake"
+      os: linux
       language: python
       python: "3.7"
       dist: bionic
@@ -21,7 +25,8 @@ matrix:
       env:
         - CONAN_PROFILE=
 
-    - os: linux
+    - name: "Linux build with conan"
+      os: linux
       language: python
       python: "3.7"
       dist: bionic
@@ -31,23 +36,23 @@ matrix:
         directories:
           - $HOME/.conan
       env:
-        - CONAN_PROFILE=.travis/linux
-
-    - os: linux
+        - CONAN_PROFILE=linux
+    
+    - name: "Wasm build"
+      os: linux
       language: python
       python: "3.7"
       dist: bionic
-      compiler: 
-        - clang
-        - gcc
+      compiler: gcc
       cache:
         pip: true
         directories:
           - $HOME/.conan
       env:
-        - CONAN_PROFILE=.travis/wasm
-
-    - os: windows
+        - CONAN_PROFILE=wasm
+    
+    - name: "Windows build with conan"
+      os: windows
       language: sh
       python: "3.7"
       cache:
@@ -58,20 +63,24 @@ matrix:
         - choco install python3 --version 3.7
         - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
       env:
-        - CONAN_PROFILE=.travis/windows
+        - CONAN_PROFILE=windows
 
 
 install:
   - pip install conan
   - conan user
+  - conan config install .travis/conan_settings.zip
 
 before_script:
-  # For compiling wasm we have to already have Expat as a native library
-  - if [[ "${CONAN_PROFILE}" == '.travis/wasm' ]]; then
+
+    # For compiling wasm we have to already have Expat as a native library
+    # Workaround (?) for 
+  - if [[ "${CONAN_PROFILE}" == 'wasm' ]]; then
     conan install Expat/2.2.9@pix4d/stable --build=missing;
     fi
+
   - if [ -n "${CONAN_PROFILE}" ]; then
-    conan install . -pr ${CONAN_PROFILE} --build=missing;
+    conan install . --profile:build=${TRAVIS_OS_NAME}_build --profile:host=${CONAN_PROFILE}_host --build=missing;
     fi
 
 script:
@@ -83,7 +92,7 @@ script:
     source activate_run.sh;
     fi
   # Execute for the moment the UT only in Linux
-  - if [[ "${CONAN_PROFILE}" == '.travis/linux' ]]; then
+  - if [[ "${CONAN_PROFILE}" == 'linux' ]]; then
     ctest . ;
     fi
   # Building by calling conan via the Cmake. These are 2 differents builds. 

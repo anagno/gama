@@ -37,7 +37,7 @@ if(NOT CONAN_EXPORTED)
         "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
     file(
       DOWNLOAD
-      "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.14/conan.cmake"
+      "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.15/conan.cmake"
       "${CMAKE_BINARY_DIR}/conan.cmake")
   endif()
 
