@@ -1,5 +1,5 @@
 [requires]
-Expat/2.2.9@pix4d/stable
+expat/2.2.9
 
 [generators]
 cmake_find_package

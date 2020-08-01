@@ -11,8 +11,6 @@ matrix:
       compiler: gcc
       cache:
         pip: true
-        directories:
-          - $HOME/.conan
       addons:
         apt:
           sources:
@@ -33,8 +31,6 @@ matrix:
       compiler: gcc
       cache:
         pip: true
-        directories:
-          - $HOME/.conan
       env:
         - CONAN_PROFILE=linux
     
@@ -46,8 +42,6 @@ matrix:
       compiler: gcc
       cache:
         pip: true
-        directories:
-          - $HOME/.conan
       env:
         - CONAN_PROFILE=wasm
     
@@ -58,7 +52,6 @@ matrix:
       cache:
         directories:
           - $HOME/AppData/Local/Temp/chocolatey
-          - $HOME/.conan
       before_install:
         - choco install python3 --version 3.7
         - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
@@ -72,34 +65,28 @@ install:
   - conan config install .travis/conan_settings.zip
 
 before_script:
-
-    # For compiling wasm we have to already have Expat as a native library
-    # Workaround (?) for 
-  - if [[ "${CONAN_PROFILE}" == 'wasm' ]]; then
-    conan install Expat/2.2.9@pix4d/stable --build=missing;
-    fi
-
   - if [ -n "${CONAN_PROFILE}" ]; then
     conan install . --profile:build=${TRAVIS_OS_NAME}_build --profile:host=${CONAN_PROFILE}_host --build=missing;
     fi
 
 script:
   # Building using conan
-  - if [ -n "${CONAN_PROFILE}" ]; then
-    conan build .;
+  - if [ -n "${CONAN_PROFILE}" ] && [ "${CONAN_PROFILE}" != 'windows' ]; then
+    conan build . ;
     fi
-  - if [ -n "${CONAN_PROFILE}" ]; then
-    source activate_run.sh;
+
+  # De-activating testing in windows for the moment
+  # We have problems with some of the linking
+  # TODO Fix
+  - if [ -n "${CONAN_PROFILE}" ] && [ "${CONAN_PROFILE}" == 'windows' ]; then
+    conan build . -c -b -i;
     fi
-  # Execute for the moment the UT only in Linux
-  - if [[ "${CONAN_PROFILE}" == 'linux' ]]; then
-    ctest . ;
-    fi
+
   # Building by calling conan via the Cmake. These are 2 differents builds. 
   # If no conan profile is provided then we use this method
   # Not the best, but for the moment it will have to be sufficient
   - if [ -z "${CONAN_PROFILE}" ]; then
-    /usr/bin/cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=TRUE -DUSE_SQLITE3=TRUE -DUSE_LIBXML2=TRUE;
+    /usr/bin/cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=TRUE -DUSE_SQLITE3=TRUE;
     fi
   - if [ -z "${CONAN_PROFILE}" ]; then
     make;

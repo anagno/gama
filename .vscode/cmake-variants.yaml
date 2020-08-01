@@ -22,20 +22,6 @@ linkage:
       long: Create shared libraries/DLLs
       linkage: shared
 
-use_libxml2:
-  default: 'yes'
-  choices:
-    'yes':
-      short: LibXml2
-      long: Use the lixml2 lib
-      settings:
-        USE_LIBXML2: TRUE
-    'no':
-      short: No LibXml2
-      long: Do not use the lixml2 lib
-      settings:
-        USE_LIBXML2: FALSE
-
 use_sqlite3:
   default: 'yes'
   choices:

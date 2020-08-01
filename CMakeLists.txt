@@ -4,6 +4,8 @@ project (gnu-gama VERSION 2.8.1)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+# set(CMAKE_VISIBILITY_INLINES_HIDDEN YES)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
 # Tests
@@ -15,12 +17,6 @@ include(CMakeDependentOption)
 option(USE_SQLITE3 "Use the SQLite 3 on the compilation of the source code" OFF)
 
 if(BUILD_TESTING)
-  cmake_dependent_option(USE_LIBXML2
-                         "Use the libxml2 on the compilation of the source code"
-                         OFF
-                         "BUILD_TESTING"
-                         OFF)
-
   cmake_dependent_option(USE_OCTAVE
                          "Use the liboctave-dev on the compilation of the source code"
                          OFF
@@ -47,12 +43,6 @@ if(NOT CONAN_EXPORTED)
     set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} sqlite3=True)
   endif()
 
-  if(BUILD_TESTING)
-    if(USE_LIBXML2)
-      set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} libxml2=True)
-    endif()
-  endif()
-
   include(${CMAKE_BINARY_DIR}/conan.cmake)
   conan_check(VERSION 1.19.1 REQUIRED)
 
@@ -73,11 +63,8 @@ if(USE_SQLITE3)
 endif()
 
 if(BUILD_TESTING)
-  if(USE_LIBXML2)
-    find_package(LibXml2 2.9 REQUIRED)
-    find_program(LIBXML2_XMLLINT_EXECUTABLE xmllint)
-  endif()
-  
+  find_package(LibXml2 2.9 REQUIRED)
+  find_program(LIBXML2_XMLLINT_EXECUTABLE xmllint REQUIRED)
 
   if(USE_OCTAVE)
     #sudo apt-get install liboctave-dev
