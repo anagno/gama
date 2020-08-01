@@ -16,7 +16,7 @@
                 "${env:HOME}/bin/gama/${input:profile}",
                 "-s",
                 "build_type=${input:build_type}",
-                "--build=missing"
+                "--build=outdated"
             ],
             "group": "build",
             "presentation": {
@@ -61,7 +61,7 @@
             "description": "profile used during the Conan build",
             "options": [
                 "wasm",
-                "linux",
+                "linux"
             ],
             "default": "linux"
         },
