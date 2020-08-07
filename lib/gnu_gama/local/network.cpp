@@ -1,7 +1,8 @@
 /* GNU Gama -- adjustment of geodetic networks
     Copyright (C) 1999, 2006, 2010  Ales Cepek <cepek@fsv.cvut.cz>
                   2011  Vaclav Petras <wenzeslaus@gmail.com>
-                  2012, 2013, 2014, 2015, 2018, 2019  Ales Cepek <cepek@gnu.org>
+                  2012, 2013, 2014, 2015, 2018, 2019, 2020
+                  Ales Cepek <cepek@gnu.org>
 
    This file is part of the GNU Gama C++ library.
 
@@ -212,8 +213,7 @@ private:
 
 LocalNetwork::LocalNetwork()
   : pocbod_(0), tst_redbod_(false), pocmer_(0), tst_redmer_(false),
-    m_0_apr_(10), konf_pr_(0.95), tol_abs_(1000),
-    update_constrained_coordinates_(false), typ_m_0_(empiricka_),
+    m_0_apr_(10), konf_pr_(0.95), tol_abs_(1000), typ_m_0_(empiricka_),
     tst_rov_opr_(false), tst_vyrovnani_(false), min_n_(0), min_x_(nullptr),
     gons_(true)
 {
@@ -1046,15 +1046,13 @@ void LocalNetwork::refine_approx()
       {
         const PointID& cb = unknown_pointid(i);
         LocalPoint& b = PD[cb];
-        if (!b.constrained_xy() || update_constrained_coordinates())
-            b.set_xy(b.x() + x(i)/1000, b.y() + x(i+1)/1000);
+        b.set_xy(b.x() + x(i)/1000, b.y() + x(i+1)/1000);
       }
     else if (unknown_type(i) == 'Z')
       {
         const PointID& cb = unknown_pointid(i);
         LocalPoint& b = PD[cb];
-        if (!b.constrained_z() || update_constrained_coordinates())
-          b.set_z(b.z() + x(i)/1000);
+        b.set_z(b.z() + x(i)/1000);
       }
     else if (unknown_type(i) == 'R')
       {
@@ -1348,8 +1346,6 @@ std::string LocalNetwork::updated_xml()
   xml += "  tol-abs=\""   + std::to_string(tol_abs())     + "\"\n";
   xml += "  sigma-act=\"";
   xml +=         m_0_apriori() ? "apriori\"\n" : "aposteriori\"\n";
-  xml += "  update-constrained-coordinates=\"";
-  xml +=         update_constrained_coordinates() ? "yes\"\n" : "no\"\n";
   xml += "  angles=\"" + std::string(gons() ? "400" : "360") + "\"\n";
   if (has_algorithm()) xml += "  algorithm=\"" + algorithm() + "\"\n";
   if (has_latitude())

@@ -1,6 +1,7 @@
 /*
     GNU Gama -- adjustment of geodetic networks
-    Copyright (C) 2000, 2002, 2013, 2014, 2018, 2019  Ales Cepek <cepek@gnu.org>
+    Copyright (C) 2000, 2002, 2013, 2014, 2018, 2019, 2020
+                  Ales Cepek <cepek@gnu.org>
 
     This file is part of the GNU Gama C++ library.
 
@@ -343,7 +344,6 @@ namespace GNU_gama { namespace local {
     lnet.conf_pr    (0.95);
     lnet.tol_abs    (1000);
     lnet.set_m_0_aposteriori();
-    lnet.update_constrained_coordinates(false);
 
     state       = state_start;
     standpoint  = 0;
@@ -499,16 +499,6 @@ namespace GNU_gama { namespace local {
               lnet.set_m_0_apriori();
             else
               return error(T_GKF_wrong_type_of_standard_deviation);
-          }
-        else if (jmeno == "update-constrained-coordinates")
-          {
-            if (hodnota == "yes")
-              lnet.update_constrained_coordinates(true);
-            else if (hodnota == "no" )
-              lnet.update_constrained_coordinates(false);
-            else
-            return error(T_GKF_bad_network_configuration_unknown_parameter
-                         + jmeno + " = " + hodnota);
           }
         else if (jmeno == "angles")
           {

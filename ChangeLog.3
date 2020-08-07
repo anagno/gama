@@ -1,0 +1,545 @@
+2020-07-01  Ales Cepek <cepek@gnu.org>
+
+	* new release 2.09
+
+	* There is one major fix visible to end users. Implicit value of
+	XML parameter 'update_constrained_coordinates' was changed to
+	"yes". The behavior of adjustment calculation was well and clearly
+	described in the documentation, but in some cases the old implicit
+	value ("no") might have led to poor numerical results. The input
+	data XML parameter 'update_constrained_coordinates' is preserved
+	only for backward compatibility and is likely to be removed in
+	some future release.
+
+2019-08-20  Petra Millarova <petramillarova@gmail.com>
+
+	* new release 2.07
+
+	* new features and enhancements in class Acord2 and bug fixes
+	 ** improved AcordTraverse algorithm
+	 ** fixed a bug in finding traverses
+	 ** added new testing data
+	 ** fixed display of total computed points in output
+	 ** compute all possible orientations from standpoints at the end,
+	    they are needed latert
+	 **  fix acordweakchecks and candidate point erasing
+	 ** Misc fixes
+	    - transformation returns correct point coordinates
+	    - reverting to swapping standpoints instead of deleting them
+	    - fixed back orientation search for traverse computation
+	 ** algorithms AcordVectors, AcordHdiffs and AcordZderived
+	 ** fixed zero division for integer vectors demo
+	 ** several minor maintenance issues and cleanup
+
+2019-07-07  Ales Cepek  <cepek@gnu.org>
+
+	* new release 2.06
+
+	* fixed two bugs reported by Oleg Goussev
+	  - a bug in html output format for --angles 360 (CC units erroneouly
+	    used on several places where SS belong)
+	  - a bug in gkf input data resulting in segmentation fault)
+
+	* improved AcordTraverse algorithm
+
+2019-05-11  Ales Cepek <cepek@gnu.org>
+
+	* new release 2.05
+
+	* added a new class Acord2 with other helper classes for
+	combinatorial solution of medians of approximate coordinates by
+	Petra Millarova <petramillarova@gmail.com>
+	* test suites for Acord2 (a2g and a2diff)
+	* source files for class Acord moved to lib/gnu_gama/local/acord/
+	* ApproximateCoordinates now also takes a class as a template
+	parameter
+	* fixed bug in SimilarityTr2D calculation
+
+2019-03-31  Ales Cepek  <cepek@gnu.org>
+
+	* new release 2.04
+
+	* experimental qmake project file gama-local.pro to be used where
+	cmake is not available with Qt distribution on
+	Windows. CMakeLists.txt project is prefered over gama-local.pro.
+
+	* PointID hash function size_t hash<PointID>::operator()(const
+	PointID & obj) const
+
+	* several minor formal changes.
+
+2019-02-15  Ales Cepek  <cepek@gnu.org>
+
+	* new release 2.03
+
+	* added new attribute "extern" both to the gama-local xml input
+	and adjustment results xml output (as suggested by Kristian Evers).
+
+2018-12-18  Ales Cepek  <cepek@gnu.org>
+
+	* new release 2.02
+
+	* improved Hungarian translation by Siki Zoltan.
+	* added new equivalent levelling data set
+
+2018-10-07  Ales Cepek  <cepek@gnu.org>
+
+	* new release 2.01
+
+	* support for gama-g3 build is implicitly enabled (can be disabled
+	by running configure script with --disable-gama-g3)
+	** minor internal changes in organization of gama-g3
+	* gnu-gama-data.dtd replaced by schema definition gnu-gama-data.xsd
+	** based on script https://www.w3.org/2000/04/schema_hack/
+	* new xmllint test for gama-g3 adjustment results
+	* new gama-g3 examples (from the SJTSK/05 project)
+
+2018-05-13  Ales Cepek  <cepek@gnu.org>
+
+	* new release 2.00
+
+	* Kolmogorov-Smirnov test removed - available only as conditional
+	compile
+	* added two unit tests - triangel 1 and 2
+	* gama-local-input.texi wording
+	* fixed a bug in azimuth definition in input XML (missing optional
+	attribude from="") reported by Oleg Goussev
+	* 5 unit tests for statan.cpp functions
+	* fixed some compiler warnings
+	* matvec update
+	* mat.h : row.size() ~~> explicit conversion to Index
+	* fixed several compiler warnings
+	* GNU_gama::List replaced by std::list
+	* redefinition of matvec template parameters, elimination of
+	size_t in sources
+
+2018-03-30  Ales Cepek  <cepek@gnu.org>
+
+	* new release 1.22
+	* Maintainer's release : several minor enhancements and fixes
+	before general cleanup of all source codes leading to version 2.
+
+2018-03-27  Ales Cepek  <cepek@gnu.org>
+
+	* rev 1.21.7
+	* added test sparse-demo
+
+2018-03-07  Ales Cepek  <cepek@gnu.org>
+
+	* revision 1.21.4
+	* added fixed points to Octave export (.m)
+
+2018-03-06  Ales Cepek  <cepek@gnu.org>
+
+	* revision 1.21.3
+	* added m4/ directory with macros ax_cxx_compile_stdcxx.m4 and
+	ax_valgrind_check.m4 to enable them even in case when
+	autoconf-archive package is not installed
+
+2018-02-28  Ales Cepek  <cepek@gnu.org>
+
+	* revision 1.21.2
+	* --octave option added to documentation
+	* all test scripts in gama-local renamed to have extension .sh
+	* added simple test for Octave adjustment results files
+
+2018-02-26  Ales Cepek  <cepek@gnu.org>
+
+	* revision 1.21.1
+	* xml/gama-local.xsd : fixed type definition of from_dh (in <obs>
+	tag) toxs:double
+	* tests/gama-local/input/zoltan-test_3d_gon.gkf : addes tests to
+	** Check if explicit from_dh attributes in observations takes
+	   higher precedence than the common value given in <obs
+	   from_dh="..."> tag
+	** Same value is given in <obs from_dh="..."> and in the
+	   observations
+	** Attribute from_dh="..." is defined only in <obs> and passed to
+	   the observations implicitly
+	* lib/gnu_gama/xml/gkfparser.h|cpp : removed processing of
+	obsoleted points' attributes xy and height
+	* lib/gnu_gama/local/acord/reduce_observations.h|cpp : removed
+	example processing of ydiff observation type
+
+2017-11-26  Ales Cepek  <cepek@gnu.org>
+
+	* new release 1.21
+	* Maintainer's release : internal matrix/vectors memory management
+	  replaced with a new implementation using C++11 move constructor
+	  and move asignment syntax.
+
+2017-11-12  Ales Cepek  <cepek@gnu.org>
+
+	* ver. 1.19.4
+	* deprecated dynamic exception specifications replaced by noexcept
+	* new test suite for matvec classes
+	* added valgrind rule to configure.ac and test suites' Makefile.am
+
+2017-10-21  Ales Cepek  <cepek@gnu.org>
+
+	* ver. 1.19.3 removed double underscores from include guards
+
+	* ver. 1.19.2 fixed the bug in sql output reported by Pavlo Karbovnyk
+
+2017-06-26  Ales Cepek  <cepek@gnu.org>
+
+	* new release 1.19
+
+	* fixed a bug introduced in 1.16, reported by Pierre Bosser
+	<pierre.bosser@ensta-bretagne.fr>. Implicit value of covariance
+	band in XML adjustment output is -1 (full bandwidth).
+
+2017-05-01  Ales Cepek  <cepek@gnu.org>
+
+	* matvec 1.02 - user defined initializer replaced by
+	std::initializer_list
+
+2016-08-19  Ales Cepek  <cepek@gnu.org>
+
+	* patch by Greg Troxel
+	fixed "test ==", which is a bash extension and not POSIX compliant
+
+2016-08-14  Ales Cepek  <cepek@gnu.org>
+
+	* new release 1.18
+
+	This is a maintainer's version introducing some minor technical
+	changes and important syntax changes in configure.ac (many thanks
+	to Greg Troxel <gdt@lexort.com> for the patch and testing on OS X
+	10.9, netbsd-7 i386 and netbsd-7 amd64).
+
+	* configure.ac : patch by Greg Troxel <gdt@lexort.com>
+	  CPPFLAGS was set with +=, which is a bash extension and fails on
+	  POSIX-conforming shells.  This resulted in sqlite3 support not being
+	  enabled on NetBSD, even though the sqlite3 library was found and
+	  linked in.
+
+	* fixed some minor problems reported by Greg Troxel (doc, NEWS)
+	* in local/network.cpp commented out // removed_obs.clear();
+	* fixed a formatting bug in outlaying terms (due to c++11)
+	* fixed a bug in HTML parser test
+	* Simplified class LocalPoint. Removed helper classes XYZ, XY and
+	  ZZ, replace by correspondning constructors. Removed exceptions
+	  from x(), y() and z() methods; user of the class is responsible
+	  for correct usage of LocalPoint objects, i.e. for calling
+	  test_xy() and test_z().
+	* fixed a bug in sql export reported by Dominik Hladik
+	* added @documentencoding UTF-8 into gama.texi
+
+2015-11-08  Ales Cepek  <cepek@gnu.org>
+
+	* new release 1.17
+
+	This is a maintainer's version introducing some basic functions
+	for handling inconsistent systems (like right-handed coordinates
+	with left-handed angles). Gama-local program solves this problem
+	by internally changig signs of all Y coordinates, together with
+	observed Y coordinates and Y differences (vectors).
+
+	All y signed information is changed in the output. This works file
+	for batch processing (gama-local) but fails in interactive
+	dialogue environment of Qt based gama-q2 where all input
+	information can be edited by user and changed signed Y coordinates
+	(and observations) must be switched only once.
+
+2015-07-25  Ales Cepek  <cepek@gnu.org>
+
+	* fixed two bugs reported by Greg Troxel <gdt@lexort.com>
+	** The bug with the tests is that they specify /bin/bash as the shell.
+           POSIX does not require bash to be present.
+	** Bad conditional in test for availability of xmllint parser.
+
+2015-07-24  Ales Cepek  <cepek@gnu.org>
+
+	* new release version 1.16
+
+2015-05-22  Ales Cepek  <cepek@gnu.org>
+
+	* 1.15j	fixed a bug in LocalNetwork class reported independently by
+		Marek Peca <pecam1@fjfi.cvut.cz>
+		Kolesár András <kolesar@openstreetmap.hu>
+		Alex Shulg <alex-shulg@yandex.ru>
+
+@@ -724,8 +724,8 @@ void LocalNetwork::project_equations()
+               min_x_[n++] = p.index_z();
+             }
+         }
+-      least_squares->min_x(min_n_, min_x_);
+     }
++  least_squares->min_x(min_n_, min_x_);
+
+
+2014-01-02  Ales Cepek  <cepek@gnu.org>
+
+	* fixed a bug reported by Gabriel Gyori <gabriel.gyori@fsv.cvut.cz>
+	  in the class LocalNetwork2sql
+
+2013-11-06  Ales Cepek  <cepek@gnu.org>
+
+	* fixed a bug reported by Dirk Falk in azimuth computations
+	  ApproximateCoordinates fialed to solve azimuth-distance
+	  combinatios in some cases
+
+2013-06-06  Ales Cepek  <cepek@gnu.org>
+
+	* Tae Wong <seotaewong40@gmail.com> contributed with thorough
+	revision of accentuation of names in the GNU Gama
+
+2013-05-30  Tomas Kubin <tomas.kubin@fsv.cvut.cz>
+
+	* a posteriori standard deviation Chi-Square test is newly always
+	performed in gama-local. The patch sent by Tomas Kubin.
+
+2012-12-25  Ales Cepek  <cepek@gnu.org>
+
+	* added Chinese translation in GBK encoding (switch "zh")
+	by 项维 (Vim Xiang) <vimxiang@gmail.com>
+
+2012-11-24  Ales Cepek  <cepek@gnu.org>
+
+	* class Gkf2sql (used in gama-local-gkf2sl) updated to be a general
+	export class and renamed to LocalNetword2sql
+
+2012-09-10  Ales Cepek  <cepek@gnu.org>
+
+	* added basic test suite for gama-local (make check)
+
+2012-09-07  Ales Cepek  <cepek@gnu.org>
+
+	* new release 1.13
+
+2012-09-07  Ales Cepek  <cepekgnu.org>
+
+	* removed matvec constructors with variable number of parameters
+	(direct initializaion of Mat / Vec elements).
+
+2012-09-06  Ales Cepek  <cepek@gnu.org>
+
+	* Fixed templates lookup name syntax errors reported by Brandon
+	Invergo <brandon@invergo.net> (detected by compiler g++-4.7).
+	Many thanks for your patch, Brandon.
+
+2012-08-11  Ales Cepek  <cepek@gnu.org>
+
+	* In gama-local suppressed output of running results during
+	linearization iterations
+
+	* added doxygen documentation into statan.h, removed forgotten
+	Czech comments from statan.cpp
+
+2012-08-10  Ales Cepek  <cepek@gnu.org>
+
+	* Fixed a bug reported by Jacques Beilin <jacques.beilin@ensg.eu>
+
+	Function NormalDistribution ended in an endless loop for high
+	values of input argument x.
+
+diff --git a/lib/gnu_gama/statan.cpp b/lib/gnu_gama/statan.cpp
+index 4da4a3b..bc2255c 100644
+--- a/lib/gnu_gama/statan.cpp
++++ b/lib/gnu_gama/statan.cpp
+@@ -21,7 +21,7 @@
+
+ #include <gnu_gama/statan.h>
+ #include <gnu_gama/radian.h>
+-
++#include <cfloat>
+
+ using namespace std;
+
+@@ -211,7 +211,10 @@ void NormalDistribution(double x, double& D, double& f)
+       D = p2/q2;
+       if (!typv)
+          D = 1 - D;
+-      } while ( (r-D) != 0 || (s-D) != 0);
++   } while (std::abs(r - D) > DBL_EPSILON);
++
++   if (s - D) return;
++   if (typv) D = 0; else D = 1;
+ }
+
+ // Kolmogorov-Smirnov probability function
+
+
+2012-07-26  Ales Cepek  <cepek@gnu.org>
+
+	* Fixed a bug reported by Anton Horpynich <anton@vingeo.com>
+
+	The computation of approximate coordinates failed if an angle
+	needed for computing of an intersection was smaller than 0.15
+	radians / 10 gons (implicit testing criterion). Although this is a
+	reasonable limit for standard surveying networks, in a batch
+	computation of approximate coordinates a much smaller value can be
+	sometimes acceptable. It is more or less a matter of personal
+	opinion if this is to be supposed a bug or not.
+
+	Gama newly solves approximate coordinates in two main loops.
+	During the first loop the default value 0.15 in class Acord is
+	used.  If afterwards there are still some coordinates remain
+	missing Gama starts a second loop with series of iterations in
+	which firstly tries to find a solution with the default value
+	then secondly with a very tiny limit of 0.0015 radians.
+
+	In most cases all coordinates are solved in the first loop with
+	the default small angle limit 10 gons.
+
+	............................................
+
+
+2012-07-24  Ales Cepek  <cepek@gnu.org>
+
+	* new release 1.12
+
+2012-05-08  Vaclav Petras  <wenzeslaus@gmail.com>
+
+	* class BaseVisitor and related classes moved to separete file visitor.h
+
+	* local Observation has protected init method and non-parametric constructor
+	Code in local Observation was reorganized and some atributes are not const.
+
+	* local observations are visitable (base is Accept<>)
+			-  class Direction : public Observation
+			+  class Direction : public Accept<Direction, Observation>
+
+	* local observations' write methods moved to WriteVisitor
+
+	* LocalRevision and LocalLinearization are now visitors
+
+	* base classes Revision and Linearization removed from local
+
+	* method observations_summary in LocalNetworkXML uses visitor for counting
+
+	* method observations in LocalNetworkXML uses visitor for writing
+
+	* function OutlyingAbsoluteTerms uses visitor for writing
+
+	* method test_abs_term in LocalNetwork uses visitor for test
+
+	* local Observation set_passive and set_active methods are now non-const
+
+	* function AdjustedObservations uses visitor for writing part of table row
+
+	* function TestLinearization uses visitor for computing and writing
+
+	* function ResidualsObservations uses visitor writing observation name
+
+2012-03-16  Ales Cepek  <cepek@gnu.org>
+
+	* fixed a bug in the definition of angular observations reported
+	by Anna Kratochvilova <anna.kratochvilova@fsv.cvut.cz> and Vaclav
+	Petras <vaclav.petras@fsv.cvut.cz>
+
+2012-03-05  Ales Cepek  <cepek@gnu.org>
+
+	* updated version of review.hu.lang by Siki Zoltan, some
+	  corrections in the Hungarian translation of GNU Gama
+
+2011-08-22  Ales Cepek  <cepek@gnu.org>
+
+	* two syntax errors reported by Siki Zoltan
+		lib/gnu_gama/g3/g3_write_observation_xml.h
+			@@ -46,7 +46,7 @@ namespace GNU_gama { namespace g3 {
+			   {
+			   private:
+
+			-    mutable std::ostream& out;
+			+    std::ostream& out;
+		lib/gnu_gama/local/local_linearization.h
+			@@ -67,7 +67,7 @@ namespace GNU_gama { namespace local {
+
+			private:
+
+			-      mutable PointData&   PD;
+			+      PointData&           PD;
+
+	The C++ Standard (7.1.1 Declarations, paragraph 8): The mutable
+	specifier can be applied only to names of class data members and
+	cannot be applied to names declared const or static, and cannot be
+	applied to reference members.
+
+
+............................................
+
+
+1.11 2011-08-14  Ales Cepek  <cepek@gnu.org>
+
+	* new release 1.11
+
+2011-08-13  Ales Cepek  <cepek@gnu.org>
+
+	* class ObservationVisitor renamed to BaseVisitor (possible use of
+	abstract base visitor class in acyclic visitor pattern is not
+	limited to observations)
+
+2011-08-11  Ales Cepek  <cepek@gnu.org>
+
+	* added a new intermediate helper template class Accept (in
+	model.h) to unify definiton of accept() method in observational
+	classes in gama-g3. Function accept(ObservationVisitor*) is a pure
+	virtual method defined in the base Observation class.
+
+2011-04-17  Ales Cepek  <cepek@gnu.org>
+
+	* SVD class (matvec/svd.h) selected internal data members and
+	variables declared volatile to suppress g++ optimization
+
+2011-04-12  Ales Cepek  <cepek@gnu.org>
+
+	* added Spanish translation of *.lang files supplied by Jokin
+	Zurutuza <zurutuza@ujaen.es>
+
+	* fixed a minor bug in formatting of adjustment general
+	parameters (general_parameters.h)
+
+2011-03-30  Ales Cepek  <cepek@gnu.org>
+
+	* first draft of string functions Utf8::length() and Utf8::leftPad()
+
+2011-03-18  Vaclav Petras <vaclav.petras@fsv.cvut.cz>
+
+	* added a new class SqliteReader for access to sqlite3 databases for
+          gama-local adjustment program
+
+2011-03-17  Ales Cepek  <cepek@gnu.org>
+
+	* description added as a public atribute to the LocalNetwork class
+
+2011-02-25  Ales Cepek  <cepek@gnu.org>
+
+	* redefined the tree structure of GNU Gama exception classes to
+	have a common base class GNU_gama::Exception::base (derived from
+	std::exceptions). Removed classes GNU_gama::local::Exception,
+	GNU_gama::local::ParserException and
+	GNU_gama::local::MatVecException are only typedefs to
+	GNU_gama::Exception::string, GNU_gama::Exception::parser and
+	GNU_gama::Exception::matvec respectively.
+
+	* added virtual functions clone() and raise() to all exceptions
+
+2010-09-27  Jiri Novak  <jiri.novak@petriny.net>
+
+	* a patch by Jiri Novak for xml/gama-local-schema.sql and Gkf2sql
+          class to be compatible with Oracle XE 10g, PostgreSQL 8.4,
+	  MySQL 5.1.7 (also suggested by Vaclav Petras) and Sqlite3.
+
+2010-09-10  Ales Cepek  <cepek@gnu.org>
+
+	* added a new class Gkf2sql and a new program gama-local-xml2sql
+	* added SQL DB schema xml/gama-local-schema.sql
+
+	Tested with sqlite3 3.7.2 and postgresql 8.4.4-2
+
+2010-08-13  Ales Cepek  <cepek@gnu.org>
+
+	* all calls to typeid() replaced by dynamic_cast<>()
+	* all CVS $Id: comments deleted
+	* directory structure simplified to a single tree
+	* namespace GaMaLib renamed to GNU_gama::local
+	* source codes scattered around directories local/revision/ and
+	  local/linearization/ were joined together into a single file
+	  local/observation_local.cpp
+
+
+#######################################
+#  See ChangeLog.2 for older changes  #
+#######################################
