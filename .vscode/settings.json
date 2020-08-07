@@ -4,8 +4,9 @@
     },
     "cmake.buildDirectory": "${userHome}/bin/gama/${buildType}",
     "cmake.parallelJobs ": "8",
-    // sudo apt-get install clang-format
-    "C_Cpp.clang_format_path": "${workspaceFolder}/.vscode/clang-format",
+    "cmakeExplorer.cmakeIntegration":true,
+    "cmakeExplorer.buildDir":"${buildDirectory}",
+    "cmakeExplorer.buildConfig":"${buildType}",
     "C_Cpp.enhancedColorization": "Enabled",
     "python.pythonPath": "/usr/bin/python",
     "python.linting.pylintEnabled": true,
