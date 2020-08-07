@@ -71,15 +71,8 @@ before_script:
 
 script:
   # Building using conan
-  - if [ -n "${CONAN_PROFILE}" ] && [ "${CONAN_PROFILE}" != 'windows' ]; then
+  - if [ -n "${CONAN_PROFILE}" ]; then
     conan build . ;
-    fi
-
-  # De-activating testing in windows for the moment
-  # We have problems with some of the linking
-  # TODO Fix
-  - if [ -n "${CONAN_PROFILE}" ] && [ "${CONAN_PROFILE}" == 'windows' ]; then
-    conan build . -c -b -i;
     fi
 
   # Building by calling conan via the Cmake. These are 2 differents builds. 

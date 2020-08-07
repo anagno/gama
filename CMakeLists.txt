@@ -54,7 +54,8 @@ if(NOT CONAN_EXPORTED)
                   missing
                   ${OPTIONAL_CONAN_PARAMETERS})
 
-  list(APPEND CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}")
+  set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} ${CMAKE_MODULE_PATH})
+  set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR} ${CMAKE_PREFIX_PATH})
 
 endif()
 
@@ -112,9 +113,7 @@ ExternalProject_Add(BuildTools
   # I am overloading the functionality of the UPDATE_COMMAND to execute conan
   DOWNLOAD_COMMAND ${conan_configure_command}
   CMAKE_ARGS
-    -DCMAKE_BUILD_TYPE=Release
     -DCMAKE_CXX_COMPILER=${BUILD_TOOS_CMAKE_CXX_COMPILER}
-    -DCMAKE_CXX_FLAGS=
     -DCMAKE_MODULE_PATH=${BUILD_TOOS_CMAKE_MODULE_PATH}
     -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 )

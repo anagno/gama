@@ -168,11 +168,11 @@ namespace GNU_gama {
 
     // design matrix
     int dm_rows, dm_cols, dm_floats;
-    SparseMatrix <>*  A;
+    SparseMatrix <>*  A = nullptr;
     Vec          <>   rhs;
     int               rhs_ind;
     BlockDiagonal<>*  B;
-    GNU_gama::AdjInputData*  adj_input_data;
+    GNU_gama::AdjInputData*  adj_input_data = nullptr;
 
 
     // adjustment

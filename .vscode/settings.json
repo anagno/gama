@@ -1,12 +1,15 @@
 {
-    "cmake.configureSettings": {
-        "CMAKE_EXPORT_COMPILE_COMMANDS": true
-    },
     "cmake.buildDirectory": "${userHome}/bin/gama/${buildType}",
-    "cmake.parallelJobs ": "8",
+    "cmake.configureSettings": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "DCMAKE_BUILD_TYPE":"${buildType}"
+    },
     "cmakeExplorer.cmakeIntegration":true,
     "cmakeExplorer.buildDir":"${buildDirectory}",
     "cmakeExplorer.buildConfig":"${buildType}",
+    "cmakeExplorer.debugConfig":"stopAtEntryDebug",
+    "cmakeExplorer.parallelJobs":-1,
+    "cmakeExplorer.extraCtestRunArgs":"-j 6",
     "C_Cpp.enhancedColorization": "Enabled",
     "python.pythonPath": "/usr/bin/python",
     "python.linting.pylintEnabled": true,
