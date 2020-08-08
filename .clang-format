@@ -4,7 +4,6 @@ BasedOnStyle: Google
 IndentWidth: '4'
 TabWidth: '4'
 UseTab: Never
-ConstructorInitializerIndentWidth: '4'
 ContinuationIndentWidth: '4'
 MaxEmptyLinesToKeep: '10'
 KeepEmptyLinesAtTheStartOfBlocks: true
@@ -14,8 +13,7 @@ PenaltyBreakAssignment: '50'
 PenaltyBreakBeforeFirstCallParameter: '100'
 PenaltyBreakComment: '20'
 PenaltyBreakFirstLessLess: '50'
-PenaltyBreakString: '50'
-PenaltyBreakTemplateDeclaration: '50'
+#PenaltyBreakTemplateDeclaration: '50'
 PenaltyExcessCharacter: '2'
 PenaltyReturnTypeOnItsOwnLine: '50'
 PenaltyBreakString: '50'
