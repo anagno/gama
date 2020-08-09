@@ -191,7 +191,7 @@ namespace GNU_gama { namespace local {
     };
 
 
-  class Distance : public Accept<Distance, Observation>
+  class Distance final: public Accept<Distance, Observation>
     {
     public:
       Distance(const PointID& s, const PointID& c, double d)
@@ -210,7 +210,7 @@ namespace GNU_gama { namespace local {
     };
 
 
-  class Direction : public Accept<Direction, Observation>
+  class Direction final: public Accept<Direction, Observation>
     {
     public:
       Direction(const PointID& s, const PointID& c,  double d)
@@ -237,7 +237,7 @@ namespace GNU_gama { namespace local {
     };
 
 
-  class Angle : public Accept<Angle, Observation>
+  class Angle final : public Accept<Angle, Observation>
     {
     private:
       PointID fs_;
@@ -277,7 +277,7 @@ namespace GNU_gama { namespace local {
 
   // height differences
 
-  class H_Diff : public Accept<H_Diff, Observation>
+  class H_Diff final : public Accept<H_Diff, Observation>
     {
     private:
       double dist_;
@@ -309,7 +309,7 @@ namespace GNU_gama { namespace local {
 
   // coordinate differences (vectors)  dx, dy, dz
 
-  class Xdiff : public Accept<Xdiff, Observation>
+  class Xdiff final : public Accept<Xdiff, Observation>
     {
     public:
       Xdiff(const PointID& from, const PointID& to, double dx)
@@ -325,7 +325,7 @@ namespace GNU_gama { namespace local {
       Xdiff* clone() const final { return new Xdiff(*this); }
     };
 
-  class Ydiff : public Accept<Ydiff, Observation>
+  class Ydiff final : public Accept<Ydiff, Observation>
     {
     public:
       Ydiff(const PointID& from, const PointID& to, double dy)
@@ -341,7 +341,7 @@ namespace GNU_gama { namespace local {
       Ydiff* clone() const final { return new Ydiff(*this); }
     };
 
-  class Zdiff : public Accept<Zdiff, Observation>
+  class Zdiff final : public Accept<Zdiff, Observation>
     {
     public:
       Zdiff(const PointID& from, const PointID& to, double dz)
@@ -360,7 +360,7 @@ namespace GNU_gama { namespace local {
 
   // coordinate observations (observed coordinates)  x, y, z
 
-  class X : public Accept<X, Observation>
+  class X final : public Accept<X, Observation>
     {
     public:
       X(const PointID& point, double x)
@@ -377,7 +377,7 @@ namespace GNU_gama { namespace local {
       X* clone() const final { return new X(*this); }
     };
 
-  class Y : public Accept<Y, Observation>
+  class Y final : public Accept<Y, Observation>
     {
     public:
       Y(const PointID& point, double y)
@@ -394,7 +394,7 @@ namespace GNU_gama { namespace local {
       Y* clone() const final{ return new Y(*this); }
     };
 
-  class Z : public Accept<Z, Observation>
+  class Z final: public Accept<Z, Observation>
     {
     public:
       Z(const PointID& point, double z)
@@ -414,7 +414,7 @@ namespace GNU_gama { namespace local {
 
   // slope observations (slope distances and zenith angles)
 
-  class S_Distance : public Accept<S_Distance, Observation>
+  class S_Distance final : public Accept<S_Distance, Observation>
     {
     public:
       S_Distance(const PointID& s, const PointID& c, double d)
@@ -434,7 +434,7 @@ namespace GNU_gama { namespace local {
     };
 
 
-  class Z_Angle : public Accept<Z_Angle, Observation>
+  class Z_Angle final: public Accept<Z_Angle, Observation>
     {
     public:
       Z_Angle(const PointID& s, const PointID& c, double d)
@@ -456,7 +456,7 @@ namespace GNU_gama { namespace local {
     };
 
 
-  class Azimuth : public Accept<Azimuth, Observation>
+  class Azimuth final : public Accept<Azimuth, Observation>
     {
     public:
       Azimuth(const PointID& s, const PointID& c,  double d)
