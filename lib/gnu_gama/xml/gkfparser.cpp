@@ -63,9 +63,9 @@ public:
     ~GKFparserImpl();
 
 private:
-    int characterDataHandler(const char* s, int len);
-    int startElement(const char* cname, const char** atts);
-    int endElement(const char* name);
+    int characterDataHandler(const char* s, int len) final;
+    int startElement(const char* cname, const char** atts) final;
+    int endElement(const char* name) final;
 
     double implicit_stdev_direction() const { return direction_stdev_; }
     double implicit_stdev_angle() const { return angle_stdev_; }

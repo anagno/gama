@@ -37,7 +37,6 @@ ParsingServiceAPI int   ascii(int* tab);
 ParsingServiceAPI char* utf8_cp1250(char *buf);
 ParsingServiceAPI char* utf8_cp1251(char *buf);
 ParsingServiceAPI char* utf8_iso_8859_2(char *buf);
-ParsingServiceAPI char* utf8_ascii(char *buf);
 ParsingServiceAPI int   Utf8Decode(int& u, unsigned char *buf);
 ParsingServiceAPI int   UnknownEncodingHandler(void *userData, const char *name,
                            XML_Encoding *info);

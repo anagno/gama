@@ -213,7 +213,6 @@ int main(int argc, char* argv[]) try
             conf = option_variables["configuration"].as<std::string>();
         if(option_variables.count("readonly-configuration"))
             conf = option_variables["readonly-configuration"].as<std::string>();
-        ;
 
         reader.retrieve(IS, conf);
     }

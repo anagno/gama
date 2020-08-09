@@ -348,30 +348,6 @@ char* utf8_iso_8859_2(char *buf){
   return buf;
 }
 
-char* utf8_ascii(char *buf){
-  unsigned int u;
-  char *p,*q;
-  p=q=buf;
-  while (*p){
-          p+=Utf8Decode((int&)u,(unsigned char*)p);
-          *q++=u;
-  }
-  *q=0;
-  return buf;
-}
-
-
-// moved to file encoding_unknown_handler.cpp
-//
-// int UnknownEncodingHandler(void *userData, const char *name,XML_Encoding *info)
-// {
-//  if (!strcmp(name,"cp-1250")) cp1250_unicode(info->map);
-//  else if (!strcmp(name,"windows-1250")) cp1250_unicode(info->map); /* this is probably correct */
-//  else if (!strcmp(name,"iso-8859-2")) iso_8859_2_unicode(info->map);
-//  else ascii(info->map);
-//  return 1;
-// }
-
 #ifdef __cplusplus
 }   //  namespace GNU_gama
 #endif
