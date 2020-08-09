@@ -33,6 +33,8 @@
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/xml/gkfparser.h>
 
+#include <sstream>
+
 using std::cout;
 using std::endl;
 using std::istringstream;
@@ -295,9 +297,14 @@ try
     ofstr << s;
 
     using namespace GNU_gama::local;
-    GKFparser gkf(network_);
-    gkf.xml_parse(s.c_str(), int(s.size()), 0);
-    gkf.xml_parse("", 0, 1);
+
+    std::stringstream stringStream(s);
+
+    {
+        using GNU_gama::local::GKFparser::operator>>;
+        stringStream >> network_;
+    }
+
   }
 
   network_.remove_inconsistency();

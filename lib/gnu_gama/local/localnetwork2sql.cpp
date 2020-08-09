@@ -30,6 +30,7 @@
 #include <Math/Business/Core/radian.h>
 #include <Utilities/Service/size_to.h>
 #include <iostream>
+#include <sstream>
 
 using namespace GNU_gama::local;
 
@@ -204,25 +205,8 @@ void LocalNetwork2sql::readGkf(std::istream& istr)
 {
   try
     {
-      GKFparser gkf(localNetwork);
-      char c;
-      int  n, finish = 0;
-      std::string line;
-      do
-        {
-          line = "";
-          n     = 0;
-          while (istr.get(c))
-            {
-              line += c;
-              n++;
-              if (c == '\n') break;
-            }
-          if (!istr) finish = 1;
-
-          gkf.xml_parse(line.c_str(), n, finish);
-        }
-      while (!finish);
+        using GNU_gama::local::GKFparser::operator>>;
+        istr >> localNetwork;
     }
   catch (...)
     {

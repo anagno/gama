@@ -19,6 +19,7 @@
 
 #include "check_xyz.h"
 #include <iostream>
+#include <gnu_gama/ellipsoids.h>
 #include <gnu_gama/xml/gkfparser.h>
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/local/language.h>
@@ -111,29 +112,13 @@ GNU_gama::local::LocalNetwork* getNet(int alg, const char* file)
         GNU_gama::local::set_gama_language(GNU_gama::local::en);
 
         std::ifstream soubor(file);
-        GNU_gama::local::GKFparser gkf(*lnet);
+
         try
           {
-            char c;
-            int  n, konec = 0;
-            string radek;
-            do
-              {
-                radek = "";
-                n     = 0;
-                while (soubor.get(c))
-                  {
-                    radek += c;
-                    n++;
-                    if (c == '\n') break;
-                  }
-                if (!soubor) konec = 1;
-
-                gkf.xml_parse(radek.c_str(), n, konec);
-              }
-            while (!konec);
+            using GNU_gama::local::GKFparser::operator>>;
+            soubor >> *lnet;
           }
-        catch (const GNU_gama::local::ParserException& v) {
+        catch (const GNU_gama::local::GKFparser::ParserException& v) {
           cerr << "\n" << T_GaMa_exception_2a << "\n\n"
                << T_GaMa_exception_2b << v.line << " : " << v.what() << endl;
           //return 3;

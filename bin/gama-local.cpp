@@ -33,6 +33,7 @@
 #include <gnu_gama/xml/localnetworkxml.h>
 #include <cstring>
 
+#include <gnu_gama/ellipsoids.h>
 #include <gnu_gama/local/acord/acord2.h>
 #include <gnu_gama/local/acord/acordstatistics.h>
 #include <gnu_gama/local/gamadata.h>
@@ -221,51 +222,36 @@ int main(int argc, char* argv[]) try
     {
         auto argv_1 = option_variables["input-file"].as<std::string>();
         std::ifstream soubor(argv_1);
-        GNU_gama::local::GKFparser gkf(*IS);
         try
         {
-            char c;
-            int n, konec = 0;
-            std::string radek;
-            do
-            {
-                radek = "";
-                n = 0;
-                while(soubor.get(c))
-                {
-                    radek += c;
-                    n++;
-                    if(c == '\n') break;
-                }
-                if(!soubor) konec = 1;
-
-                gkf.xml_parse(radek.c_str(), n, konec);
-            } while(!konec);
+            using GNU_gama::local::GKFparser::operator>>;
+            soubor >> *IS;
         }
-        catch(const GNU_gama::local::ParserException& v)
+        catch(const GNU_gama::local::GKFparser::ParserException& exception)
         {
             if(xmlerr.isValid())
             {
                 xmlerr.setDescription(GNU_gama::local::T_GaMa_exception_2a);
-                std::string t, s = v.what();
-                for(std::string::iterator i = s.begin(), e = s.end(); i != e; ++i)
+                std::string t;
+                
+                auto message = std::string_view{exception.what()};
+                for(const auto& character : message)
                 {
-                    if(*i == '<')
+                    if(character == '<')
                         t += "\"";
-                    else if(*i == '>')
+                    else if(character == '>')
                         t += "\"";
                     else
-                        t += *i;
+                        t += character;
                 }
                 xmlerr.setDescription(t);
-                xmlerr.setLineNumber(v.line);
-                // xmlerr.setDescription(T_GaMa_exception_2b);
+                xmlerr.setLineNumber(exception.line);
                 return xmlerr.write_xml("gamaLocalParserError");
             }
 
             std::cerr << "\n"
                       << GNU_gama::local::T_GaMa_exception_2a << "\n\n"
-                      << GNU_gama::local::T_GaMa_exception_2b << v.line << " : " << v.what()
+                      << GNU_gama::local::T_GaMa_exception_2b << exception.line << " : " << exception.what()
                       << std::endl;
             return 3;
         }

@@ -41,11 +41,6 @@ void XMLerror::clear()
   _strlist.clear();
 }
 
-void XMLerror::setIsValid(bool b)
-{
-  _isValid = b;
-}
-
 bool XMLerror::isValid() const
 {
   return _isValid;

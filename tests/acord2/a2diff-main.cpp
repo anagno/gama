@@ -84,29 +84,12 @@ void a2_diff (string input_file, double& max_diff)
   lnet->set_algorithm(LocalNetwork::Algorithm::gso);
 
   std::ifstream soubor(input_dir + input_file);
-  GNU_gama::local::GKFparser gkf(*lnet);
   try
     {
-      char c;
-      int  n, konec = 0;
-      string radek;
-      do
-        {
-          radek = "";
-          n     = 0;
-          while (soubor.get(c))
-            {
-              radek += c;
-              n++;
-              if (c == '\n') break;
-            }
-            if (!soubor) konec = 1;
-
-            gkf.xml_parse(radek.c_str(), n, konec);
-        }
-      while (!konec);
+        using GNU_gama::local::GKFparser::operator>>;
+        soubor >>*lnet;
     }
-    catch (const GNU_gama::local::ParserException& v) {
+    catch (const GNU_gama::local::GKFparser::ParserException& v) {
       cerr << "\n" << T_GaMa_exception_2a << "\n\n"
            << T_GaMa_exception_2b << v.line << " : " << v.what() << endl;
           //return 3;

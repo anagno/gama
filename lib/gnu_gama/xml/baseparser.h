@@ -79,7 +79,7 @@ namespace GNU_gama {
   {
   public:
 
-    void xml_parse(const char *s, int len, int  isFinal)
+    void xml_parse(const char *s, int len, int  isFinal) override final
     {
       int err = XML_Parse(parser, s, len, isFinal);
       if (err == 0)

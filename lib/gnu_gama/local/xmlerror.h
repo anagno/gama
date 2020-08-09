@@ -40,7 +40,6 @@ public:
   XMLerror();
 
   void clear();
-  void setIsValid(bool b);
   bool isValid() const;
   bool hasLineNumber() const;
 
