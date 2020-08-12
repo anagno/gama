@@ -20,8 +20,8 @@
 */
 
 #include <gnu_gama/local/localnetwork2sql.h>
-#include <gnu_gama/version.h>
 #include <gnu_gama/exception.h>
+#include <Utilities/Business/version.h>
 #include <iostream>
 #include <fstream>
 

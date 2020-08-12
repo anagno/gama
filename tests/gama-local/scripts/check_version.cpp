@@ -21,7 +21,7 @@
 #include <iostream>
 #include <fstream>
 // #include <config.h>
-#include <gnu_gama/version.h>
+#include <Utilities/Business/version.h>
 
 using std::string;
 

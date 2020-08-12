@@ -3,7 +3,6 @@
 # Library
 set(SRC_GAMA
    gnu_gama/exception.h
-   gnu_gama/version.h
    gnu_gama/xsd.h
 
    gnu_gama/xml/baseparser.cpp
@@ -164,16 +163,11 @@ add_custom_command(OUTPUT gnu_gama/local/language.h
                    COMMAND ${BuildTools_slovnikar} ${language_files}
                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local)
 
-# https://crascit.com/2017/04/18/generated-sources-in-cmake-builds/
-# https://cmake.org/cmake/help/v3.10/variable/CMAKE_VERSION.html
-configure_file(gnu_gama/version.cpp.in gnu_gama/version.cpp @ONLY)
-
 add_library(libgama ${SRC_GAMA}
                     ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/ellipsoids.cpp
                     ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/ellipsoids.h
                     ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local/language.h
                     ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/local/language.cpp
-                    ${CMAKE_CURRENT_BINARY_DIR}/gnu_gama/version.cpp
                     )
 
 target_include_directories(libgama
@@ -187,7 +181,8 @@ target_link_libraries(libgama
     GaMa::Service_Math 
     GaMa::Business_MathCore 
     GaMa::Business_MathAdjustment
-    GaMa::Service_Utilities)
+    GaMa::Service_Utilities
+    GaMa::Business_Utilities)
 
 include(GenerateExportHeader)
 generate_export_header(libgama

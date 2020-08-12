@@ -35,7 +35,7 @@
 #include <gnu_gama/xml/localnetworkxml.h>
 #include <Math/Business/Core/statan.h>
 #include <Math/Business/Core/radian.h>
-#include <gnu_gama/version.h>
+#include <Utilities/Business/version.h>
 #include <gnu_gama/xsd.h>
 
 using namespace std;

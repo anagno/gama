@@ -35,7 +35,7 @@
 
 #endif
 
-#include <gnu_gama/version.h>
+#include <Utilities/Business/version.h>
 #include <iostream>
 
 #define str(s)  # s
@@ -48,7 +48,7 @@ namespace GNU_gama {
    *
    * Checked by tests/gama-local/scripts/check_version.cpp
    */
-  std::string GNU_gama_version() { return "@PROJECT_VERSION@"; }
+  std::string GNU_gama_version() { return "@CMAKE_PROJECT_VERSION@"; }
 
   std::string GNU_gama_compiler()
   {

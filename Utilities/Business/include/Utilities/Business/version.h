@@ -18,19 +18,18 @@
     along with GNU Gama.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GNU_GAMA_VERSION_H_GNU_Gama_version_h_gnugamaversionh
-#define GNU_GAMA_VERSION_H_GNU_Gama_version_h_gnugamaversionh
+#pragma once
+
+#include "UtilitiesBusinessDLL.h"
 
 #include <string>
 
 namespace GNU_gama {
 
-  std::string GNU_gama_version();
-  std::string GNU_gama_compiler();
+  UtilitiesBusinessAPI std::string GNU_gama_version();
+  UtilitiesBusinessAPI std::string GNU_gama_compiler();
 
   extern std::string GNU_gama_year;
 
-  int version(const char* program, const char* copyright_holder);
+  UtilitiesBusinessAPI int version(const char* program, const char* copyright_holder);
 }
-
-#endif

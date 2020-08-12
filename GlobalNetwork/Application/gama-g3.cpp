@@ -22,7 +22,7 @@
 #include <iostream>
 #include <gnu_gama/xml/dataparser.h>
 #include <gnu_gama/g3/g3_model.h>
-#include <gnu_gama/version.h>
+#include <Utilities/Business/version.h>
 
 namespace
 {

@@ -41,7 +41,7 @@
 #include <Math/Business/Core/statan.h>
 #include <Math/Business/Core/radian.h>
 #include <Math/Service/smatrix_graph.h>
-#include <gnu_gama/version.h>
+#include <Utilities/Business/version.h>
 #include <gnu_gama/ellipsoids.h>
 
 using namespace std;

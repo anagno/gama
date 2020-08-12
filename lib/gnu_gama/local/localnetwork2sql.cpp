@@ -25,10 +25,10 @@
 #include "localnetwork2sql.h"
 #include <gnu_gama/xml/gkfparser.h>
 #include <gnu_gama/local/gamadata.h>
-#include <gnu_gama/version.h>
 #include <Math/Business/Core/statan.h>
 #include <Math/Business/Core/radian.h>
 #include <Utilities/Service/size_to.h>
+#include <Utilities/Business/version.h>
 #include <iostream>
 #include <sstream>
 

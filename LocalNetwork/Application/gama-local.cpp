@@ -27,7 +27,7 @@
 #include <Parsing/Business/outstream.h>
 
 #include <Math/Business/Core/intfloat.h>
-#include <gnu_gama/version.h>
+#include <Utilities/Business/version.h>
 #include <gnu_gama/xml/gkfparser.h>
 #include <gnu_gama/xml/localnetworkoctave.h>
 #include <gnu_gama/xml/localnetworkxml.h>
