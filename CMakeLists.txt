@@ -134,7 +134,8 @@ add_subdirectory(Utilities)
 add_subdirectory(Parsing)
 
 add_subdirectory(lib)
-add_subdirectory(bin)
+add_subdirectory(LocalNetwork)
+add_subdirectory(GlobalNetwork)
 
 if(BUILD_TESTING)
   add_subdirectory(tests)

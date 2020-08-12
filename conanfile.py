@@ -9,7 +9,7 @@ import platform
 
 # cmake . -LAH
 # node --experimental-modules --experimental-wasm-modules --experimental-wasm-threads --experimental-wasm-bulk-memory bin/gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
-# nodejs bin/gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
+# nodejs LocalNetwork/Application/gama-local.js /home/anagno/Documents/projects/gama/tests/gama-local/input/azimuth-angle.gkf --angles 360
 
 #https://stackoverflow.com/questions/55635294/how-to-create-packages-with-cmake
 

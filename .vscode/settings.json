@@ -2,7 +2,7 @@
     "cmake.buildDirectory": "${userHome}/bin/gama/${buildType}",
     "cmake.configureSettings": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
-        "DCMAKE_BUILD_TYPE":"${buildType}"
+        "CMAKE_BUILD_TYPE":"${buildType}"
     },
     "cmakeExplorer.cmakeIntegration":true,
     "cmakeExplorer.buildDir":"${buildDirectory}",
