@@ -29,13 +29,11 @@ class GaMa(ConanFile):
    options = {
        "sqlite3": [True, False],
        "shared": [True, False],
-       "native_compiler": "ANY"
    }
 
    default_options = {
        "sqlite3": False,
        "shared": False,
-       "native_compiler": None,
    }
 
    #def configure(self):
@@ -57,7 +55,7 @@ class GaMa(ConanFile):
       # https://github.com/conan-io/conan/issues/4893
       # https://github.com/conan-io/conan/issues/7423
       if self.should_test and not tools.cross_building(self):
-         self.requires("libxml2/2.9.9@#98c13df03fac70408756b07364074446")
+        self.requires("libxml2/2.9.9")
 
    def build_requirements(self):
 
@@ -70,12 +68,11 @@ class GaMa(ConanFile):
    def _configure_cmake(self):
       cmake = CMake(self)
 
-      if self.settings.os == "Emscripten":
-         if self.options.native_compiler:
-            cmake.definitions["BUILD_TOOS_CMAKE_CXX_COMPILER"] = self.options.native_compiler
-         else:
-            raise ConanInvalidConfiguration(
-                "A native compiler was not specified")
+      if tools.cross_building(self):
+        if self.settings_build.compiler == "gcc":
+            cmake.definitions["BUILD_TOOLS_CMAKE_CXX_COMPILER"] = "g++"
+        if self.settings_build.compiler == "clang":
+            cmake.definitions["BUILD_TOOLS_CMAKE_CXX_COMPILER"] = "clang++"
 
       cmake.definitions["CONAN_EXPORTED"] = True
 

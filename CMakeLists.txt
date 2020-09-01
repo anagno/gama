@@ -92,15 +92,15 @@ endif()
 # * https://cmake.org/pipermail/cmake/2010-January/034857.html
 
 if(NOT CMAKE_CROSSCOMPILING) 
-  set(BUILD_TOOS_CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
-  set(BUILD_TOOS_CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
+  set(BUILD_TOOLS_CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
+  set(BUILD_TOOLS_CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 else()
-  if(NOT DEFINED BUILD_TOOS_CMAKE_CXX_COMPILER)
+  if(NOT DEFINED BUILD_TOOLS_CMAKE_CXX_COMPILER)
     message(FATAL_ERROR 
-      " BUILD_TOOS_CMAKE_CXX_COMPILER is not defined.  You must tell CMake which compiler to use."
+      " BUILD_TOOLS_CMAKE_CXX_COMPILER is not defined.  You must tell CMake which compiler to use."
       "We also need a native compiler for compiling some build tools for generating headers.") 
   endif()
-  set(BUILD_TOOS_CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/BuildTools)
+  set(BUILD_TOOLS_CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/BuildTools)
   set(conan_configure_command conan install ${CMAKE_CURRENT_SOURCE_DIR}/Parsing --install-folder ${CMAKE_CURRENT_BINARY_DIR}/BuildTools/)
 endif()
 
@@ -114,8 +114,8 @@ ExternalProject_Add(BuildTools
   # I am overloading the functionality of the UPDATE_COMMAND to execute conan
   DOWNLOAD_COMMAND ${conan_configure_command}
   CMAKE_ARGS
-    -DCMAKE_CXX_COMPILER=${BUILD_TOOS_CMAKE_CXX_COMPILER}
-    -DCMAKE_MODULE_PATH=${BUILD_TOOS_CMAKE_MODULE_PATH}
+    -DCMAKE_CXX_COMPILER=${BUILD_TOOLS_CMAKE_CXX_COMPILER}
+    -DCMAKE_MODULE_PATH=${BUILD_TOOLS_CMAKE_MODULE_PATH}
     -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 )
 
