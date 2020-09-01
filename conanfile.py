@@ -13,6 +13,7 @@ import platform
 
 #https://stackoverflow.com/questions/55635294/how-to-create-packages-with-cmake
 
+
 class GaMa(ConanFile):
    name = "GaMa"
    version = "2.7"
@@ -50,17 +51,13 @@ class GaMa(ConanFile):
       if self.options.sqlite3:
          self.requires("sqlite3/3.29.0")
 
-      # This is a build_requiremes but for the moment we do not have a good
-      # way of declaring it 
-      # https://github.com/conan-io/conan/issues/4893
-      # https://github.com/conan-io/conan/issues/7423
-      if self.should_test and not tools.cross_building(self):
-        self.requires("libxml2/2.9.9")
-
    def build_requirements(self):
 
       if tools.cross_building(self):
          self.build_requires("expat/2.2.9")
+
+      if self.should_test:
+        self.build_requires("libxml2/2.9.9")
 
    def imports(self):
       self.copy("*.dll", "bin", "bin")
@@ -79,7 +76,7 @@ class GaMa(ConanFile):
       if self.options.sqlite3:
          cmake.definitions["USE_SQLITE3"] = "ON"
 
-      if self.should_test and not tools.cross_building(self.settings):
+      if self.should_test:
          cmake.definitions["BUILD_TESTING"] = "ON"
 
       #cmake.verbose = True
@@ -94,7 +91,7 @@ class GaMa(ConanFile):
       if self.should_build:
          cmake.build()
 
-      if self.should_test and not tools.cross_building(self.settings):
+      if self.should_test:
          cmake.test()
 
    def package(self):

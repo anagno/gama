@@ -248,41 +248,36 @@ foreach(test ${INPUT_FILES})
   endforeach(algo)
 endforeach(test)
 
-if(LibXml2_FOUND)
+set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
-  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
+foreach(test ${INPUT_FILES})
+add_test(NAME xmllint_gama_local_xsd_${test}
+    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+    --schema ${GAMA_XML}/gama-local.xsd
+    ${INPUT_DIR}/${test}.gkf
+    --noout)
+endforeach(test)
 
-  foreach(test ${INPUT_FILES})
-    add_test(NAME xmllint_gama_local_xsd_${test}
-      COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
-        --schema ${GAMA_XML}/gama-local.xsd
-        ${INPUT_DIR}/${test}.gkf
-        --noout)
-  endforeach(test)
+file(MAKE_DIRECTORY ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd)
 
-  file(MAKE_DIRECTORY ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd)
+foreach(test ${INPUT_FILES})
+add_test(NAME xmllint-gama-local-adjustment-xsd_input_${test}
+    COMMAND gama-local ${INPUT_DIR}/${test}.gkf
+    --xml ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd/${test}.xml)
+endforeach(test)
 
-  foreach(test ${INPUT_FILES})
-    add_test(NAME xmllint-gama-local-adjustment-xsd_input_${test}
-      COMMAND gama-local ${INPUT_DIR}/${test}.gkf
-        --xml ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd/${test}.xml)
-  endforeach(test)
+foreach(test ${INPUT_FILES})
+add_test(NAME xmllint-gama-local-adjustment-xsd_output_${test}
+    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+    --schema ${GAMA_XML}/gama-local-adjustment.xsd
+    --noout
+    ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd/${test}.xml
+    )
 
-  foreach(test ${INPUT_FILES})
-    add_test(NAME xmllint-gama-local-adjustment-xsd_output_${test}
-      COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
-        --schema ${GAMA_XML}/gama-local-adjustment.xsd
-        --noout
-        ${RESULT_DIR}/xmllint-gama-local-adjustment-xsd/${test}.xml
-        )
-
-    set_tests_properties(xmllint-gama-local-adjustment-xsd_output_${test}
-                         PROPERTIES DEPENDS
-                                    xmllint-gama-local-adjustment-xsd_input_${test})
-  endforeach(test)
-
-endif()
-
+set_tests_properties(xmllint-gama-local-adjustment-xsd_output_${test}
+                        PROPERTIES DEPENDS
+                                xmllint-gama-local-adjustment-xsd_input_${test})
+endforeach(test)
 
 if(OCTAVE_FOUND)
 
@@ -347,41 +342,37 @@ set_tests_properties(gama_local_nop_xml2txt
   PROPERTIES DEPENDS gama_local_nop)
 
 
-if(LibXml2_FOUND)
+set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
-  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
+add_test(NAME xmllint_gama_local_par
+COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+    --schema ${GAMA_XML}/gama-local.xsd
+    ${INPUT_DIR}/gama-local-par.gkf
+    --noout)
 
-  add_test(NAME xmllint_gama_local_par
-    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
-      --schema ${GAMA_XML}/gama-local.xsd
-      ${INPUT_DIR}/gama-local-par.gkf
-      --noout)
+add_test(NAME xmllint_gama_local_nop
+COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+    --schema ${GAMA_XML}/gama-local.xsd
+    ${INPUT_DIR}/gama-local-nop.gkf
+    --noout)
 
-  add_test(NAME xmllint_gama_local_nop
-    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
-      --schema ${GAMA_XML}/gama-local.xsd
-      ${INPUT_DIR}/gama-local-nop.gkf
-      --noout)
+add_test(NAME xmllint_gama_local_par_xml2txt 
+COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+    --schema ${GAMA_XML}/gama-local-adjustment.xsd
+    ${RESULT_DIR}/gama-local-parameters/par.xml
+    --noout)
 
-  add_test(NAME xmllint_gama_local_par_xml2txt 
-    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
-      --schema ${GAMA_XML}/gama-local-adjustment.xsd
-      ${RESULT_DIR}/gama-local-parameters/par.xml
-      --noout)
+set_tests_properties(xmllint_gama_local_par_xml2txt 
+    PROPERTIES DEPENDS gama_local_par)
 
-  set_tests_properties(xmllint_gama_local_par_xml2txt 
-      PROPERTIES DEPENDS gama_local_par)
+add_test(NAME xmllint_gama_local_nop_xml2txt 
+COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+    --schema ${GAMA_XML}/gama-local-adjustment.xsd
+    ${RESULT_DIR}/gama-local-parameters/nop.xml
+    --noout)
 
-  add_test(NAME xmllint_gama_local_nop_xml2txt 
-    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
-      --schema ${GAMA_XML}/gama-local-adjustment.xsd
-      ${RESULT_DIR}/gama-local-parameters/nop.xml
-      --noout)
-
-  set_tests_properties(xmllint_gama_local_nop_xml2txt 
-      PROPERTIES DEPENDS gama_local_nop)
-
-endif()
+set_tests_properties(xmllint_gama_local_nop_xml2txt 
+    PROPERTIES DEPENDS gama_local_nop)
 
 # -------------------------------------------------------------------------
 #
@@ -430,19 +421,14 @@ foreach(test ${INPUT_FILES_LOCAL_UPDATED})
   set_tests_properties(check_xml_xml_update_xml_${test}
     PROPERTIES DEPENDS gama_local_updated_xml_2_${test})
 
+  add_test(NAME xmllint_gama_local_update_xml_${test}
+    COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
+    --schema ${GAMA_XML}/gama-local.xsd
+    ${RESULT_DIR}/gama-local-updated-xml/${test}-1.gkf
+    --noout)
 
-  if(LibXml2_FOUND)
-
-    add_test(NAME xmllint_gama_local_update_xml_${test}
-      COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
-        --schema ${GAMA_XML}/gama-local.xsd
-        ${RESULT_DIR}/gama-local-updated-xml/${test}-1.gkf
-        --noout)
-
-    set_tests_properties(xmllint_gama_local_update_xml_${test}
-      PROPERTIES DEPENDS gama_local_updated_xml_${test})
-
-  endif()
+  set_tests_properties(xmllint_gama_local_update_xml_${test}
+    PROPERTIES DEPENDS gama_local_updated_xml_${test})
 
 endforeach(test)
 

@@ -71,8 +71,13 @@ before_script:
 
 script:
   # Building using conan
-  - if [ -n "${CONAN_PROFILE}" ]; then
+  - if [ -n "${CONAN_PROFILE}" ] && [ "${CONAN_PROFILE}" != 'wasm' ]; then
     conan build . ;
+    fi
+
+  # Deactivate for the moment the UT in wasm build
+  - if [ -n "${CONAN_PROFILE}" ] && [ "${CONAN_PROFILE}" == 'wasm' ]; then
+    conan build . -c -b;
     fi
 
   # Building by calling conan via the Cmake. These are 2 differents builds. 

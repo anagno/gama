@@ -65,7 +65,6 @@ if(USE_SQLITE3)
 endif()
 
 if(BUILD_TESTING)
-  find_package(LibXml2 2.9 REQUIRED)
   find_program(LIBXML2_XMLLINT_EXECUTABLE xmllint REQUIRED)
 
   if(USE_OCTAVE)
