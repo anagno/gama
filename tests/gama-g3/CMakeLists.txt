@@ -2,7 +2,7 @@ set(INPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/input)
 
 include(CMake_TestFiles.cmake)
 
-set(RESULT_DIR ${CMAKE_CURRENT_BINARY_DIR}/results/${PROJECT_VERSION})
+set(RESULT_DIR ${CMAKE_CURRENT_BINARY_DIR}/results/${GaMa_VERSION})
 file(MAKE_DIRECTORY ${RESULT_DIR})
 
 # -------------------------------------------------------------------------
@@ -44,7 +44,7 @@ endforeach(test)
 #
 add_executable(check_g3_adjustment scripts/check_adjustment.cpp)
 
-target_link_libraries(check_g3_adjustment libgama)
+target_link_libraries(check_g3_adjustment GaMa::libgama)
 
 foreach(test ${INPUT_FILES})
   foreach(algo
@@ -70,8 +70,6 @@ foreach(test ${SJTSK05_FILES})
   set_tests_properties(check_g3_adjustment_${test}
                        PROPERTIES DEPENDS gama_g3_adjustement_${test})
 endforeach(test)
-
-set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
 foreach(test ${INPUT_FILES})
 add_test(NAME xmllint_g3_adjustement_xsd_input_${test}

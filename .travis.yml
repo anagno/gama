@@ -62,22 +62,11 @@ matrix:
 install:
   - pip install conan
   - conan user
-  - conan config install .travis/conan_settings.zip
-
-before_script:
-  - if [ -n "${CONAN_PROFILE}" ]; then
-    conan install . --profile:build=${TRAVIS_OS_NAME}_build --profile:host=${CONAN_PROFILE}_host --build=missing;
-    fi
 
 script:
   # Building using conan
-  - if [ -n "${CONAN_PROFILE}" ] && [ "${CONAN_PROFILE}" != 'wasm' ]; then
-    conan build . ;
-    fi
-
-  # Deactivate for the moment the UT in wasm build
-  - if [ -n "${CONAN_PROFILE}" ] && [ "${CONAN_PROFILE}" == 'wasm' ]; then
-    conan build . -c -b;
+  - if [ -n "${CONAN_PROFILE}" ]; then
+    conan create --profile:build=.travis/${TRAVIS_OS_NAME}_build --profile:host=.travis/${CONAN_PROFILE}_host --build=missing -tf tests . user/testing;
     fi
 
   # Building by calling conan via the Cmake. These are 2 differents builds. 

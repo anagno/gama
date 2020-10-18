@@ -1,0 +1,49 @@
+[settings]
+os=Emscripten
+arch=x86
+build_type=Release
+compiler=clang
+compiler.version=11
+compiler.cppstd=17
+compiler.libcxx=libstdc++11
+
+[options]
+boost:without_graph=True
+boost:without_log=True
+boost:without_python=True
+boost:without_regex=True
+boost:without_stacktrace=True
+boost:without_test=True
+boost:zlib=False
+boost:bzip2=False
+boost:lzma=False
+boost:zstd=False
+# I think this is necessary because of https://github.com/emscripten-core/emscripten/issues/9726 
+boost:without_fiber=True 
+# to reduce the amount of warning, but it is not necessary
+boost:fPIC=False 
+
+boost:without_locale=True
+boost:without_coroutine=True
+boost:multithreading=False
+boost:without_thread=True
+boost:without_wave=True
+boost:without_type_erasure=True
+boost:without_atomic=True
+boost:without_context=True
+
+# https://github.com/conan-io/conan-center-index/pull/1629
+boost:debug_level=1
+
+[build_requires]
+cmake/3.17.3
+emsdk_installer/1.39.13@bincrafters/stable
+
+[env]
+#EMCC_DEBUG=1
+
+# If a single dll is using that all, all of them has to.
+# So if we use boost in some parts, then we have to use it 
+# everywhere
+#CXXFLAGS=-s USE_PTHREADS=1
+

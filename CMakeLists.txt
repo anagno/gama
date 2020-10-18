@@ -1,29 +1,22 @@
 cmake_minimum_required(VERSION 3.16)
 
-project (gnu-gama VERSION 2.9.4)
+project (GaMa VERSION 2.9.4)
 
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 # set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 # set(CMAKE_VISIBILITY_INLINES_HIDDEN YES)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
 # Tests
 # https://gitlab.kitware.com/cmake/community/wikis/doc/ctest/Testing-With-CTest#dynamic-analysis
-option(BUILD_TESTING "" OFF)
+option(BUILD_TESTING "" ON)
 include (CTest)
 
 include(CMakeDependentOption)
 option(USE_SQLITE3 "Use the SQLite 3 on the compilation of the source code" OFF)
-
-if(BUILD_TESTING)
-  cmake_dependent_option(USE_OCTAVE
-                         "Use the liboctave-dev on the compilation of the source code"
-                         OFF
-                         "BUILD_TESTING"
-                         OFF)
-endif()
 
 if(NOT CONAN_EXPORTED)
 
@@ -40,6 +33,14 @@ if(NOT CONAN_EXPORTED)
 
   set(OPTIONAL_CONAN_PARAMETERS OPTIONS)
 
+  if(BUILD_SHARED_LIBS)
+    set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} shared=True)
+  endif()
+
+  if(CMAKE_POSITION_INDEPENDENT_CODE)
+    set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} fPIC=True)
+  endif()
+  
   if(USE_SQLITE3)
     set(OPTIONAL_CONAN_PARAMETERS ${OPTIONAL_CONAN_PARAMETERS} sqlite3=True)
   endif()
@@ -49,6 +50,7 @@ if(NOT CONAN_EXPORTED)
 
   conan_cmake_run(CONANFILE
                   conanfile.py
+                  SETTINGS compiler.cppstd=17
                   BASIC_SETUP
                   CMAKE_TARGETS
                   BUILD
@@ -64,18 +66,11 @@ if(USE_SQLITE3)
   find_package(SQLite3 3.20 REQUIRED)
 endif()
 
-if(BUILD_TESTING)
-  find_program(LIBXML2_XMLLINT_EXECUTABLE xmllint REQUIRED)
-
-  if(USE_OCTAVE)
-    #sudo apt-get install liboctave-dev
-    find_package(Octave 4.2 REQUIRED)
-  endif()
-endif()
-
 if(SQLITE3_FOUND)
   add_definitions(-DGNU_GAMA_LOCAL_SQLITE_READER)
 endif()
+
+#include(CMake/CompilerWarnings.cmake)
 
 # The programs located under Parsing/Application are only needed during the build 
 # of the library. These programs generate some source code, which is necessary 

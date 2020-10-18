@@ -1,17 +1,17 @@
 # Header files
 set(header_files
-    "include/Math/Adjustment/Business/adj.h"
-    "include/Math/Adjustment/Business/adj_base.h"
-    "include/Math/Adjustment/Business/adj_basefull.h"
-    "include/Math/Adjustment/Business/adj_basesparse.h"
-    "include/Math/Adjustment/Business/adj_chol.h"
-    "include/Math/Adjustment/Business/adj_envelope.h"
-    "include/Math/Adjustment/Business/adj_gso.h"
-    "include/Math/Adjustment/Business/adj_input_data.h"
-    "include/Math/Adjustment/Business/adj_svd.h"
-    "include/Math/Adjustment/Business/AdjustmentException.h"
-    "include/Math/Adjustment/Business/envelope.h"
-    "include/Math/Adjustment/Business/homogenization.h"
+    "include/Math/Business/Adjustment/adj.h"
+    "include/Math/Business/Adjustment/adj_base.h"
+    "include/Math/Business/Adjustment/adj_basefull.h"
+    "include/Math/Business/Adjustment/adj_basesparse.h"
+    "include/Math/Business/Adjustment/adj_chol.h"
+    "include/Math/Business/Adjustment/adj_envelope.h"
+    "include/Math/Business/Adjustment/adj_gso.h"
+    "include/Math/Business/Adjustment/adj_input_data.h"
+    "include/Math/Business/Adjustment/adj_svd.h"
+    "include/Math/Business/Adjustment/AdjustmentException.h"
+    "include/Math/Business/Adjustment/envelope.h"
+    "include/Math/Business/Adjustment/homogenization.h"
    )
 
 # Source Files files

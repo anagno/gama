@@ -84,14 +84,6 @@ namespace GNU_gama { namespace local
     }
 
 
-    // ...  network configuration updates  .................................
-
-    void update_points()       { update(Points);       }
-    void update_observations() { update(Observations); }
-    void update_residuals()    { update(Residuals);    }
-    void update_adjustment()   { update(Adjustment);   }
-
-
     // ...  revision of points and observations  ...........................
 
     void  revision_points();

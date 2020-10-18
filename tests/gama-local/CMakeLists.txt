@@ -1,4 +1,4 @@
-set(TEST_BASE_DIR ${PROJECT_SOURCE_DIR}/tests/gama-local)
+set(TEST_BASE_DIR ${PROJECT_SOURCE_DIR}/gama-local)
 set(INPUT_DIR ${TEST_BASE_DIR}/input)
 set(INPUT_FILES
     gama-local
@@ -29,7 +29,7 @@ set(INPUT_FILES
     bug-2019-08-20-knin_test
   )
 
-set(RESULT_DIR ${CMAKE_BINARY_DIR}/tests/gama-local/results/${PROJECT_VERSION})
+set(RESULT_DIR ${CMAKE_BINARY_DIR}/tests/gama-local/results/${GaMa_VERSION})
 file(MAKE_DIRECTORY ${RESULT_DIR})
 
 
@@ -40,7 +40,7 @@ file(MAKE_DIRECTORY ${RESULT_DIR})
 add_executable(check_version scripts/check_version.cpp
   )
 
-target_link_libraries(check_version libgama)
+target_link_libraries(check_version GaMa::libgama)
 
 add_test(NAME check_version COMMAND check_version
   ${PROJECT_SOURCE_DIR}/CMakeLists.txt)
@@ -90,11 +90,11 @@ endforeach(test)
 add_executable(check_algorithms scripts/check_xyz.h scripts/check_xyz.cpp
   scripts/check_algorithms.cpp)
 
-target_link_libraries(check_algorithms libgama)
+target_link_libraries(check_algorithms GaMa::libgama)
 
 foreach(test ${INPUT_FILES})
   add_test(NAME check_algorithms_${test}
-    COMMAND check_algorithms ${PROJECT_VERSION} ${test}
+    COMMAND check_algorithms ${GaMa_VERSION} ${test}
     ${INPUT_DIR}/${test}.gkf )
 endforeach(test)
 
@@ -108,7 +108,7 @@ add_executable(check_xml_xml scripts/check_xml_xml.cpp
   scripts/compare_xml_adjustment.h scripts/compare_xml_adjustment.cpp
   )
 
-target_link_libraries(check_xml_xml libgama)
+target_link_libraries(check_xml_xml GaMa::libgama)
 
 set(RES ${RESULT_DIR}/gama-local-adjustment)
 
@@ -140,7 +140,7 @@ add_executable(check_html scripts/check_html.cpp
                           scripts/compare_xml_adjustment.h
                           scripts/compare_xml_adjustment.cpp)
 
-target_link_libraries(check_html libgama)
+target_link_libraries(check_html GaMa::libgama)
 
 foreach(test ${INPUT_FILES})
   foreach(algo gso) # svd  cholesky envelope)
@@ -179,7 +179,7 @@ add_executable(check_equivalents scripts/check_xyz.h
   scripts/check_xyz.cpp scripts/check_equivalents.cpp
   )
 
-target_link_libraries(check_equivalents libgama)
+target_link_libraries(check_equivalents GaMa::libgama)
 
 set(EQUIVALENTS_TESTS
     # CMake is weird with 2D arrays, so we apply this hack
@@ -213,7 +213,7 @@ endforeach(test)
 add_executable(check_xml_results  scripts/check_xml_results.cpp
   scripts/check_xyz.h scripts/check_xyz.cpp)
 
-target_link_libraries(check_xml_results libgama)  
+target_link_libraries(check_xml_results GaMa::libgama)  
 
 foreach(test ${INPUT_FILES})
   add_test(
@@ -229,7 +229,7 @@ endforeach(test)
 #
 add_executable(check_externs scripts/check_externs.cpp ../acord2/acord.cpp ../acord2/acord.h)
 
-target_link_libraries(check_externs libgama)  
+target_link_libraries(check_externs GaMa::libgama)  
 
 add_test(NAME check_externs COMMAND check_externs
   ${INPUT_DIR} ${RESULT_DIR}/gama-local-adjustment ${INPUT_FILES})
@@ -247,8 +247,6 @@ foreach(test ${INPUT_FILES})
                                     gama_local_adjustement_${test}_${algo})
   endforeach(algo)
 endforeach(test)
-
-set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
 foreach(test ${INPUT_FILES})
 add_test(NAME xmllint_gama_local_xsd_${test}
@@ -340,9 +338,6 @@ add_test(NAME gama_local_nop_xml2txt
 
 set_tests_properties(gama_local_nop_xml2txt 
   PROPERTIES DEPENDS gama_local_nop)
-
-
-set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
 
 add_test(NAME xmllint_gama_local_par
 COMMAND ${LIBXML2_XMLLINT_EXECUTABLE}
@@ -442,17 +437,15 @@ if(SQLITE3_FOUND)
 
   add_executable(sqlite_init_db  scripts/sqlite_init_db.cpp)
 
-  target_link_libraries(sqlite_init_db libgama SQLite::SQLite3)
+  target_link_libraries(sqlite_init_db GaMa::libgama SQLite::SQLite3)
 
   add_executable(check_xml_coordinates  scripts/check_xml_coordinates.cpp)
 
-  target_link_libraries(check_xml_coordinates libgama)
+  target_link_libraries(check_xml_coordinates GaMa::libgama)
 
 
   file(MAKE_DIRECTORY ${RESULT_DIR}/gama-local-sqlite-reader)
-  set(GAMA_XML "${PROJECT_SOURCE_DIR}/Parsing/Schemas")
-
-  add_test(NAME gama_local_xml2sql_fixed-azimuth
+    add_test(NAME gama_local_xml2sql_fixed-azimuth
     COMMAND gama-local-xml2sql
       fixed-azimuth
       ${INPUT_DIR}/fixed-azimuth.gkf

@@ -4,5 +4,8 @@ project (Math)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(GNUInstallDirs)
+include(GenerateExportHeader)
+
 add_subdirectory(Business)
 add_subdirectory(Service)

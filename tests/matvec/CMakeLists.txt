@@ -5,7 +5,7 @@
 
 add_executable(matvec-basic matvec-basic.cpp)
 
-target_link_libraries(matvec-basic libgama)
+target_link_libraries(matvec-basic GaMa::libgama)
 
 add_test(NAME matvec-basic COMMAND matvec-basic)
 
@@ -16,7 +16,7 @@ add_test(NAME matvec-basic COMMAND matvec-basic)
 
 add_executable(matvec_demo_001 matvec_demo_001.cpp)
 
-target_link_libraries(matvec_demo_001 libgama)
+target_link_libraries(matvec_demo_001 GaMa::libgama)
 
 add_test(NAME matvec_demo_001 COMMAND matvec_demo_001)
 
@@ -27,7 +27,7 @@ add_test(NAME matvec_demo_001 COMMAND matvec_demo_001)
 
 add_executable(matvec_demo_002 matvec_demo_002.cpp)
 
-target_link_libraries(matvec_demo_002 libgama)
+target_link_libraries(matvec_demo_002 GaMa::libgama)
 
 add_test(NAME matvec_demo_002 COMMAND matvec_demo_002)
 
@@ -38,7 +38,7 @@ add_test(NAME matvec_demo_002 COMMAND matvec_demo_002)
 
 add_executable(matvec_demo_003 matvec_demo_003.cpp)
 
-target_link_libraries(matvec_demo_003 libgama)
+target_link_libraries(matvec_demo_003 GaMa::libgama)
 
 add_test(NAME matvec_demo_003 COMMAND matvec_demo_003)
 
@@ -49,7 +49,7 @@ add_test(NAME matvec_demo_003 COMMAND matvec_demo_003)
 
 add_executable(matvec_demo_004 matvec_demo_004.cpp)
 
-target_link_libraries(matvec_demo_004 libgama)
+target_link_libraries(matvec_demo_004 GaMa::libgama)
 
 add_test(NAME matvec_demo_004 COMMAND matvec_demo_004)
 
@@ -60,7 +60,7 @@ add_test(NAME matvec_demo_004 COMMAND matvec_demo_004)
 
 add_executable(matvec_demo_005 matvec_demo_005.cpp)
 
-target_link_libraries(matvec_demo_005 libgama)
+target_link_libraries(matvec_demo_005 GaMa::libgama)
 
 add_test(NAME matvec_demo_005 COMMAND matvec_demo_005)
 
@@ -71,7 +71,7 @@ add_test(NAME matvec_demo_005 COMMAND matvec_demo_005)
 
 add_executable(matvec_demo_006 matvec_demo_006.cpp)
 
-target_link_libraries(matvec_demo_006 libgama)
+target_link_libraries(matvec_demo_006 GaMa::libgama)
 
 add_test(NAME matvec_demo_006 COMMAND matvec_demo_006)
 
@@ -82,7 +82,7 @@ add_test(NAME matvec_demo_006 COMMAND matvec_demo_006)
 
 add_executable(matvec_test_001 matvec_test_001.cpp)
 
-target_link_libraries(matvec_test_001 libgama)
+target_link_libraries(matvec_test_001 GaMa::libgama)
 
 add_test(NAME matvec_test_001 COMMAND matvec_test_001)
 
@@ -93,7 +93,7 @@ add_test(NAME matvec_test_001 COMMAND matvec_test_001)
 
 add_executable(matvec_test_002 matvec_test_002.cpp)
 
-target_link_libraries(matvec_test_002 libgama)
+target_link_libraries(matvec_test_002 GaMa::libgama)
 
 add_test(NAME matvec_test_002 COMMAND matvec_test_002)
 
@@ -104,7 +104,7 @@ add_test(NAME matvec_test_002 COMMAND matvec_test_002)
 
 add_executable(matvec_test_003 matvec_test_003.cpp)
 
-target_link_libraries(matvec_test_003 libgama)
+target_link_libraries(matvec_test_003 GaMa::libgama)
 
 add_test(NAME matvec_test_003 COMMAND matvec_test_003)
 
@@ -115,7 +115,7 @@ add_test(NAME matvec_test_003 COMMAND matvec_test_003)
 
 add_executable(matvec_test_004 matvec_test_004.cpp)
 
-target_link_libraries(matvec_test_004 libgama)
+target_link_libraries(matvec_test_004 GaMa::libgama)
 
 add_test(NAME matvec_test_004 COMMAND matvec_test_004)
 
@@ -126,7 +126,7 @@ add_test(NAME matvec_test_004 COMMAND matvec_test_004)
 
 add_executable(matvec_test_005 matvec_test_005.cpp)
 
-target_link_libraries(matvec_test_005 libgama)
+target_link_libraries(matvec_test_005 GaMa::libgama)
 
 add_test(NAME matvec_test_005 COMMAND matvec_test_005)
 
@@ -137,7 +137,7 @@ add_test(NAME matvec_test_005 COMMAND matvec_test_005)
 
 add_executable(simple-inversion simple-inversion.cpp)
 
-target_link_libraries(simple-inversion libgama)
+target_link_libraries(simple-inversion GaMa::libgama)
 
 add_test(NAME simple-inversion COMMAND simple-inversion)
 
@@ -148,6 +148,6 @@ add_test(NAME simple-inversion COMMAND simple-inversion)
 
 add_executable(sparse-demo sparse-demo.cpp)
 
-target_link_libraries(sparse-demo libgama)
+target_link_libraries(sparse-demo GaMa::libgama)
 
 add_test(NAME sparse-demo COMMAND sparse-demo)

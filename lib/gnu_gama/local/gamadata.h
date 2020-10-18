@@ -45,9 +45,6 @@ namespace GNU_gama { namespace local {
       double xNorthAngle() const;
     };
 
-
-  std::ostream& operator << (std::ostream&,     PointData&);
-  std::ostream& operator << (std::ostream& str, ObservationData&);
 }}   // namepsace GNU_gama::local
 
 

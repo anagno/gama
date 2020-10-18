@@ -24,3 +24,14 @@ target_include_directories(Business_Utilities
 generate_export_header(Business_Utilities
     EXPORT_FILE_NAME UtilitiesBusinessDLL.h
     EXPORT_MACRO_NAME UtilitiesBusinessAPI)
+
+set_property(TARGET Business_Utilities
+  PROPERTY PUBLIC_HEADER
+  ${header_files} ${CMAKE_CURRENT_BINARY_DIR}/UtilitiesBusinessDLL.h)
+
+install(
+    TARGETS Business_Utilities
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/GaMa/${PROJECT_NAME}/Business/)

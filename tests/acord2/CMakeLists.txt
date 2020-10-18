@@ -6,7 +6,7 @@ file(MAKE_DIRECTORY ${RESULT_DIR})
 
 add_executable(a2g a2g-main.cpp a2g.cpp a2g.h)
 
-target_link_libraries(a2g libgama)
+target_link_libraries(a2g GaMa::libgama)
 
 set(A2G_FILES
   angle-01.a2g
@@ -28,7 +28,7 @@ add_test(NAME acord2-a2g COMMAND a2g ${RESULT_DIR}/a2g
 
 add_executable(a2diff a2diff-main.cpp acord.h acord.cpp)
 
-target_link_libraries(a2diff libgama)
+target_link_libraries(a2diff GaMa::libgama)
 
 set(A2DIFF_FILES
   traverse-01-en-right.gkf

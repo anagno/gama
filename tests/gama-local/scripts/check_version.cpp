@@ -38,7 +38,7 @@ int main(int /*argc*/, char* argv[])
    *
    * project (gnu-gama VERSION MAJOR.MINOR)
    */
-  const string pattern = "project (gnu-gama VERSION ";
+  const string pattern = "project (GaMa VERSION ";
 
   string version_cmake;
   while (std::getline(inpf, version_cmake))

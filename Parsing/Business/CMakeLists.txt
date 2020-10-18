@@ -25,3 +25,14 @@ generate_export_header(Business_Parsing
                        ParsingDLL.h
                        EXPORT_MACRO_NAME
                        ParsingAPI)
+
+set_property(TARGET Business_Parsing
+  PROPERTY PUBLIC_HEADER
+  ${header_files} ${CMAKE_CURRENT_BINARY_DIR}/ParsingDLL.h)
+
+install(
+    TARGETS Business_Parsing
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/GaMa/${PROJECT_NAME}/Business/)

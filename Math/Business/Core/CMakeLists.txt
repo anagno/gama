@@ -25,3 +25,14 @@ generate_export_header(Business_MathCore
                        MathDLL.h
                        EXPORT_MACRO_NAME
                        MathAPI)
+
+set_property(TARGET Business_MathCore
+  PROPERTY PUBLIC_HEADER
+  ${header_files} ${CMAKE_CURRENT_BINARY_DIR}/MathDLL.h)
+
+install(
+    TARGETS Business_MathCore
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/GaMa/${PROJECT_NAME}/Business/Core)

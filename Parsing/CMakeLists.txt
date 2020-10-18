@@ -12,4 +12,4 @@ include(GNUInstallDirs)
 add_subdirectory(Business)
 add_subdirectory(Service)
 add_subdirectory(Application)
-
+add_subdirectory(Schemas)

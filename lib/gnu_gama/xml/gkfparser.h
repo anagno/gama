@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "GaMaDLL.h"
+#include <gnu_gama/GaMaDLL.h>
 
 #include <gnu_gama/local/network.h>
 #include <gnu_gama/exception.h>

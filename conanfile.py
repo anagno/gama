@@ -1,6 +1,6 @@
 from conans import ConanFile, CMake
 from conans import tools
-import platform
+import os
 
 # cmake /home/anagno/Documents/projects/gama -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=TRUE -DUSE_SQLITE3=TRUE -DCONAN_EXPORTED=TRUE
 # ctest
@@ -16,7 +16,7 @@ import platform
 
 class GaMa(ConanFile):
    name = "GaMa"
-   version = "2.7"
+   version = "2.9.4"
    settings = "os", "compiler", "build_type", "arch",
    generators = ["cmake_find_package", "virtualrunenv"]
    exports_sources = {
@@ -30,14 +30,18 @@ class GaMa(ConanFile):
    options = {
        "sqlite3": [True, False],
        "shared": [True, False],
+       "fPIC": [True, False]
    }
 
    default_options = {
        "sqlite3": False,
        "shared": False,
+       "fPIC": True
    }
 
-   #def configure(self):
+
+   def configure(self):
+      tools.check_min_cppstd(self, "17")
       # https://github.com/conan-io/conan-center-index/pull/2274
       # if self.should_test and not tools.cross_building(self.settings):
       #   if self.options.libxml2 and self.options["libxml2"].include_utils == False:
@@ -61,6 +65,7 @@ class GaMa(ConanFile):
 
    def imports(self):
       self.copy("*.dll", "bin", "bin")
+      self.copy("*.dll", "lib", "bin")
 
    def _configure_cmake(self):
       cmake = CMake(self)
@@ -73,11 +78,11 @@ class GaMa(ConanFile):
 
       cmake.definitions["CONAN_EXPORTED"] = True
 
+      # We test in the test phase of conan
+      cmake.definitions["BUILD_TESTING"] = False
+
       if self.options.sqlite3:
          cmake.definitions["USE_SQLITE3"] = "ON"
-
-      if self.should_test:
-         cmake.definitions["BUILD_TESTING"] = "ON"
 
       #cmake.verbose = True
       if self.should_configure:
@@ -91,14 +96,58 @@ class GaMa(ConanFile):
       if self.should_build:
          cmake.build()
 
-      if self.should_test:
-         cmake.test()
-
    def package(self):
       cmake = self._configure_cmake()
 
       if self.should_install:
          cmake.install()
 
+
+   def package_info(self):
+      bin_path = os.path.join(self.package_folder, "bin")
+      self.output.info("Appending PATH env var with : {}".format(bin_path))
+      self.env_info.PATH.append(bin_path)
+
+      self.cpp_info.names["cmake_find_package"] = "GaMa"
+
+      self.cpp_info.components["Service_Math"].names["cmake_find_package"] = "Service_Math"
+      self.cpp_info.components["Service_Math"].includedirs = ["include/GaMa"]
+
+      self.cpp_info.components["Service_Parsing"].names["cmake_find_package"] = "Service_Parsing"
+      self.cpp_info.components["Service_Parsing"].includedirs = ["include/GaMa"]
+      self.cpp_info.components["Service_Parsing"].libs = ["Service_Parsing"]
+      self.cpp_info.components["Service_Parsing"].requires = ["expat::expat"]
+
+      self.cpp_info.components["Business_Parsing"].names["cmake_find_package"] = "Business_Parsing"
+      self.cpp_info.components["Business_Parsing"].includedirs = ["include/GaMa"]
+      self.cpp_info.components["Business_Parsing"].libs = ["Business_Parsing"]
+      self.cpp_info.components["Business_Parsing"].requires = ["Service_Parsing"]
+
+      self.cpp_info.components["Service_Utilities"].names["cmake_find_package"] = "Service_Utilities"
+      self.cpp_info.components["Service_Utilities"].includedirs = ["include/GaMa"]
+      self.cpp_info.components["Service_Utilities"].libs = ["Service_Utilities"]
+
+      self.cpp_info.components["Business_Utilities"].names["cmake_find_package"] = "Business_Utilities"
+      self.cpp_info.components["Business_Utilities"].includedirs = ["include/GaMa"]
+      self.cpp_info.components["Business_Utilities"].libs = ["Business_Utilities"]
+
+      self.cpp_info.components["Business_MathCore"].names["cmake_find_package"] = "Business_MathCore"
+      self.cpp_info.components["Business_MathCore"].includedirs = ["include/GaMa"]
+      self.cpp_info.components["Business_MathCore"].libs = ["Business_MathCore"]
+
+      self.cpp_info.components["Business_MathAdjustment"].names["cmake_find_package"] = "Business_MathAdjustment"
+      self.cpp_info.components["Business_MathAdjustment"].includedirs = ["include/GaMa"]
+      self.cpp_info.components["Business_MathAdjustment"].libs = ["Business_MathAdjustment"]
+      self.cpp_info.components["Business_MathAdjustment"].requires = ["Service_Math"]
+
+      self.cpp_info.components["libgama"].names["cmake_find_package"] = "libgama"
+      self.cpp_info.components["libgama"].includedirs = ["include/GaMa"]
+      self.cpp_info.components["libgama"].libs = ["libgama"]
+      self.cpp_info.components["libgama"].resdirs = ['share']
+      self.cpp_info.components["libgama"].requires = ["expat::expat", "boost::boost", "Service_Math", "Business_Utilities",
+                                                      "Business_Parsing", "Service_Parsing", "Service_Utilities", "Business_MathCore"]
+
+      if self.options.sqlite3:
+         self.cpp_info.components["libgama"].requires.append("sqlite3::sqlite3")
 
 # sudo apt-get install clang nodejs

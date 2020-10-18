@@ -26,6 +26,7 @@
 #ifndef XMLerror_h_XMLERROR_H_xmlerror_h_xmlerror_h_local_xmlerror_h_
 #define XMLerror_h_XMLERROR_H_xmlerror_h_xmlerror_h_local_xmlerror_h_
 
+#include <gnu_gama/GaMaDLL.h>
 #include <gnu_gama/xsd.h>
 #include <string>
 #include <vector>
@@ -34,7 +35,7 @@
 
 namespace GNU_gama { namespace local {
 
-class XMLerror {
+class GaMaAPI XMLerror {
 public:
 
   XMLerror();

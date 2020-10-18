@@ -32,3 +32,14 @@ generate_export_header(Business_MathAdjustment
                        AdjustmentDLL.h
                        EXPORT_MACRO_NAME
                        AdjustmentAPI)
+
+set_property(TARGET Business_MathAdjustment
+  PROPERTY PUBLIC_HEADER
+  ${header_files} ${CMAKE_CURRENT_BINARY_DIR}/AdjustmentDLL.h)
+
+install(
+    TARGETS Business_MathAdjustment
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/GaMa/${PROJECT_NAME}/Business/Adjustment)

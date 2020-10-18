@@ -5,7 +5,7 @@ find_package(Boost 1.72.0 COMPONENTS program_options REQUIRED)
 add_executable(gama-local gama-local.cpp)
 
 target_link_libraries(gama-local 
-  PRIVATE libgama Boost::Boost)
+  PUBLIC libgama Boost::Boost)
 
 if(EMSCRIPTEN)
   #set_target_properties(gama-local PROPERTIES
@@ -19,10 +19,6 @@ if(EMSCRIPTEN)
     "--embed-file ${CMAKE_SOURCE_DIR}/tests/gama-local/input")
 endif()
 
-install(
-    TARGETS gama-local
-    DESTINATION ${CMAKE_INSTALL_BINDIR})
-
 add_executable(gama-local-xml2sql gama-local-xml2sql.cpp)
 
 target_link_libraries(gama-local-xml2sql PRIVATE libgama)
@@ -30,3 +26,7 @@ target_link_libraries(gama-local-xml2sql PRIVATE libgama)
 add_executable(gama-local-xml2txt gama-local-xml2txt.cpp)
 
 target_link_libraries(gama-local-xml2txt PRIVATE libgama)
+
+install(
+    TARGETS gama-local gama-local-xml2sql gama-local-xml2txt
+    DESTINATION ${CMAKE_INSTALL_BINDIR})
